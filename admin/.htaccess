@@ -1,0 +1,8 @@
+RewriteEngine On
+RewriteRule ^Login login.php
+RewriteRule ^404 index.php?404
+RewriteRule ^Home index.php?p=homepagina
+RewriteRule ^Couponcodes index.php?p=couponpagina
+RewriteRule ^Groepspermissies index.php?p=groeppermissiespagina
+RewriteRule ^Gebruikerpermissies index.php?p=gebruikerpermissiespagina
+RewriteRule ^Filialen index.php?p=filialenpagina
