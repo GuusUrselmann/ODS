@@ -23,7 +23,10 @@ Route::group(['prefix' => '/'], function() {
 Route::group(['prefix' => '/admin'], function() {
     Route::get('/', 'Admin\AdminDashboardController@Dashboard');
     Route::get('/dashboard', 'Admin\AdminDashboardController@Dashboard');
-    Route::get('/couponcodes', 'Admin\CouponcodesController@Overview');
-    Route::get('/couponcodes/bewerken/{id}', 'Admin\CouponcodesController@Edit');
-    Route::get('/couponcodes/toevoegen', 'Admin\CouponcodesController@Add');
+
+    Route::get('/couponcodes', 'Admin\CouponcodesController@overview');
+    Route::get('/couponcodes/bewerken/{id}', 'Admin\CouponcodesController@edit');
+    Route::post('/couponcodes/bewerken/{id}', 'Admin\CouponcodesController@update');
+    Route::get('/couponcodes/toevoegen', 'Admin\CouponcodesController@add');
+    Route::post('/couponcodes/toevoegen', 'Admin\CouponcodesController@save');
 });

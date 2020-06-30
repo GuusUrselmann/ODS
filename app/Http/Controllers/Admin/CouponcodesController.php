@@ -69,7 +69,7 @@ class CouponcodesController extends Controller
             ],
         ];
 
-        return view('admin.couponcodes.add' , [
+        return view('admin.couponcodes.add', [
             'branches' => $branches
         ]);
     }
@@ -108,5 +108,43 @@ class CouponcodesController extends Controller
             'couponcode' => $couponcode,
             'branches' => $branches
         ]);
+    }
+
+    public function save()
+    {
+        // TODO: Insert into database
+
+        $data = [
+            'branch_id' => request('branch_id'),
+            'code' => request('code'),
+            'amount' => request('amount'),
+            'status' => request('status'),
+            'active_till' => request('active_till'),
+            'type' => request('type'),
+            'sort' => request('sort'),
+            'min_amount_spent' => request('min_amount_spent'),
+            'one_off' => request('one_off')
+        ];
+
+        return redirect('/');
+    }
+
+    public function update()
+    {
+        // TODO: Update with code NOT with id from url
+
+        $data = [
+            'branch_id' => request('branch_id'),
+            'code' => request('code'),
+            'amount' => request('amount'),
+            'status' => request('status'),
+            'active_till' => request('active_till'),
+            'type' => request('type'),
+            'sort' => request('sort'),
+            'min_amount_spent' => request('min_amount_spent'),
+            'one_off' => request('one_off')
+        ];
+
+        return redirect('/');
     }
 }

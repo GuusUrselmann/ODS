@@ -12,15 +12,16 @@
         <div class="col-sm-6 offset-sm-3 pt-md-5">
             <div class="card">
                 <div class="card-body">
-                    <form>
+                    <form action="{{ url()->current() }}" method="POST">
+                        @csrf
                         <div class="form-group">
                             <label for="code">Coupon Code:</label>
-                            <input type="text" class="form-control" id="code" value="{{ $couponcode['code'] }}" readonly>
+                            <input type="text" name="code" class="form-control" id="code" value="{{ $couponcode['code'] }}" readonly>
                         </div>
 
                         <div class="form-group">
                             <label for="branch">Filliaal:</label>
-                            <select class="form-control" name="branch">
+                            <select class="form-control" name="branch_id">
                                 @foreach($branches as $branch)
                                     <option value="{{ $branch['id'] }}" {{ $couponcode['branch_id'] == $branch['id'] ? "selected=selected" : "" }}>
                                         {{ $branch['name'] }}
@@ -49,7 +50,7 @@
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">€</div>
                                 </div>
-                            <input type="number" step="0.5" class="form-control" id="minAmount" value="{{ $couponcode['min_amount_spent'] }}">
+                            <input type="number" step="0.5" name="min_amount_spent" class="form-control" id="minAmount" value="{{ $couponcode['min_amount_spent'] }}">
                             </div>
                         </div>
 
