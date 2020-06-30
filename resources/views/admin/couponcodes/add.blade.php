@@ -12,11 +12,12 @@
         <div class="col-sm-6 offset-sm-3 pt-md-5">
             <div class="card">
                 <div class="card-body">
-                    <form>
+                    <form action="{{ url()->current() }}" method="POST">
+                        @csrf
                         <div class="form-group">
                             <label for="code">Coupon Code:</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="code">
+                                <input type="text" name="code" class="form-control" id="code">
                                 <span class="input-group-append">
                                     <button type="button" class="btn btn-info">Willekeurig</button>
                                 </span>
@@ -25,7 +26,7 @@
 
                         <div class="form-group">
                             <label for="branch">Filliaal:</label>
-                            <select class="form-control" name="branch">
+                            <select class="form-control" name="branch_id">
                                 @foreach($branches as $branch)
                                     <option value="{{ $branch['id'] }}">
                                         {{ $branch['name'] }}
@@ -54,7 +55,7 @@
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">€</div>
                                 </div>
-                            <input type="number" step="0.5" class="form-control" id="minAmount">
+                            <input type="number" step="0.5" name="min_amount_spent" class="form-control" id="minAmount">
                             </div>
                         </div>
 
