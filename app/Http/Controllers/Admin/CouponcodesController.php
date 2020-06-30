@@ -55,11 +55,30 @@ class CouponcodesController extends Controller
         ]);
     }
 
+    public function add()
+    {
+        // TODO: Hook up db data
+        $branches = [
+            [
+                'id' => 1,
+                'name' => 'Snackbar De Groot'
+            ],
+            [
+                'id' => 2,
+                'name' => 'Snackbar Dollenhuis'
+            ],
+        ];
+
+        return view('admin.couponcodes.add' , [
+            'branches' => $branches
+        ]);
+    }
+
     public function edit()
     {
         // TODO: Hook up db data, use ID to get data
         $id = request('id');
-        
+
         $branches = [
             [
                 'id' => 1,
@@ -77,12 +96,12 @@ class CouponcodesController extends Controller
             'code' => 'S3F02',
             'amount' => '10.00',
             'status' => 'active',
-            'active_till' => '10-07-20',
+            'active_till' => '10-07-2020',
             'type' => 'takeaway',
             'sort' => 'amount',
             'min_amount_spent' => '30.00',
             'one_off' => 'true',
-            'created_at' => '30-06-20'
+            'created_at' => '30-06-2020'
         ];
 
         return view('admin.couponcodes.edit', [
