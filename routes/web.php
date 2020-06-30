@@ -24,4 +24,5 @@ Route::group(['prefix' => '/admin'], function() {
     Route::get('/', 'Admin\AdminDashboardController@Dashboard');
     Route::get('/dashboard', 'Admin\AdminDashboardController@Dashboard');
     Route::get('/couponcodes', 'Admin\CouponcodesController@Overview');
+    Route::get('/couponcodes/aanpassen/{id}', 'Admin\CouponcodesController@Edit');
 });
