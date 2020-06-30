@@ -4,10 +4,10 @@
 <div class="containter">
     <div class="row">
         <div class="col-sm-6 offset-sm-3 pt-md-5">
-            <h1>Couponcode Aanpassen</h1>
+            <h1>Couponcode Bewerken</h1>
         </div>
     </div>
-    
+
     <div class="row">
         <div class="col-sm-6 offset-sm-3 pt-md-5">
             <div class="card">
@@ -75,7 +75,7 @@
 
                             <div class="col form-group">
                                 <label for="active_till">Geldig Tot:</label>
-                                <input type="date" name="active_till" class="form-control" id="active_till">
+                                <input type="date" name="active_till" class="form-control" id="active_till" value="{{ date("Y-m-d", strtotime($couponcode['active_till'])) }}">
                             </div>
                         </div>
                         
