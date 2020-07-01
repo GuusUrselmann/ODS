@@ -313,6 +313,23 @@ return [
             'icon_color' => 'cyan',
             'url'        => '#',
         ],
+        ['header' => 'OTHER'],
+        [
+            'text'    => 'Permissions',
+            'icon'    => 'fas fa-fw fa-clipboard',
+            'submenu' => [
+                [
+                    'text' => 'Groups',
+                    'url'  => 'admin/permissions/groups',
+                    'icon'    => 'fas fa-fw fa-cubes',
+                ],
+                [
+                    'text' => 'Users',
+                    'url'  => 'admin/permissions/users',
+                    'icon'    => 'fas fa-fw fa-users',
+                ],
+            ],
+        ],
     ],
 
     /*
