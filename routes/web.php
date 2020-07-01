@@ -23,4 +23,14 @@ Route::group(['prefix' => '/'], function() {
 Route::group(['prefix' => '/admin'], function() {
     Route::get('/', 'Admin\AdminDashboardController@Dashboard');
     Route::get('/dashboard', 'Admin\AdminDashboardController@Dashboard');
+
+    Route::group(['prefix' => '/filialen'], function() {
+        Route::get('/', 'Admin\BranchesController@overview');
+        Route::get('/openinghours', 'Admin\BranchesController@openingHours');
+        Route::get('/toevoegen', 'Admin\BranchesController@add');
+        Route::post('/toevoegen', 'Admin\BranchesController@save');
+        Route::get('/bewerken/{id}', 'Admin\BranchesController@edit');
+        Route::post('/bewerken/{id}', 'Admin\BranchesController@update');
+        Route::post('/verwijderen/{id}', 'Admin\BranchesController@delete');
+    });
 });
