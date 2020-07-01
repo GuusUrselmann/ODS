@@ -2,6 +2,9 @@
 
 @section('content')
 
+{{-- TODO: needs to be on the right --}}
+<a href="" class="btn btn-success">Toevoegen</a>
+
 <div class="table-responsive">
     <table class="table table-hover">
         <thead class="thead-dark">
@@ -27,9 +30,9 @@
                     <td>{{ $branche['status'] == "active" ? "Ja" : "Nee" }}</td>
                     <td class="text-right">
                         {{-- TODO: Connect buttons up to actions --}}
-                        <button type="button" class="btn btn-info">Openingstijden</button>
-                        <button type="button" class="btn btn-warning">Bewerken</button>
-                        <button type="button" class="btn btn-danger">Verwijderen</button>
+                        <a href="" class="btn btn-info">Openingstijden</a>
+                        <a href="" class="btn btn-warning">Bewerken</a>
+                        <a href="" class="btn btn-danger">Verwijderen</a>
                     </td>
                 </tr>
             @endforeach
