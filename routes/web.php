@@ -44,9 +44,6 @@ Route::group(['prefix' => '/admin'], function() {
     Route::group(['prefix' => '/users'], function() {
         Route::get('/', 'Admin\AdminUsersController@users');
     });
-    Route::group(['prefix' => '/branches'], function() {
-        Route::get('/', 'Admin\AdminBranchesController@branches');
-    });
     Route::group(['prefix' => '/permissions'], function() {
         Route::get('/', 'Admin\AdminPermissionsController@groups');
         Route::get('/groups', 'Admin\AdminPermissionsController@groups');
@@ -64,4 +61,13 @@ Route::group(['prefix' => '/admin'], function() {
         Route::post('/toevoegen', 'Admin\CouponcodesController@save');
         Route::get('/verwijderen', 'Admin\CouponcodesController@delete');
     });    
+    Route::group(['prefix' => '/filialen'], function() {
+        Route::get('/', 'Admin\BranchesController@overview');
+        Route::get('/openinghours', 'Admin\BranchesController@openingHours');
+        Route::get('/toevoegen', 'Admin\BranchesController@add');
+        Route::post('/toevoegen', 'Admin\BranchesController@save');
+        Route::get('/bewerken/{id}', 'Admin\BranchesController@edit');
+        Route::post('/bewerken/{id}', 'Admin\BranchesController@update');
+        Route::post('/verwijderen/{id}', 'Admin\BranchesController@delete');
+    });
 });
