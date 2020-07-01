@@ -30,5 +30,6 @@ Route::group(['prefix' => '/admin'], function() {
         Route::post('/bewerken/{id}', 'Admin\CouponcodesController@update');
         Route::get('/toevoegen', 'Admin\CouponcodesController@add');
         Route::post('/toevoegen', 'Admin\CouponcodesController@save');
+        Route::get('/verwijderen', 'Admin\CouponcodesController@delete');
     });    
 });
