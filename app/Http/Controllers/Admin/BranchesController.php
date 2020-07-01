@@ -70,7 +70,88 @@ class BranchesController extends Controller
 
     public function openingHours()
     {
-        return view('admin.branches.openinghours');
+        // TODO: hoop up database
+        $openinghours = [
+            'delivery' => [
+                'monday' => [
+                    'open' => true,
+                    'openinghour' => '16:00',
+                    'closinghour' => '22:00',
+                ],
+                'tuesday' => [
+                    'open' => true,
+                    'openinghour' => '16:00',
+                    'closinghour' => '22:00',
+                ],
+                'wednesday' => [
+                    'open' => false,
+                    'openinghour' => '16:00',
+                    'closinghour' => '22:00',
+                ],
+                'thursday' => [
+                    'open' => true,
+                    'openinghour' => '16:00',
+                    'closinghour' => '22:00',
+                ],
+                'friday' => [
+                    'open' => false,
+                    'openinghour' => '16:00',
+                    'closinghour' => '22:00',
+                ],
+                'saturday' => [
+                    'open' => true,
+                    'openinghour' => '16:00',
+                    'closinghour' => '22:00',
+                ],
+                'sunday' => [
+                    'open' => true,
+                    'openinghour' => '16:00',
+                    'closinghour' => '22:00',
+                ]
+            ],
+            'takeaway' => [
+                'monday' => [
+                    'open' => true,
+                    'openinghour' => '17:00',
+                    'closinghour' => '22:30',
+                ],
+                'tuesday' => [
+                    'open' => true,
+                    'openinghour' => '17:00',
+                    'closinghour' => '22:30',
+                ],
+                'wednesday' => [
+                    'open' => true,
+                    'openinghour' => '17:00',
+                    'closinghour' => '22:30',
+                ],
+                'thursday' => [
+                    'open' => true,
+                    'openinghour' => '17:00',
+                    'closinghour' => '22:30',
+                ],
+                'friday' => [
+                    'open' => true,
+                    'openinghour' => '17:00',
+                    'closinghour' => '22:30',
+                ],
+                'saturday' => [
+                    'open' => true,
+                    'openinghour' => '17:00',
+                    'closinghour' => '22:30',
+                ],
+                'sunday' => [
+                    'open' => true,
+                    'openinghour' => '17:00',
+                    'closinghour' => '22:30',
+                ]
+            ]
+        ];
+
+        return view('admin.branches.openinghours', [
+            'delivery' => $openinghours['delivery'],
+            'takeaway' => $openinghours['takeaway']
+        ]);
     }
 
     public function add()
@@ -80,6 +161,7 @@ class BranchesController extends Controller
 
     public function edit()
     {
+        // TODO: hoop up database, also update updated_at column
         $branche =  [
             'id' => 2,
             'name' => 'Snackbar De Fantastico',
