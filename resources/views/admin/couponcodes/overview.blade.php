@@ -1,15 +1,15 @@
-@extends('layouts.admin.layout')
+@extends('adminlte::page')
+
+@section('title', 'Couponcodes')
+
+@section('content_header')
+    <h1>Couponcodes</h1>
+@stop
 
 @section('content')
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-10 offset-sm-1 pt-md-5">
-            <h1>Couponcodes</h1>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-10 offset-sm-1">
+        <div class="col-sm-12">
             <div class="table-responsive">
                 <table class="table table-hover">
                     <thead class="thead-dark">
@@ -54,3 +54,11 @@
     </div>
 </div>
 @endsection
+
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+@stop
+
+@section('js')
+    <script> console.log('Hi!'); </script>
+@stop
