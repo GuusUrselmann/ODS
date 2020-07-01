@@ -26,7 +26,7 @@ Route::group(['prefix' => '/admin'], function() {
 
     Route::group(['prefix' => '/filialen'], function() {
         Route::get('/', 'Admin\BranchesController@overview');
-        Route::get('/openinghours', 'Admin\BranchesController@openingHours');
+        Route::get('/openingstijden', 'Admin\BranchesController@openingHours');
         Route::get('/toevoegen', 'Admin\BranchesController@add');
         Route::post('/toevoegen', 'Admin\BranchesController@save');
         Route::get('/bewerken/{id}', 'Admin\BranchesController@edit');
