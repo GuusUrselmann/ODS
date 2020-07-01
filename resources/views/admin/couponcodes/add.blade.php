@@ -12,12 +12,12 @@
         <div class="col-sm-6 offset-sm-3 pt-md-5">
             <div class="card">
                 <div class="card-body">
-                    <form action="{{ url()->current() }}" method="POST">
+                    <form action="{{ url()->current() }}" method="POST" class="needs-validation" novalidate>
                         @csrf
                         <div class="form-group">
                             <label for="code">Coupon Code:</label>
                             <div class="input-group">
-                                <input type="text" name="code" class="form-control" id="code">
+                                <input type="text" name="code" class="form-control" id="code" required>
                                 <span class="input-group-append">
                                     <button type="button" class="btn btn-info">Willekeurig</button>
                                 </span>
@@ -45,7 +45,7 @@
                             </div>
                             <div class="col form-group">
                                 <label for="">Bedrag/Percentage:</label>
-                                <input type="number" step="0.5" name="amount" class="form-control">
+                                <input type="number" step="0.5" name="amount" class="form-control" required>
                             </div>
                         </div>
                         
@@ -55,7 +55,7 @@
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">€</div>
                                 </div>
-                            <input type="number" step="0.5" name="min_amount_spent" class="form-control" id="minAmount">
+                                <input type="number" step="0.5" min="0" name="min_amount_spent" class="form-control" id="minAmount" required>
                             </div>
                         </div>
 
@@ -81,7 +81,7 @@
 
                             <div class="col form-group">
                                 <label for="active_till">Geldig Tot:</label>
-                                <input type="date" name="active_till" class="form-control" id="active_till">
+                                <input type="date" name="active_till" class="form-control" id="active_till" required>
                             </div>
                         </div>
                         
@@ -100,4 +100,25 @@
         </div>
     </div>
 </div>
+
+<script>
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+</script>
 @endsection
