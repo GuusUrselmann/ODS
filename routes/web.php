@@ -41,9 +41,6 @@ Route::group(['prefix' => '/admin'], function() {
         Route::post('/{id}/edit', 'Admin\AdminCategoriesController@categoryEditSave');
         Route::post('/{id}/delete', 'Admin\AdminCategoriesController@categoryDelete');
     });
-    Route::group(['prefix' => '/coupons'], function() {
-        Route::get('/', 'Admin\AdminCouponsController@coupons');
-    });
     Route::group(['prefix' => '/users'], function() {
         Route::get('/', 'Admin\AdminUsersController@users');
     });
@@ -59,5 +56,12 @@ Route::group(['prefix' => '/admin'], function() {
         Route::get('/', 'Admin\AdminSettingsController@settings');
     });
 
-
+    Route::group(['prefix' => '/couponcodes'], function() {
+        Route::get('/', 'Admin\CouponcodesController@overview');
+        Route::get('/bewerken/{id}', 'Admin\CouponcodesController@edit');
+        Route::post('/bewerken/{id}', 'Admin\CouponcodesController@update');
+        Route::get('/toevoegen', 'Admin\CouponcodesController@add');
+        Route::post('/toevoegen', 'Admin\CouponcodesController@save');
+        Route::get('/verwijderen', 'Admin\CouponcodesController@delete');
+    });    
 });
