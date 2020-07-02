@@ -9,7 +9,7 @@
 @section('content')
 <div class="containter">    
     <div class="row">
-        <div class="col-sm-12 pt-md-5">
+        <div class="col-sm-8 offset-sm-2 pt-md-5">
             <div class="card">
                 <div class="card-body">
                     <form action="{{ url()->current() }}" method="POST" class="needs-validation" novalidate>
