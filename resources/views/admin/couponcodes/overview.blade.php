@@ -53,7 +53,7 @@
         </div>
     </div>
 </div>
-@endsection
+@stop
 
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
