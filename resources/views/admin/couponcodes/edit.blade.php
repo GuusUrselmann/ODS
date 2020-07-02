@@ -69,8 +69,8 @@
                             <div class="col form-group ">
                                 <label for="status">Status:</label>
                                 <select name="status" class="form-control" id="status">
-                                    <option value="active">Actief</option>
-                                    <option value="inactive">Inactief</option>
+                                    <option value="active" {{ $couponcode['status'] == "active" ? "selected=selected" : "" }}>Actief</option>
+                                    <option value="inactive" {{ $couponcode['status'] == "inactive" ? "selected=selected" : "" }}>Inactief</option>
                                 </select>
                             </div>
 
