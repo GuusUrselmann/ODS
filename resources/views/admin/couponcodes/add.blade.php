@@ -17,9 +17,9 @@
                         <div class="form-group">
                             <label for="code">Coupon Code:</label>
                             <div class="input-group">
-                                <input type="text" name="code" class="form-control" id="code" required>
+                                <input type="text" name="code" class="form-control random-string" id="code" required>
                                 <span class="input-group-append">
-                                    <button type="button" class="btn btn-info">Willekeurig</button>
+                                    <button type="button" class="btn btn-info random-string-generator">Willekeurig</button>
                                 </span>
                             </div>
                         </div>
@@ -108,4 +108,5 @@
 
 @section('js')
 <script src="{{ url('/js/utilities/form-validation.js') }}"></script>
+<script src="{{ url('/js/utilities/random-string.js') }}"></script>
 @stop
