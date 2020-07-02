@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Couponcodes')
+@section('title', 'Couponcodes Overzicht')
 
 @section('content_header')
     <h1>Couponcodes</h1>
