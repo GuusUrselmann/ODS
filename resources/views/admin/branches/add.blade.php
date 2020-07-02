@@ -1,15 +1,15 @@
-@extends('layouts.admin.layout')
+@extends('adminlte::page')
+
+@section('title', 'Filiaal Toevoegen')
+
+@section('content_header')
+    <h1>Filiaal Toevoegen</h1>
+@stop
 
 @section('content')
-<div class="containter">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-sm-6 offset-sm-3 pt-md-5">
-            <h1>Filiaal Toevoegen</h1>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-6 offset-sm-3 pt-md-3">
+        <div class="col-sm-8 offset-sm-2">
             <div class="card">
                 <div class="card-body">
                     <form action="{{ url()->current() }}" method="POST" class="needs-validation" novalidate>
@@ -192,9 +192,13 @@
         </div>
     </div>
 </div>
+@stop
 
-@endsection
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+@stop
 
+@section('js')
 <script>
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 (function() {
@@ -214,4 +218,6 @@
     });
   }, false);
 })();
-</script>
+</script>    
+@stop
+

@@ -15,18 +15,17 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::group(['prefix' => '/'], function() {
+Route::group(['prefix' => '/'], function () {
     Route::get('/', 'Guest\GuestHomeController@home');
     Route::get('/home', 'Guest\GuestHomeController@home');
 });
 
 
 //Admin routes
-Route::group(['prefix' => '/admin'], function() {
-<<<<<<< HEAD
+Route::group(['prefix' => '/admin'], function () {
     Route::get('/', 'Admin\AdminDashboardController@dashboard');
     Route::get('/dashboard', 'Admin\AdminDashboardController@dashboard');
-    Route::group(['prefix' => '/products'], function() {
+    Route::group(['prefix' => '/products'], function () {
         Route::get('/', 'Admin\AdminProductsController@products');
         Route::get('/add', 'Admin\AdminProductsController@productAdd');
         Route::get('/{id}/edit', 'Admin\AdminProductsController@productEdit');
@@ -34,7 +33,7 @@ Route::group(['prefix' => '/admin'], function() {
         Route::post('/{id}/edit', 'Admin\AdminProductsController@productEditSave');
         Route::post('/{id}/delete', 'Admin\AdminProductsController@productDelete');
     });
-    Route::group(['prefix' => '/categories'], function() {
+    Route::group(['prefix' => '/categories'], function () {
         Route::get('/', 'Admin\AdminCategoriesController@categories');
         Route::get('/add', 'Admin\AdminCategoriesController@categoryAdd');
         Route::get('/{id}/edit', 'Admin\AdminCategoriesController@categoryEdit');
@@ -42,32 +41,28 @@ Route::group(['prefix' => '/admin'], function() {
         Route::post('/{id}/edit', 'Admin\AdminCategoriesController@categoryEditSave');
         Route::post('/{id}/delete', 'Admin\AdminCategoriesController@categoryDelete');
     });
-    Route::group(['prefix' => '/users'], function() {
+    Route::group(['prefix' => '/users'], function () {
         Route::get('/', 'Admin\AdminUsersController@users');
     });
-    Route::group(['prefix' => '/permissions'], function() {
+    Route::group(['prefix' => '/permissions'], function () {
         Route::get('/', 'Admin\AdminPermissionsController@groups');
         Route::get('/groups', 'Admin\AdminPermissionsController@groups');
         Route::get('/users', 'Admin\AdminPermissionsController@users');
     });
-    Route::group(['prefix' => '/settings'], function() {
+    Route::group(['prefix' => '/settings'], function () {
         Route::get('/', 'Admin\AdminSettingsController@settings');
     });
 
-    Route::group(['prefix' => '/couponcodes'], function() {
+    Route::group(['prefix' => '/couponcodes'], function () {
         Route::get('/', 'Admin\CouponcodesController@overview');
         Route::get('/bewerken/{id}', 'Admin\CouponcodesController@edit');
         Route::post('/bewerken/{id}', 'Admin\CouponcodesController@update');
         Route::get('/toevoegen', 'Admin\CouponcodesController@add');
         Route::post('/toevoegen', 'Admin\CouponcodesController@save');
         Route::get('/verwijderen', 'Admin\CouponcodesController@delete');
-    });    
-=======
-    Route::get('/', 'Admin\AdminDashboardController@Dashboard');
-    Route::get('/dashboard', 'Admin\AdminDashboardController@Dashboard');
+    });
 
->>>>>>> branches
-    Route::group(['prefix' => '/filialen'], function() {
+    Route::group(['prefix' => '/filialen'], function () {
         Route::get('/', 'Admin\BranchesController@overview');
         Route::get('/openingstijden', 'Admin\BranchesController@openingHours');
         Route::get('/toevoegen', 'Admin\BranchesController@add');
@@ -76,8 +71,4 @@ Route::group(['prefix' => '/admin'], function() {
         Route::post('/bewerken/{id}', 'Admin\BranchesController@update');
         Route::post('/verwijderen/{id}', 'Admin\BranchesController@delete');
     });
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> branches

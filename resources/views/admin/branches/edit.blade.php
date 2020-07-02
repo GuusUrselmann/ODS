@@ -1,15 +1,15 @@
-@extends('layouts.admin.layout')
+@extends('adminlte::page')
+
+@section('title', 'Filiaal Bewerken')
+
+@section('content_header')
+    <h1>Filiaal Bewerken</h1>
+@stop
 
 @section('content')
-<div class="containter">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-sm-6 offset-sm-3 pt-md-5">
-            <h1>Filiaal Bewerken</h1>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-6 offset-sm-3 pt-md-3">
+        <div class="col-sm-8 offset-sm-2">
             <div class="card">
                 <div class="card-body">
                     <form action="{{ url()->current() }}" method="POST" class="needs-validation" novalidate>
@@ -70,7 +70,7 @@
                         <div class="form-row">
                             <div class="col form-group">
                                 <label for="phonenumber">Telefoonnummer:</label>
-                                <input type="text" name="phonenumber" class="form-control" id="phonenumber" value="{{ $branche['phonenumber'] }}">
+                                <input type="text" name="phonenumber" class="form-control" id="phonenumber" value="{{ $branche['phonenumber'] }}" required>
                                 <div class="invalid-feedback">
                                     Vul a.u.b. een geldig telefoonnummer in.
                                 </div>
@@ -192,7 +192,13 @@
         </div>
     </div>
 </div>
+@stop
 
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+@stop
+
+@section('js')
 <script>
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 (function() {
@@ -213,5 +219,4 @@
   }, false);
 })();
 </script>
-
-@endsection
+@stop

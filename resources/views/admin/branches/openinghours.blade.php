@@ -1,22 +1,22 @@
-@extends('layouts.admin.layout')
+@extends('adminlte::page')
+
+@section('title', 'Filiaal Openingstijden')
+
+@section('content_header')
+    <h1>Filiaal Tijden</h1>
+@stop
 
 @section('content')
-<div class="containter">
-    <div class="row">
-        <div class="col-sm-8 offset-sm-1 pt-md-5">
-            <h1>Filiaal Tijden</h1>
-        </div>
-    </div>
-
+<div class="container-fluid">
     <div class="row">
         <div class="col-sm-5 offset-sm-1 pt-md-3">
             <div class="card">
                 <div class="card-body">
                     <h3 class="card-title">Bezorgen</h3>
-                    <hr>
+                    <br><hr>
 
-                    <form action="" method="">
-
+                    <form action="" method="" class="needs-validation" novalidate>
+                        @csrf
                         @foreach($delivery as $day => $hours)
                             <div class="form-row">
                                 <div class="col">
@@ -52,9 +52,9 @@
             <div class="card">
                 <div class="card-body">
                     <h3 class="card-title">Afhalen</h3>
-                    <hr>
+                    <br><hr>
 
-                    <form action="" method="POST">
+                    <form action="" method="POST" class="needs-validation" novalidate>
                         @csrf
                         @foreach($takeaway as $day => $hours)
                             <div class="form-row">
@@ -89,4 +89,32 @@
 
     </div>
 </div>
-@endsection
+@stop
+
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+@stop
+
+@section('js')
+<script>
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+</script>    
+@stop
+
