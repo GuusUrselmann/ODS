@@ -23,6 +23,7 @@ Route::group(['prefix' => '/'], function() {
 
 //Admin routes
 Route::group(['prefix' => '/admin'], function() {
+<<<<<<< HEAD
     Route::get('/', 'Admin\AdminDashboardController@dashboard');
     Route::get('/dashboard', 'Admin\AdminDashboardController@dashboard');
     Route::group(['prefix' => '/products'], function() {
@@ -61,6 +62,11 @@ Route::group(['prefix' => '/admin'], function() {
         Route::post('/toevoegen', 'Admin\CouponcodesController@save');
         Route::get('/verwijderen', 'Admin\CouponcodesController@delete');
     });    
+=======
+    Route::get('/', 'Admin\AdminDashboardController@Dashboard');
+    Route::get('/dashboard', 'Admin\AdminDashboardController@Dashboard');
+
+>>>>>>> branches
     Route::group(['prefix' => '/filialen'], function() {
         Route::get('/', 'Admin\BranchesController@overview');
         Route::get('/openingstijden', 'Admin\BranchesController@openingHours');
@@ -70,4 +76,8 @@ Route::group(['prefix' => '/admin'], function() {
         Route::post('/bewerken/{id}', 'Admin\BranchesController@update');
         Route::post('/verwijderen/{id}', 'Admin\BranchesController@delete');
     });
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> branches
