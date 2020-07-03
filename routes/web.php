@@ -38,10 +38,10 @@ Route::group(['prefix' => '/admin'], function () {
     Route::group(['prefix' => '/categorieen'], function () {
         Route::get('/', 'Admin\CategoriesController@overview');
         Route::get('/toevoegen', 'Admin\CategoriesController@add');
-        Route::get('/{id}/bewerken', 'Admin\CategoriesController@edit');
+        Route::get('/bewerken/{id}', 'Admin\CategoriesController@edit');
         Route::post('/toevoegen', 'Admin\CategoriesController@save');
-        Route::post('/{id}/bewerken', 'Admin\CategoriesController@update');
-        Route::post('/{id}/verwijderen', 'Admin\CategoriesController@delete');
+        Route::post('/bewerken/{id}', 'Admin\CategoriesController@update');
+        Route::post('/verwijderen/{id}', 'Admin\CategoriesController@delete');
     });
     
     Route::group(['prefix' => '/gebruikers'], function () {
