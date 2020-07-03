@@ -18,7 +18,37 @@ class CategoriesController extends Controller
 
     public function overview()
     {
-        return view('admin.categories.categories');
+        $categories = [
+            [
+                'id' => 1,
+                'name' => 'Voorgerechten',
+                'status' => "active",
+                'created_at' => "02/07/2020",
+                'updated_at' => null,
+                'deleted_at' => null,
+                'webshop_position' => 1,
+            ],
+            [
+                'id' => 2,
+                'name' => 'Hoofdgerechten',
+                'status' => "active",
+                'created_at' => "02/07/2020",
+                'updated_at' => null,
+                'deleted_at' => null,
+                'webshop_position' => 2,
+            ],
+            [
+                'id' => 3,
+                'name' => 'Nagerechten',
+                'status' => "active",
+                'created_at' => "02/07/2020",
+                'updated_at' => null,
+                'deleted_at' => null,
+                'webshop_position' => 3,
+            ],
+        ];
+
+        return view('admin.categories.overview', ['categories' => $categories]);
     }
 
     public function add()
@@ -28,7 +58,17 @@ class CategoriesController extends Controller
 
     public function edit()
     {
-        return view('admin.categories.edit');
+        $category = [
+            'id' => 1,
+            'name' => 'Voorgerechten',
+            'status' => "inactive",
+            'created_at' => "02/07/2020",
+            'updated_at' => null,
+            'deleted_at' => null,
+            'webshop_position' => 1,
+        ];
+
+        return view('admin.categories.edit', [ 'category' => $category]);
     }
 
     /*
@@ -36,7 +76,7 @@ class CategoriesController extends Controller
     */
     public function save()
     {
-        return redirect(url('/admin/categories'));
+        return redirect(url('/admin/categorieen'));
     }
 
     /*
@@ -44,11 +84,11 @@ class CategoriesController extends Controller
     */
     public function update()
     {
-        return redirect(url('/admin/categories'));
+        return redirect(url('/admin/categorieen'));
     }
 
     public function delete()
     {
-        return redirect(url('/admin/categories'));
+        return redirect(url('/admin/categorieen'));
     }
 }
