@@ -314,58 +314,56 @@ return [
         //     'url'        => '#',
         // ],
 
-
-
-        [
+        [   
             'text'    => 'Dashboard',
             'url'  => 'admin/',
             'icon'    => 'fas fa-fw fa-home',
         ],
-        ['header' => 'PRODUCTS'],
+        ['header' => 'PRODUCTEN'],
         [
-            'text'    => 'Products',
-            'url'  => 'admin/products/',
+            'text'    => 'Producten',
+            'url'  => 'admin/producten/',
             'icon'    => 'fas fa-fw fa-utensils',
         ],
         [
-            'text'    => 'Categories',
-            'url'  => 'admin/categories/',
+            'text'    => 'Categorieën',
+            'url'  => 'admin/categorieen/',
             'icon'    => 'fas fa-fw fa-list-ol',
         ],
         [
-            'text'    => 'Coupons',
-            'url'  => 'admin/coupons/',
+            'text'    => 'Couponcodes',
+            'url'  => 'admin/couponcodes/',
             'icon'    => 'fas fa-fw fa-ticket-alt',
         ],
-        ['header' => 'COMPANY'],
+        ['header' => 'BEDRIJF'],
         [
-            'text'    => 'Users',
-            'url'  => 'admin/users/',
+            'text'    => 'Gebruikers',
+            'url'  => 'admin/gebruikers/',
             'icon'    => 'fas fa-fw fa-users',
         ],
         [
-            'text'    => 'Branches',
-            'url'  => 'admin/branches/',
+            'text'    => 'Filialen',
+            'url'  => 'admin/filialen/',
             'icon'    => 'fas fa-fw fa-network-wired',
         ],
-        ['header' => 'OTHER'],
+        ['header' => 'OVERIG'],
         [
-            'text'    => 'Permissions',
+            'text'    => 'Permissies',
             'icon'    => 'fas fa-fw fa-key',
             'submenu' => [
                 [
-                    'text' => 'Groups',
-                    'url'  => 'admin/permissions/groups',
+                    'text' => 'Groepen',
+                    'url'  => 'admin/permissies/groepen',
                 ],
                 [
-                    'text' => 'Users',
-                    'url'  => 'admin/permissions/users',
+                    'text' => 'Gebruikers',
+                    'url'  => 'admin/permissies/gebruikers',
                 ],
             ],
         ],
         [
-            'text'    => 'Settings',
-            'url'  => 'admin/settings/',
+            'text'    => 'Instellingen',
+            'url'  => 'admin/instellingen/',
             'icon'    => 'fas fa-fw fa-cog',
         ],
     ],
