@@ -110,6 +110,9 @@ class CouponcodesController extends Controller
         ]);
     }
 
+    /*
+    *   Method to insert new categories into the datbase
+    */
     public function save()
     {
         // TODO: Insert into database
@@ -129,6 +132,9 @@ class CouponcodesController extends Controller
         return redirect('/');
     }
 
+    /*
+    *   Method to update existing categories into the datbase
+    */
     public function update()
     {
         // TODO: Update with code NOT with id from url

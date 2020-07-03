@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class AdminSettingsController extends Controller
+class SettingsController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -15,7 +15,7 @@ class AdminSettingsController extends Controller
     public function __construct() {
     }
 
-    public function settings() {
+    public function overview() {
         return view('admin.settings.settings');
     }
 }

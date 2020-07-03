@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class AdminUsersController extends Controller
+class UsersController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -15,7 +15,7 @@ class AdminUsersController extends Controller
     public function __construct() {
     }
 
-    public function users() {
+    public function overview() {
         return view('admin.users.users');
     }
 }

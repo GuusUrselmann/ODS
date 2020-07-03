@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class AdminDashboardController extends Controller
+class PermissionsController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -15,7 +15,11 @@ class AdminDashboardController extends Controller
     public function __construct() {
     }
 
-    public function dashboard() {
-        return view('admin.dashboard.dashboard');
+    public function groups() {
+        return view('admin.permissions.groups');
+    }
+
+    public function users() {
+        return view('admin.permissions.users');
     }
 }

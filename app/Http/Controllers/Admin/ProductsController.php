@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class AdminProductsController extends Controller
+class ProductsController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -15,27 +15,33 @@ class AdminProductsController extends Controller
     public function __construct() {
     }
 
-    public function products() {
+    public function overview() {
         return view('admin.products.products');
     }
 
-    public function productAdd() {
+    public function add() {
         return view('admin.products.add');
     }
 
-    public function productEdit() {
+    public function edit() {
         return view('admin.products.edit');
     }
 
-    public function productAddSave() {
+    /*
+    *   Method to insert new categories into the datbase
+    */
+    public function save() {
         return redirect(url('/admin/products'));
     }
 
-    public function productEditSave() {
+    /*
+    *   Method to update existing categories into the datbase
+    */
+    public function update() {
         return redirect(url('/admin/products'));
     }
 
-    public function productDelete() {
+    public function delete() {
         return redirect(url('/admin/products'));
     }
 }

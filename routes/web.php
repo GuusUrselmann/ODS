@@ -23,34 +23,38 @@ Route::group(['prefix' => '/'], function () {
 
 //Admin routes
 Route::group(['prefix' => '/admin'], function () {
-    Route::get('/', 'Admin\AdminDashboardController@dashboard');
-    Route::get('/dashboard', 'Admin\AdminDashboardController@dashboard');
+    Route::get('/', 'Admin\DashboardController@dashboard');
+    Route::get('/dashboard', 'Admin\DashboardController@dashboard');
     Route::group(['prefix' => '/products'], function () {
-        Route::get('/', 'Admin\AdminProductsController@products');
-        Route::get('/add', 'Admin\AdminProductsController@productAdd');
-        Route::get('/{id}/edit', 'Admin\AdminProductsController@productEdit');
-        Route::post('/add', 'Admin\AdminProductsController@productAddSave');
-        Route::post('/{id}/edit', 'Admin\AdminProductsController@productEditSave');
-        Route::post('/{id}/delete', 'Admin\AdminProductsController@productDelete');
+        Route::get('/', 'Admin\ProductsController@overview');
+        Route::get('/add', 'Admin\ProductsController@add');
+        Route::get('/{id}/edit', 'Admin\ProductsController@edit');
+        Route::post('/add', 'Admin\ProductsController@save');
+        Route::post('/{id}/edit', 'Admin\ProductsController@update');
+        Route::post('/{id}/delete', 'Admin\ProductsController@delete');
     });
+
     Route::group(['prefix' => '/categories'], function () {
-        Route::get('/', 'Admin\AdminCategoriesController@categories');
-        Route::get('/add', 'Admin\AdminCategoriesController@categoryAdd');
-        Route::get('/{id}/edit', 'Admin\AdminCategoriesController@categoryEdit');
-        Route::post('/add', 'Admin\AdminCategoriesController@categoryAddSave');
-        Route::post('/{id}/edit', 'Admin\AdminCategoriesController@categoryEditSave');
-        Route::post('/{id}/delete', 'Admin\AdminCategoriesController@categoryDelete');
+        Route::get('/', 'Admin\CategoriesController@overview');
+        Route::get('/add', 'Admin\CategoriesController@add');
+        Route::get('/{id}/edit', 'Admin\CategoriesController@edit');
+        Route::post('/add', 'Admin\CategoriesController@save');
+        Route::post('/{id}/edit', 'Admin\CategoriesController@update');
+        Route::post('/{id}/delete', 'Admin\CategoriesController@delete');
     });
+    
     Route::group(['prefix' => '/users'], function () {
-        Route::get('/', 'Admin\AdminUsersController@users');
+        Route::get('/', 'Admin\UsersController@overview');
     });
+    
     Route::group(['prefix' => '/permissions'], function () {
-        Route::get('/', 'Admin\AdminPermissionsController@groups');
-        Route::get('/groups', 'Admin\AdminPermissionsController@groups');
-        Route::get('/users', 'Admin\AdminPermissionsController@users');
+        Route::get('/', 'Admin\PermissionsController@groups');
+        Route::get('/groups', 'Admin\PermissionsController@groups');
+        Route::get('/users', 'Admin\PermissionsController@users');
     });
+
     Route::group(['prefix' => '/settings'], function () {
-        Route::get('/', 'Admin\AdminSettingsController@settings');
+        Route::get('/', 'Admin\SettingsController@overview');
     });
 
     Route::group(['prefix' => '/couponcodes'], function () {
