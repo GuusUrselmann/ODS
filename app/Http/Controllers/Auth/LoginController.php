@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+use Illuminate\Support\Facades\Auth;
+use App\UserType;
 class LoginController extends Controller
 {
     /*
@@ -36,5 +37,11 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    protected function authenticated() {
+    	if (Auth::user()->user_type_id == UserType::where('slug', 'eigenaar')->first()->id) {
+    		return redirect(url('/admin'));
+    	}
     }
 }

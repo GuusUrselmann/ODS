@@ -1,0 +1,68 @@
+.background-cover {
+  background-size: cover;
+  background-position: center center;
+}
+
+.page-wrapper {
+  height: 100vh;
+}
+
+.page-wrapper .page-content {
+  height: 100vh;
+}
+
+.page-wrapper .page-content .card {
+  margin-top: 130px;
+  border: none;
+}
+
+.page-wrapper .page-content .card .card-title {
+  height: 50px;
+  line-height: 50px;
+  color: #fff;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+  background-color: rgba(0, 123, 255, 0.95);
+}
+
+.page-wrapper .page-sidebar {
+  height: calc(100vh);
+  margin-left: -25px;
+  background-color: rgba(0, 123, 255, 0.95);
+}
+
+.page-wrapper .page-sidebar .sidebar-content {
+  width: 100%;
+  height: calc(100% - 50px);
+}
+
+.page-wrapper .page-sidebar .sidebar-content .sidebar-return {
+  padding: 3px;
+  background-color: #fff;
+  margin-left: 20px;
+  margin-top: 60px;
+}
+
+.page-wrapper .page-sidebar .sidebar-content .sidebar-logo {
+  width: 110%;
+  margin-top: 90px;
+  margin-left: -10%;
+  background-color: #fff;
+  text-align: center;
+}
+
+.page-wrapper .page-sidebar .sidebar-content .sidebar-logo img {
+  width: 80%;
+}
+
+.page-wrapper .page-sidebar .sidebar-footer {
+  height: 35px;
+  width: calc(100%);
+  margin-left: -15px;
+  padding-left: 30px;
+  line-height: 35px;
+  position: absolute;
+  bottom: 5px;
+  background-color: #fff;
+}
+

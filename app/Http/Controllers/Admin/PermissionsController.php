@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Group;
 
 class PermissionsController extends Controller
 {
@@ -16,7 +17,28 @@ class PermissionsController extends Controller
     }
 
     public function groups() {
-        return view('admin.permissions.groups');
+        $groups = Group::all();
+        return view('admin.permissions.groups', compact('groups'));
+    }
+
+    public function groupAdd() {
+        return view('admin.permissions.groupAdd');
+    }
+
+    public function groupSave() {
+    }
+
+    public function groupEdit() {
+        return view('admin.permissions.groupEdit');
+    }
+
+    public function groupUpdate() {
+    }
+
+    public function groupDelete($id) {
+        $group = Group::find($id);
+        $group->delete();
+        return redirect('/admin/permissies/groepen');
     }
 
     public function users() {

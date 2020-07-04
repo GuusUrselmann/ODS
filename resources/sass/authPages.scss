@@ -1,0 +1,58 @@
+.background-cover {
+    background-size: cover;
+    background-position: center center;
+}
+
+.page-wrapper {
+    height: 100vh;
+    .page-content {
+        height: 100vh;
+        .card {
+            margin-top: 130px;
+            border: none;
+            .card-title {
+                height: 50px;
+                line-height: 50px;
+                color: #fff;
+                border-top-left-radius: .25rem;
+                border-top-right-radius: .25rem;
+                background-color: rgba(0, 123, 255, 0.95);
+            }
+        }
+    }
+    .page-sidebar {
+        height: calc(100vh);
+        margin-left: -25px;
+        background-color: rgba(0, 123, 255, 0.95);
+        .sidebar-content {
+            width: 100%;
+            height: calc(100% - 50px);
+            .sidebar-return {
+                padding: 3px;
+                background-color: #fff;
+                margin-left: 20px;
+                margin-top: 60px;
+            }
+            .sidebar-logo {
+                width: 110%;
+                margin-top: 90px;
+                margin-left: -10%;
+                background-color: #fff;
+                text-align: center;
+                img {
+                    width: 80%;
+                }
+            }
+        }
+        .sidebar-footer {
+            height: 35px;
+            width: calc(100%);
+            margin-left: -15px;
+            padding-left: 30px;
+            line-height: 35px;
+            position: absolute;
+            bottom: 5px;
+            background-color: #fff;
+        }
+    }
+}
