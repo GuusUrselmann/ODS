@@ -21,6 +21,18 @@
                             </div>
                         </div>
                                                 
+                        {{-- TODO: hide if user is only assigned to one branch --}}
+                        <div class="form-group">
+                            <label for="branch">Filliaal:</label>
+                            <select class="form-control" name="branch_id">
+                                @foreach($branches as $branch)
+                                    <option value="{{ $branch['id'] }}">
+                                        {{ $branch['name'] }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
                         <div class="form-group">
                             <label for="status">Status:</label>
                             <select name="status" class="form-control" id="status">
