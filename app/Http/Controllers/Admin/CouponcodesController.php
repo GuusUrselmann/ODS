@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Couponcode;
 
 class CouponcodesController extends Controller
 {
@@ -13,42 +14,43 @@ class CouponcodesController extends Controller
 
     public function overview()
     {
-        // TODO: Hook up db data 
-        $couponcodes = [
-            [
-                'code' => 'S3F02',
-                'amount' => '10.00',
-                'status' => 'active',
-                'active_till' => '10-07-20',
-                'type' => 'delivery',
-                'sort' => 'percentage',
-                'min_amount_spent' => '30.00',
-                'one_off' => 'true',
-                'created_at' => '30-06-20'
-            ],
-            [
-                'code' => 'S3F03',
-                'amount' => '15.00',
-                'sort' => 'percentage',
-                'status' => 'active',
-                'active_till' => '20-07-20',
-                'type' => 'takeaway',
-                'min_amount_spent' => '50.00',
-                'one_off' => 'true',
-                'created_at' => '30-06-20'
-            ],
-            [
-                'code' => 'S3F04',
-                'amount' => '5.00',
-                'sort' => 'amount',
-                'status' => 'active',
-                'active_till' => '12-07-20',
-                'type' => 'both',
-                'min_amount_spent' => '20.00',
-                'one_off' => 'true',
-                'created_at' => '30-06-20'
-            ]
-        ];
+        $couponcodes = Couponcode::all();
+        
+        // $couponcodes = [
+        //     [
+        //         'code' => 'S3F02',
+        //         'amount' => '10.00',
+        //         'status' => 'active',
+        //         'active_till' => '10-07-20',
+        //         'type' => 'delivery',
+        //         'sort' => 'percentage',
+        //         'min_amount_spent' => '30.00',
+        //         'one_off' => 'true',
+        //         'created_at' => '30-06-20'
+        //     ],
+        //     [
+        //         'code' => 'S3F03',
+        //         'amount' => '15.00',
+        //         'sort' => 'percentage',
+        //         'status' => 'active',
+        //         'active_till' => '20-07-20',
+        //         'type' => 'takeaway',
+        //         'min_amount_spent' => '50.00',
+        //         'one_off' => 'true',
+        //         'created_at' => '30-06-20'
+        //     ],
+        //     [
+        //         'code' => 'S3F04',
+        //         'amount' => '5.00',
+        //         'sort' => 'amount',
+        //         'status' => 'active',
+        //         'active_till' => '12-07-20',
+        //         'type' => 'both',
+        //         'min_amount_spent' => '20.00',
+        //         'one_off' => 'true',
+        //         'created_at' => '30-06-20'
+        //     ]
+        // ];
 
         return view('admin.couponcodes.overview', [
             'couponcodes' => $couponcodes,
@@ -115,21 +117,22 @@ class CouponcodesController extends Controller
     */
     public function save()
     {
-        // TODO: Insert into database
+        $couponcode = new Couponcode();
 
-        $data = [
-            'branch_id' => request('branch_id'),
-            'code' => request('code'),
-            'amount' => request('amount'),
-            'status' => request('status'),
-            'active_till' => request('active_till'),
-            'type' => request('type'),
-            'sort' => request('sort'),
-            'min_amount_spent' => request('min_amount_spent'),
-            'one_off' => request('one_off')
-        ];
+        $couponcode->branch_id = 1;
+        $couponcode->code = request('code');
+        $couponcode->amount = request('amount');
+        $couponcode->status = request('status');
+        $couponcode->active_from = request('active_from');
+        $couponcode->active_till = request('active_till');
+        $couponcode->type = request('type');
+        $couponcode->sort = request('sort');
+        $couponcode->min_amount_spent = request('min_amount_spent');
+        $couponcode->one_off = request('one_off');
 
-        return redirect('/');
+        $couponcode->save();
+
+        return redirect('/admin/couponcodes');
     }
 
     /*

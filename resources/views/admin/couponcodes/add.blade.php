@@ -70,13 +70,18 @@
                             </div>
                         </div>
                         
+                        <div class="form-group">
+                            <label for="status">Status:</label>
+                            <select name="status" class="form-control" id="status">
+                                <option value="active">Actief</option>
+                                <option value="inactive">Inactief</option>
+                            </select>
+                        </div>
+
                         <div class="form-row">
-                            <div class="col form-group ">
-                                <label for="status">Status:</label>
-                                <select name="status" class="form-control" id="status">
-                                    <option value="active">Actief</option>
-                                    <option value="inactive">Inactief</option>
-                                </select>
+                            <div class="col form-group">
+                                <label for="active_from">Geldig Vanaf:</label>
+                                <input type="date" name="active_from" class="form-control" id="active_from" required>
                             </div>
 
                             <div class="col form-group">
@@ -88,8 +93,8 @@
                         <div class="form-group">
                             <label for="one_off">Eenmalig:</label>
                             <select name="one_off" class="form-control" id="one_off">
-                                <option value="true">Ja</option>
-                                <option value="false">Nee</option>
+                                <option value="1">Ja</option>
+                                <option value="0">Nee</option>
                             </select>
                         </div>
 
