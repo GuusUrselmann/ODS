@@ -14,6 +14,8 @@
                 <div class="card-body">
                     <form action="{{ url()->current() }}" method="POST" class="needs-validation" novalidate>
                         @csrf
+                        <input type="hidden" name="id" value="{{ $couponcode['id'] }}">
+
                         <div class="form-group">
                             <label for="code">Coupon Code:</label>
                             <input type="text" name="code" class="form-control" id="code" value="{{ $couponcode['code'] }}" readonly>
@@ -65,13 +67,18 @@
                             </div>
                         </div>
                         
+                        <div class="form-group">
+                            <label for="status">Status:</label>
+                            <select name="status" class="form-control" id="status">
+                                <option value="active" {{ $couponcode['status'] == "active" ? "selected=selected" : "" }}>Actief</option>
+                                <option value="inactive" {{ $couponcode['status'] == "inactive" ? "selected=selected" : "" }}>Inactief</option>
+                            </select>
+                        </div>
+
                         <div class="form-row">
-                            <div class="col form-group ">
-                                <label for="status">Status:</label>
-                                <select name="status" class="form-control" id="status">
-                                    <option value="active" {{ $couponcode['status'] == "active" ? "selected=selected" : "" }}>Actief</option>
-                                    <option value="inactive" {{ $couponcode['status'] == "inactive" ? "selected=selected" : "" }}>Inactief</option>
-                                </select>
+                            <div class="col form-group">
+                                <label for="active_from">Geldig Vanaf:</label>
+                                <input type="date" name="active_from" class="form-control" id="active_from" value="{{ date("Y-m-d", strtotime($couponcode['active_from'])) }}" required>
                             </div>
 
                             <div class="col form-group">
@@ -83,8 +90,8 @@
                         <div class="form-group">
                             <label for="one_off">Eenmalig:</label>
                             <select name="one_off" class="form-control" id="one_off">
-                                <option value="true" {{ $couponcode['one_off'] ? "selected=selected" : "" }}>Ja</option>
-                                <option value="false" {{ $couponcode['one_off'] ? "selected=selected" : "" }}>Nee</option>
+                                <option value="1" {{ $couponcode['one_off'] ? "selected=selected" : "" }}>Ja</option>
+                                <option value="0" {{ !$couponcode['one_off'] ? "selected=selected" : "" }}>Nee</option>
                             </select>
                         </div>
 
