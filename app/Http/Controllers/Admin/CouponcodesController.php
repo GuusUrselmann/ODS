@@ -17,42 +17,12 @@ class CouponcodesController extends Controller
     {
         $couponcodes = Couponcode::all();
         
-        // $couponcodes = [
-        //     [
-        //         'code' => 'S3F02',
-        //         'amount' => '10.00',
-        //         'status' => 'active',
-        //         'active_till' => '10-07-20',
-        //         'type' => 'delivery',
-        //         'sort' => 'percentage',
-        //         'min_amount_spent' => '30.00',
-        //         'one_off' => 'true',
-        //         'created_at' => '30-06-20'
-        //     ],
-        //     [
-        //         'code' => 'S3F03',
-        //         'amount' => '15.00',
-        //         'sort' => 'percentage',
-        //         'status' => 'active',
-        //         'active_till' => '20-07-20',
-        //         'type' => 'takeaway',
-        //         'min_amount_spent' => '50.00',
-        //         'one_off' => 'true',
-        //         'created_at' => '30-06-20'
-        //     ],
-        //     [
-        //         'code' => 'S3F04',
-        //         'amount' => '5.00',
-        //         'sort' => 'amount',
-        //         'status' => 'active',
-        //         'active_till' => '12-07-20',
-        //         'type' => 'both',
-        //         'min_amount_spent' => '20.00',
-        //         'one_off' => 'true',
-        //         'created_at' => '30-06-20'
-        //     ]
-        // ];
-
+        // TODO: build one query
+        foreach($couponcodes as $couponcode) {
+            $branch = Branch::find($couponcode['branch_id']);
+            $couponcode['branch_name'] = $branch['name'];
+        }
+        
         return view('admin.couponcodes.overview', [
             'couponcodes' => $couponcodes,
         ]);
@@ -60,17 +30,7 @@ class CouponcodesController extends Controller
 
     public function add()
     {
-        // $branches = Branch::all();
-        $branches = [
-            [
-                'id' => 1,
-                'name' => 'Snackbar De Groot'
-            ],
-            [
-                'id' => 2,
-                'name' => 'Snackbar Dollenhuis'
-            ],
-        ];
+        $branches = Branch::all();
 
         return view('admin.couponcodes.add', [
             'branches' => $branches
@@ -79,18 +39,8 @@ class CouponcodesController extends Controller
 
     public function edit()
     {
-        // $branches = Branch::all();
         $couponcode = Couponcode::find(request('id'));
-        $branches = [
-            [
-                'id' => 1,
-                'name' => 'Snackbar De Groot'
-            ],
-            [
-                'id' => 2,
-                'name' => 'Snackbar Dollenhuis'
-            ],
-        ];
+        $branches = Branch::all();
 
         return view('admin.couponcodes.edit', [
             'couponcode' => $couponcode,

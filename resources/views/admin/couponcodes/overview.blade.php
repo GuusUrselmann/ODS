@@ -15,6 +15,7 @@
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">Couponcode</th>
+                            <th scope="col">Filiaal</th>
                             <th scope="col">Korting</th>
                             <th scope="col">Min. Bedrag</th>
                             <th scope="col">Geldig Vanaf</th>
@@ -31,6 +32,7 @@
                         @foreach ($couponcodes as $couponcode)
                             <tr>
                                 <th scope="row">{{ $couponcode['code'] }}</th>
+                                <td scope="row">{{ $couponcode['branch_name'] }}</td>
                                 <td>
                                     @if($couponcode['sort'] == "percentage")
                                         {{ $couponcode['amount'] }} %

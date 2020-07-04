@@ -21,50 +21,13 @@ class CategoriesController extends Controller
     public function overview()
     {
         $categories = Category::all();
-        
-        // $categories = [
-        //     [
-        //         'id' => 1,
-        //         'name' => 'Voorgerechten',
-        //         'status' => "active",
-        //         'created_at' => "02/07/2020",
-        //         'updated_at' => null,
-        //         'deleted_at' => null,
-        //         'webshop_position' => 1,
-        //     ],
-        //     [
-        //         'id' => 2,
-        //         'name' => 'Hoofdgerechten',
-        //         'status' => "active",
-        //         'created_at' => "02/07/2020",
-        //         'updated_at' => null,
-        //         'deleted_at' => null,
-        //         'webshop_position' => 2,
-        //     ],
-        //     [
-        //         'id' => 3,
-        //         'name' => 'Nagerechten',
-        //         'status' => "active",
-        //         'created_at' => "02/07/2020",
-        //         'updated_at' => null,
-        //         'deleted_at' => null,
-        //         'webshop_position' => 3,
-        //     ],
-        // ];
 
         return view('admin.categories.overview', ['categories' => $categories]);
     }
 
     public function add()
     {
-        // $branches = Branch::all();
-
-        $branches = [
-            [
-                'id' => 1,
-                'name' => "De Grot"
-            ]
-        ];
+        $branches = Branch::all();
 
         return view('admin.categories.add', ['branches' => $branches]);
     }
@@ -72,15 +35,8 @@ class CategoriesController extends Controller
     public function edit()
     {
         $category = Category::find(request('id'));
-        // $branches = Branch::all();
+        $branches = Branch::all();
         
-        $branches = [
-            [
-                'id' => 1,
-                'name' => "De Grot"
-            ]
-        ];
-
         return view('admin.categories.edit', [ 
             'category' => $category,
             'branches' => $branches    
