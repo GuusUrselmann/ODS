@@ -143,7 +143,6 @@ class BranchesController extends Controller
         $branch->delivery_free_at = request('delivery_free_at');
         $branch->delivery_min_amount = request('delivery_min_amount');
         $branch->delivery_max_distance = request('delivery_max_distance');
-        // $branch->created_at = request('created_at');
 
         $branch->save();
 
