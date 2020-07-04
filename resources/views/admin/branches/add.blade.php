@@ -91,32 +91,32 @@
                             <div class="col-3 form-group">
                                 <label for="cash">Contant:</label>
                                 <select name="cash" class="form-control" id="cash">
-                                    <option value="true">Ja</option>
-                                    <option value="false">Nee</option>
+                                    <option value="1">Ja</option>
+                                    <option value="0">Nee</option>
                                 </select>
                             </div>
                             
                             <div class="col-3 form-group">
                                 <label for="card">Pinnen:</label>
                                 <select name="card" class="form-control" id="card">
-                                    <option value="true">Ja</option>
-                                    <option value="false">Nee</option>
+                                    <option value="1">Ja</option>
+                                    <option value="0">Nee</option>
                                 </select>
                             </div>
 
                             <div class="col-3 form-group">
                                 <label for="ideal">Ideal:</label>
                                 <select name="ideal" class="form-control" id="ideal">
-                                    <option value="true">Ja</option>
-                                    <option value="false">Nee</option>
+                                    <option value="1">Ja</option>
+                                    <option value="0">Nee</option>
                                 </select>
                             </div>
 
                             <div class="col-3 form-group">
                                 <label for="invoice">Factuur:</label>
                                 <select name="invoice" class="form-control" id="invoice">
-                                    <option value="true">Ja</option>
-                                    <option value="false">Nee</option>
+                                    <option value="1">Ja</option>
+                                    <option value="0">Nee</option>
                                 </select>
                             </div>
                         </div>
@@ -125,16 +125,16 @@
                             <div class="col form-group">
                                 <label for="delivery">Bezorgen:</label>
                                 <select name="delivery" class="form-control" id="delivery">
-                                    <option value="true">Ja</option>
-                                    <option value="false">Nee</option>
+                                    <option value="1">Ja</option>
+                                    <option value="0">Nee</option>
                                 </select>
                             </div>
                             
                             <div class="col form-group">
                                 <label for="takeaway">Afhalen:</label>
                                 <select name="takeaway" class="form-control" id="takeaway">
-                                    <option value="true">Ja</option>
-                                    <option value="false">Nee</option>
+                                    <option value="1">Ja</option>
+                                    <option value="0">Nee</option>
                                 </select>
                             </div>
                         </div>
@@ -143,7 +143,7 @@
                             <div class="col form-group">
                                 <label for="max_distance_delivery">Max. afstand bezorgen:</label>
                                 <div class="input-group mb-2">
-                                    <input type="number" min="0" name="max_distance_delivery_km" class="form-control" id="max_distance_delivery" required>
+                                    <input type="number" min="0" name="delivery_max_distance" class="form-control" id="max_distance_delivery" required>
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">km</div>
                                     </div>
