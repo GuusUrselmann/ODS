@@ -35,6 +35,7 @@ CREATE TABLE `branch` (
   `cash` tinyint(1) NOT NULL DEFAULT 1,
   `card` tinyint(1) NOT NULL DEFAULT 1,
   `ideal` tinyint(1) NOT NULL DEFAULT 1,
+  `invoice` tinyint(1) NOT NULL DEFAULT 1,
   `takeaway` tinyint(1) NOT NULL DEFAULT 1,
   `delivery` tinyint(1) NOT NULL DEFAULT 1,
   `delivery_costs` int(11) DEFAULT NULL,
@@ -45,7 +46,7 @@ CREATE TABLE `branch` (
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -54,6 +55,7 @@ CREATE TABLE `branch` (
 
 LOCK TABLES `branch` WRITE;
 /*!40000 ALTER TABLE `branch` DISABLE KEYS */;
+INSERT INTO `branch` (`id`, `name`, `zipcode`, `address`, `house_number`, `city`, `phonenumber`, `email`, `status`, `cash`, `card`, `ideal`, `invoice`, `takeaway`, `delivery`, `delivery_costs`, `delivery_free_at`, `delivery_min_amount`, `delivery_max_distance`, `created_at`, `updated_at`, `deleted_at`) VALUES (1,'Snackbar de Grot','3915HD','Streetname',21,'Cityname',612345678,'info@degrot.nl','inactive',1,1,1,1,1,1,5,30,15,50,'2020-07-04 09:58:17','2020-07-04 10:32:05',NULL),(2,'Snackbar Friet','1017TN','Eerste Weteringdwarsstraat',381,'Amsterdam',669715780,'info@friet.nl','active',1,1,1,1,1,1,3,30,20,50,'2020-07-04 10:25:09','2020-07-04 10:31:51',NULL),(3,'Snackbar de Grot','6351AE','Prickart',210,'Bocholtz',650922598,'info@degrot.nl','active',1,1,1,1,1,1,5,30,15,50,'2020-07-04 10:28:02','2020-07-04 10:31:15',NULL);
 /*!40000 ALTER TABLE `branch` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -95,12 +97,16 @@ DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
+  `branch_id` int(11) NOT NULL,
+  `webshop_position` int(11) NOT NULL,
   `status` enum('active','inactive','deleted') NOT NULL DEFAULT 'active',
   `created_at` datetime NOT NULL,
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`id`),
+  KEY `category_branch_id_fk` (`branch_id`),
+  CONSTRAINT `category_branch_id_fk` FOREIGN KEY (`branch_id`) REFERENCES `branch` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -109,6 +115,7 @@ CREATE TABLE `category` (
 
 LOCK TABLES `category` WRITE;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
+INSERT INTO `category` (`id`, `name`, `branch_id`, `webshop_position`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES (1,'Voorgerechten',1,1,'active','2020-07-04 11:09:12','2020-07-04 11:26:39',NULL),(2,'Hoofdgerechten',1,2,'active','2020-07-04 11:14:21','2020-07-04 11:14:21',NULL),(3,'Nagerechten',1,3,'active','2020-07-04 11:16:05','2020-07-04 11:16:05',NULL);
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -177,13 +184,13 @@ LOCK TABLES `company` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `couponcodes`
+-- Table structure for table `couponcode`
 --
 
-DROP TABLE IF EXISTS `couponcodes`;
+DROP TABLE IF EXISTS `couponcode`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `couponcodes` (
+CREATE TABLE `couponcode` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `branch_id` int(11) NOT NULL,
   `code` varchar(255) NOT NULL,
@@ -201,16 +208,17 @@ CREATE TABLE `couponcodes` (
   PRIMARY KEY (`id`),
   KEY `couponcodes_branch_id_fk` (`branch_id`),
   CONSTRAINT `couponcodes_branch_id_fk` FOREIGN KEY (`branch_id`) REFERENCES `branch` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `couponcodes`
+-- Dumping data for table `couponcode`
 --
 
-LOCK TABLES `couponcodes` WRITE;
-/*!40000 ALTER TABLE `couponcodes` DISABLE KEYS */;
-/*!40000 ALTER TABLE `couponcodes` ENABLE KEYS */;
+LOCK TABLES `couponcode` WRITE;
+/*!40000 ALTER TABLE `couponcode` DISABLE KEYS */;
+INSERT INTO `couponcode` (`id`, `branch_id`, `code`, `amount`, `active_from`, `active_till`, `status`, `type`, `sort`, `min_amount_spent`, `one_off`, `created_at`, `updated_at`, `deleted_at`) VALUES (3,1,'3psDIh7j',10,'2020-07-05 00:00:00','2020-07-17 00:00:00','active','delivery','amount',10,1,'2020-07-04 10:42:39','2020-07-04 10:50:25',NULL),(4,1,'XH7hWFyk',5,'2020-07-04 00:00:00','2020-07-06 00:00:00','active','both','percentage',25,1,'2020-07-04 10:50:52','2020-07-04 10:50:52',NULL);
+/*!40000 ALTER TABLE `couponcode` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -543,4 +551,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-04  9:15:12
+-- Dump completed on 2020-07-04 11:55:03
