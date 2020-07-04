@@ -28,8 +28,13 @@ class PermissionsController extends Controller
     public function groupSave() {
     }
 
-    public function groupEdit() {
-        return view('admin.permissions.groupEdit');
+    public function groupEdit($id) {
+        $group = Group::find($id);
+        // if($group->isEmpty()) {
+        //     Return if group not found
+        //     return redirect(url('/admin/tasks/add'))->with('modal', $modal);
+        // }
+        return view('admin.permissions.groupEdit', compact('group'));
     }
 
     public function groupUpdate() {
