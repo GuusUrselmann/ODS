@@ -8,8 +8,4 @@ use Illuminate\Support\Facades\DB;
 class Branch extends Model
 {
     protected $table = 'branch';
-
-    public static function selectOne($id) {
-        return DB::table('branch')->find($id);
-    }
 }

@@ -112,7 +112,7 @@ class BranchesController extends Controller
 
     public function edit()
     {
-        $branch = Branch::selectOne(request('id'));
+        $branch = Branch::find(request('id'));
         
         return view('admin.branches.edit', ['branch' => $branch]);
     }
