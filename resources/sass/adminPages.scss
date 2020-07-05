@@ -1,0 +1,37 @@
+.action-btn {
+    width: 30px;
+    height: 30px;
+    line-height: 20px;
+}
+
+.form-group-edit {
+    label {
+        padding: 3px 15px
+    }
+    .select2 {
+        width: 100%!important;
+        .select2-selection {
+            min-height: calc(4.5rem + 2px);
+        }
+    }
+}
+.form-group-edit-submit {
+    margin-top: 15px;
+    margin-left: 20px;
+}
+
+.form-group-add {
+    label {
+        padding: 3px 15px
+    }
+    .select2 {
+        width: 100%!important;
+        .select2-selection {
+            min-height: calc(4.5rem + 2px);
+        }
+    }
+}
+.form-group-add-submit {
+    margin-top: 15px;
+    margin-left: 20px;
+}

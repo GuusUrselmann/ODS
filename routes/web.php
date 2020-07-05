@@ -43,14 +43,19 @@ Route::group(['prefix' => '/admin'], function () {
         Route::post('/bewerken/{id}', 'Admin\CategoriesController@update');
         Route::post('/verwijderen/{id}', 'Admin\CategoriesController@delete');
     });
-    
+
     Route::group(['prefix' => '/gebruikers'], function () {
         Route::get('/', 'Admin\UsersController@overview');
     });
-    
+
     Route::group(['prefix' => '/permissies'], function () {
         Route::get('/', 'Admin\PermissionsController@groups');
         Route::get('/groepen', 'Admin\PermissionsController@groups');
+        Route::get('/groepen/toevoegen', 'Admin\PermissionsController@groupAdd');
+        Route::post('/groepen/toevoegen', 'Admin\PermissionsController@groupSave');
+        Route::get('/groepen/bewerken/{id}', 'Admin\PermissionsController@groupEdit');
+        Route::post('/groepen/bewerken/{id}', 'Admin\PermissionsController@groupUpdate');
+        Route::get('/groepen/verwijderen/{id}', 'Admin\PermissionsController@groupDelete');
         Route::get('/gebruikers', 'Admin\PermissionsController@users');
     });
 
