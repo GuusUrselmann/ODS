@@ -81,4 +81,24 @@ Route::group(['prefix' => '/admin'], function () {
         Route::post('/bewerken/{id}', 'Admin\BranchesController@update');
         Route::post('/verwijderen/{id}', 'Admin\BranchesController@delete');
     });
+
+    Route::group(['prefix' => '/klanten'], function () {
+        Route::group(['prefix' => '/particulieren'], function () {
+            Route::get('/', 'Admin\CustomerIndividualsController@individuals');
+            Route::get('/toevoegen', 'Admin\CustomerIndividualsController@add');
+            Route::get('/bewerken/{id}', 'Admin\CustomerIndividualsController@edit');
+            Route::post('/toevoegen', 'Admin\CustomerIndividualsController@save');
+            Route::post('/bewerken/{id}', 'Admin\CustomerIndividualsController@update');
+            Route::post('/verwijderen/{id}', 'Admin\CustomerIndividualsController@delete');
+        });
+
+        Route::group(['prefix' => '/bedrijven'], function () {
+            Route::get('/', 'Admin\CustomerCompaniesController@companies');
+            Route::get('/toevoegen', 'Admin\CustomerCompaniesController@add');
+            Route::get('/bewerken/{id}', 'Admin\CustomerCompaniesController@edit');
+            Route::post('/toevoegen', 'Admin\CustomerCompaniesController@save');
+            Route::post('/bewerken/{id}', 'Admin\CustomerCompaniesController@update');
+            Route::post('/verwijderen/{id}', 'Admin\CustomerCompaniesController@delete');
+        });
+    });
 });
