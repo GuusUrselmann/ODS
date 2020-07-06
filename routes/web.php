@@ -45,7 +45,12 @@ Route::group(['prefix' => '/admin'], function () {
     });
 
     Route::group(['prefix' => '/gebruikers'], function () {
-        Route::get('/', 'Admin\UsersController@overview');
+        Route::get('/', 'Admin\UsersController@users');
+        Route::get('/toevoegen', 'Admin\UsersController@add');
+        Route::post('/toevoegen', 'Admin\UsersController@save');
+        Route::get('/bewerken/{id}', 'Admin\UsersController@edit');
+        Route::post('/bewerken/{id}', 'Admin\UsersController@update');
+        Route::get('/verwijderen/{id}', 'Admin\UsersController@delete');
     });
 
     Route::group(['prefix' => '/permissies'], function () {

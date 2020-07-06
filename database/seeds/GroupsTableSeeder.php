@@ -17,5 +17,9 @@ class GroupsTableSeeder extends Seeder
             'name' => 'Eigenaar',
             'slug' => 'eigenaar'
         ]);
+        App\Group::create([
+            'name' => 'Klant Permissies',
+            'slug' => 'klant_permissies'
+        ]);
     }
 }

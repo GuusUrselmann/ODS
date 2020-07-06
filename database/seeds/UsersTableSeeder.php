@@ -15,7 +15,6 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         App\User::create([
-            'username' => 'Admin',
             'email' => 'guusurselmann@gmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
@@ -24,5 +23,7 @@ class UsersTableSeeder extends Seeder
             'user_type_id' => '1',
             'remember_token' => Str::random(10)
         ]);
+
+        factory(App\User::class, 58)->create();
     }
 }
