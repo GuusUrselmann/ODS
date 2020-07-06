@@ -31,6 +31,6 @@ class CreateBranchUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('branch_userss');
+        Schema::dropIfExists('branch_users');
     }
 }
