@@ -69,5 +69,9 @@ class CustomerCompaniesController extends Controller
 
     public function delete()
     {
+        $company = Company::find(request('id'));
+        $company->delete();
+        
+        return redirect('/admin/klanten/bedrijven');
     }
 }

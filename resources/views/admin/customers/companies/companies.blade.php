@@ -3,52 +3,69 @@
 @section('title', 'Bedrijven Overzicht')
 
 @section('content_header')
-    <h1>Bedrijven</h1>
 @stop
 
 @section('content')
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-12">
-            <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Naam</th>
-                            <th scope="col">Plaats</th>
-                            <th scope="col">KVK nummer</th>
-                            <th scope="col">BTW nummer</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Telefoon</th>
-                            <th scope="col">Actief</th>
-                            <th scope="col" class="text-right">
-                                <a href="{{ url('/admin/klanten/bedrijven/toevoegen') }}" class="btn btn-success">Toevoegen</a>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($companies as $company)
-                            <tr>
-                                <th scope="row">{{ $company['id'] }}</th>
-                                <td>{{ $company['name'] }}</td>
-                                <td>{{ $company['city'] }}</td>
-                                <td>{{ $company['legal_number'] }}</td>
-                                <td>{{ $company['tax_number'] }}</td>
-                                <td>{{ $company['email'] }}</td>
-                                <td>{{ $company['phonenumber'] }}</td>
-                                <td>{{ $company['status'] == "active" ? "Ja" : "Nee" }}</td>
-                                <td class="text-right">
-                                    <a href="{{ url('/admin/klanten/bedrijven/bewerken/' . $company['id']) }}" class="btn btn-warning">Bewerken</a>
-                                    {{-- TODO: Show confirmation pop up  --}}
-                                    <a href="{{ url('/admin/klanten/bedrijven/verwijderen/' . $company['id']) }}" class="btn btn-danger">Verwijderen</a>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>    
+        <div class="col-sm-12 col-md-9">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="card-title">Bedrijven</h1>
+                     <a href="{{ url('/admin/klanten/bedrijven/toevoegen') }}" class="btn btn-sm btn-success float-right">
+                        <i class="fas fa-plus"></i> Toevoegen
+                    </a>
+                </div>
 
+                <div class="card-body p-0">
+                    <table class="table table-hover">
+                        <thead class="table table-striped">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Naam</th>
+                                <th scope="col">Plaats</th>
+                                <th scope="col">KVK nummer</th>
+                                <th scope="col">BTW nummer</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Telefoon</th>
+                                <th scope="col">Actief</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($companies as $company)
+                                <tr>
+                                    <th scope="row">{{ $company['id'] }}</th>
+                                    <td>{{ $company['name'] }}</td>
+                                    <td>{{ $company['city'] }}</td>
+                                    <td>{{ $company['legal_number'] }}</td>
+                                    <td>{{ $company['tax_number'] }}</td>
+                                    <td>{{ $company['email'] }}</td>
+                                    <td>{{ $company['phonenumber'] }}</td>
+                                    <td>{{ $company['status'] == "active" ? "Ja" : "Nee" }}</td>
+                                    <td class="text-right">
+                                        <a href="{{ url('/admin/klanten/bedrijven/bewerken/' . $company['id']) }}" class="btn btn-sm btn-warning">
+                                            <i class="fas fa-pencil-alt"></i>
+                                        </a>                                    
+                                        <a data-href="{{ url('admin/klanten/bedrijven/verwijderen/'. $company['id']) }}" class="btn btn-sm btn-danger action-btn text-light deleteConfirmModal">
+                                            <i class="fas fa-times"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            <div class="info-box">
+                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-list-ol"></i></span>
+                <div class="info-box-content">
+                <span class="info-box-text">Aantal Bedrijven</span>
+                <span class="info-box-number">{{ $companies->count() }}</span>
+            </div>
         </div>
     </div>
 </div>
@@ -58,4 +75,5 @@
 @stop
 
 @section('js')
+<script src="{{ asset('js/utilities/confirm-delete.js') }}" defer></script>
 @stop
