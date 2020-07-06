@@ -19,7 +19,7 @@ class CreateUserTypesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
-            $table->integer('group_id')->unsigned();
+            $table->bigInteger('group_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
 

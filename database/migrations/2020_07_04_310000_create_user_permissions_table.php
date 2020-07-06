@@ -3,27 +3,24 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class CreatePermissionGroupsTable extends Migration
+class CreateUserPermissionsTable extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    use SoftDeletes;
     public function up()
     {
-        Schema::create('permission_groups', function (Blueprint $table) {
+        Schema::create('user_permissions', function (Blueprint $table) {
             $table->id();
-            $table->integer('permission_id')->unsigned();
-            $table->integer('group_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('permission_id')->unsigned();
             $table->timestamps();
-            $table->softDeletes();
 
             $table->foreign('permission_id')->references('id')->on('permissions')->onDelete('cascade');
-            $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -34,6 +31,6 @@ class CreatePermissionGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('permission_groups');
+        Schema::dropIfExists('user_permissions');
     }
 }

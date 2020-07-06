@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserPermissionsTable extends Migration
+class CreateTagsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateUserPermissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_permissions', function (Blueprint $table) {
+        Schema::create('tags', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->unsigned();
-            $table->integer('permission_id')->unsigned();
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreateUserPermissionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_permissions');
+        Schema::dropIfExists('tags');
     }
 }
