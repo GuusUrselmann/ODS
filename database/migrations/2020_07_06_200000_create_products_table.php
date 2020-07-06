@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->decimal('price');
             $table->bigInteger('photo_id')->unsigned();
             $table->bigInteger('branch_id')->unsigned();
+            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
             $table->softDeletes();
 

@@ -17,6 +17,7 @@ class CreateCompanyProductsTable extends Migration
             $table->id();
             $table->bigInteger('company_id')->unsigned();
             $table->bigInteger('product_id')->unsigned();
+            $table->enum('status', ['active','inactive'])->default('active');
             $table->timestamps();
 
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');

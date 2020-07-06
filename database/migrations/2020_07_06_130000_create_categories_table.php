@@ -18,6 +18,7 @@ class CreateCategoriesTable extends Migration
             $table->string('name');
             $table->bigInteger('branch_id')->unsigned();
             $table->integer('webshop_position');
+            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
             $table->softDeletes();
 

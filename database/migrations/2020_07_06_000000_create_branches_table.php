@@ -32,6 +32,7 @@ class CreateBranchesTable extends Migration
             $table->decimal('delivery_free_at');
             $table->decimal('delivery_min_amount');
             $table->integer('delivery_max_distance');
+            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
             $table->softDeletes();
         });

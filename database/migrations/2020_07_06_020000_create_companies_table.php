@@ -24,6 +24,7 @@ class CreateCompaniesTable extends Migration
             $table->string('city');
             $table->integer('phonenumber');
             $table->string('email');
+            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
             $table->softDeletes();
         });

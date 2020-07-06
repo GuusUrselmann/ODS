@@ -24,6 +24,7 @@ class CreateCouponcodesTable extends Migration
             $table->enum('sort', ['percentage', 'amount']);
             $table->integer('min_amount_spent')->nullable();
             $table->boolean('one_off');
+            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
             $table->softDeletes();
 
