@@ -7,5 +7,5 @@ use Illuminate\Support\Facades\DB;
 
 class Branch extends Model
 {
-    protected $table = 'branch';
+    //
 }
