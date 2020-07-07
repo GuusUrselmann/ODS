@@ -2,17 +2,13 @@
 
 @section('title', 'Bedrijf Toevoegen')
 
-@section('content_header')
-    <h1>Bedrijf Toevoegen</h1>
-@stop
-
 @section('content')
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-10">
+        <div class="col-sm-12 col-md-9">
             <div class="card">
                 <div class="card-body">
-                    <form action="{{ url()->current() }}" method="POST" class="needs-validation" novalidate>
+                    <form action="{{ url()->current() }}" method="POST" class="needs-validation" id="formCompanyAdd" novalidate>
                         @csrf
                         <div class="form-row">
                             <div class="col form-group">
@@ -51,8 +47,8 @@
 
                         <div class="form-row">
                             <div class="col form-group">
-                                <label for="address">Straatnaam:</label>
-                                <input type="text" name="address" class="form-control" id="address" required>
+                                <label for="street_name">Straatnaam:</label>
+                                <input type="text" name="street_name" class="form-control" id="street_name" required>
                                 <div class="invalid-feedback">
                                     Vul a.u.b. een geldig adres in.
                                 </div>
@@ -87,8 +83,8 @@
                         
                         <div class="form-row">
                             <div class="col form-group">
-                                <label for="phonenumber">Telefoonnummer:</label>
-                                <input type="text" name="phonenumber" class="form-control" id="phonenumber" required>
+                                <label for="phone">Telefoonnummer:</label>
+                                <input type="text" name="phone" class="form-control" id="phone" required>
                                 <div class="invalid-feedback">
                                     Vul a.u.b. een geldig telefoonnummer in.
                                 </div>
@@ -103,12 +99,20 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary btn-block">Opslaan</button>
                     </form>
 
                 </div>
             </div>
 
+        </div>
+
+        <div class="col-sm-12 col-md-3">
+            <div class="small-box bg-white">
+                <div class="inner">
+                    <h4>Bedrijf Toevoegen</h4>
+                    <button type="submit" form="formCompanyAdd" class="btn btn-primary btn-block mt-5">Opslaan</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

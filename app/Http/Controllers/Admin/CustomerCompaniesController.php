@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Company;
+use App\ContactInformation;
 
 class CustomerCompaniesController extends Controller
 {
@@ -30,16 +31,21 @@ class CustomerCompaniesController extends Controller
     public function save()
     {
         $company = new Company();
-
+        $contact_information = new ContactInformation();
+        
+        $contact_information->street_name = request('street_name');
+        $contact_information->house_number = request('house_number');
+        $contact_information->city = request('city');
+        $contact_information->zipcode = request('zipcode');
+        $contact_information->email = request('email');
+        $contact_information->phone = request('phone');
+        
+        $contact_information->save();
+        
         $company->name = request('name');
+        $company->contact_information_id = $contact_information->id;
         $company->legal_number = request('legal_number');
         $company->tax_number = request('tax_number');
-        $company->address = request('address');
-        $company->house_number = request('house_number');
-        $company->city = request('city');
-        $company->zipcode = request('zipcode');
-        $company->email = request('email');
-        $company->phonenumber = request('phonenumber');
         $company->status = request('status');
         
         $company->save();
@@ -50,19 +56,23 @@ class CustomerCompaniesController extends Controller
     public function update()
     {
         $company = Company::find(request('company_id'));
+        $contact_information = ContactInformation::find($company->contact_information_id);
 
         $company->name = request('name');
         $company->legal_number = request('legal_number');
         $company->tax_number = request('tax_number');
-        $company->address = request('address');
-        $company->house_number = request('house_number');
-        $company->city = request('city');
-        $company->zipcode = request('zipcode');
-        $company->email = request('email');
-        $company->phonenumber = request('phonenumber');
         $company->status = request('status');
         
         $company->save();
+
+        $contact_information->street_name = request('street_name');
+        $contact_information->house_number = request('house_number');
+        $contact_information->city = request('city');
+        $contact_information->zipcode = request('zipcode');
+        $contact_information->email = request('email');
+        $contact_information->phone = request('phone');
+        
+        $contact_information->save();
 
         return redirect('/admin/klanten/bedrijven');
     }

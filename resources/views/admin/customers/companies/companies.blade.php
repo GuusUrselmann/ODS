@@ -35,19 +35,19 @@
                         <tbody>
                             @foreach ($companies as $company)
                                 <tr>
-                                    <th scope="row">{{ $company['id'] }}</th>
-                                    <td>{{ $company['name'] }}</td>
-                                    <td>{{ $company['city'] }}</td>
-                                    <td>{{ $company['legal_number'] }}</td>
-                                    <td>{{ $company['tax_number'] }}</td>
-                                    <td>{{ $company['email'] }}</td>
-                                    <td>{{ $company['phonenumber'] }}</td>
-                                    <td>{{ $company['status'] == "active" ? "Ja" : "Nee" }}</td>
+                                    <th scope="row">{{ $company->id }}</th>
+                                    <td>{{ $company->name }}</td>
+                                    <td>{{ $company->contact_information->city }}</td>
+                                    <td>{{ $company->legal_number }}</td>
+                                    <td>{{ $company->tax_number }}</td>
+                                    <td>{{ $company->contact_information->email }}</td>
+                                    <td>{{ $company->contact_information->phone }}</td>
+                                    <td>{{ $company->status == "active" ? "Ja" : "Nee" }}</td>
                                     <td class="text-right">
-                                        <a href="{{ url('/admin/klanten/bedrijven/bewerken/' . $company['id']) }}" class="btn btn-sm btn-warning">
+                                        <a href="{{ url('/admin/klanten/bedrijven/bewerken/' . $company->id) }}" class="btn btn-sm btn-warning action-btn">
                                             <i class="fas fa-pencil-alt"></i>
                                         </a>                                    
-                                        <a data-href="{{ url('admin/klanten/bedrijven/verwijderen/'. $company['id']) }}" class="btn btn-sm btn-danger action-btn text-light deleteConfirmModal">
+                                        <a data-href="{{ url('admin/klanten/bedrijven/verwijderen/'. $company->id) }}" class="btn btn-sm btn-danger action-btn text-light deleteConfirmModal">
                                             <i class="fas fa-times"></i>
                                         </a>
                                     </td>
@@ -72,6 +72,7 @@
 @stop
 
 @section('css')
+<link rel="stylesheet" href="{{asset('/css/adminPages.css')}}">
 @stop
 
 @section('js')
