@@ -2,9 +2,6 @@
 
 @section('title', 'Bedrijven Overzicht')
 
-@section('content_header')
-@stop
-
 @section('content')
 <div class="container-fluid">
     <div class="row">
@@ -18,7 +15,7 @@
                 </div>
 
                 <div class="card-body p-0">
-                    <table class="table table-hover">
+                    <table class="table table-striped table-hover">
                         <thead class="table table-striped">
                             <tr>
                                 <th scope="col">#</th>
