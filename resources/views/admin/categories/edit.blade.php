@@ -14,11 +14,25 @@
                 <div class="card-body">
                     <form action="{{ url()->current() }}" method="POST" class="needs-validation" novalidate>
                         @csrf
+                        <input type="hidden" name="id" value="{{ $category['id'] }}">
+                
                         <div class="form-group">
                             <label for="name">Naam:</label>
                             <div class="input-group">
                                 <input type="text" name="name" class="form-control random-string" id="name" value="{{ $category['name'] }}" required>
                             </div>
+                        </div>
+                        
+                        {{-- TODO: hide if user is only assigned to one branch --}}
+                        <div class="form-group">
+                            <label for="branch">Filliaal:</label>
+                            <select class="form-control" name="branch_id">
+                                @foreach($branches as $branch)
+                                    <option value="{{ $branch['id'] }}">
+                                        {{ $branch['name'] }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
                                                 
                         <div class="form-group">

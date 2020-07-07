@@ -56,12 +56,16 @@
                                     <button type="submit" class="btn btn-primary">
                                         Inloggen
                                     </button>
-
-                                    @if (Route::has('password.request'))
-                                        <a class="btn btn-link" href="{{ route('password.request') }}">
-                                            Wachtwoord vergeten?
-                                        </a>
-                                    @endif
+                                    <a class="btn btn-link" href="{{ url('register') }}">
+                                        Nog geen account?
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="form-group row mb-0">
+                                <div class="col-md-8 offset-md-4">
+                                    <a class="btn btn-link" href="{{ url('password/reset') }}">
+                                        Wachtwoord vergeten?
+                                    </a>
                                 </div>
                             </div>
                         </form>

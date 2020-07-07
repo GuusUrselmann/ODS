@@ -9,6 +9,7 @@ use Validator;
 use App\Group;
 use App\Permission;
 use App\PermissionGroup;
+use App\UserPermission;
 use App\User;
 
 class PermissionsController extends Controller

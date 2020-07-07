@@ -23,6 +23,10 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-4">
+                                <label>Gebruikersnaam</label>
+                                <input type="text" class="form-control" placeholder="Gebruikersnaam" name="username" value="{{$user->username}}">
+                            </div>
+                            <div class="form-group col-4">
                                 <label>Email</label>
                                 <input type="email" class="form-control" placeholder="Email" name="email" value="{{$user->email}}">
                             </div>
@@ -81,7 +85,7 @@
         closeOnSelect: false,
         width: '80%'
     });
-    $('#usertypeSelect').on('change', function (e) {
+    $('#usertypeSelect').on('select2:select', function (e) {
         var changes = {!! json_encode($group_perms_array) !!};
         var value = $(".usertype-select").val();
         $('.permissions-select').val(null).change();
