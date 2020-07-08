@@ -18,5 +18,10 @@ class UserTypesTableSeeder extends Seeder
             'slug' => 'eigenaar',
             'group_id' => '1'
         ]);
+        App\UserType::create([
+            'name' => 'Klant',
+            'slug' => 'klant',
+            'group_id' => '2'
+        ]);
     }
 }

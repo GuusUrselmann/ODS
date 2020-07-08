@@ -8,11 +8,11 @@
   padding: 3px 15px;
 }
 
-.form-group-edit .select2 {
+.select2 {
   width: 100% !important;
 }
 
-.form-group-edit .select2 .select2-selection {
+.select2 .select2-selection--multiple {
   min-height: calc(4.5rem + 2px);
 }
 
@@ -25,15 +25,34 @@
   padding: 3px 15px;
 }
 
-.form-group-add .select2 {
+.form-group-add-submit {
+  margin-top: 15px;
+  margin-left: 20px;
+}
+
+.table-users .card-body {
+  padding: 10px 0px !important;
+}
+
+.table-users .row:first-child,
+.table-users .row:last-child {
+  padding: 0px 10px !important;
+}
+
+.form-user-add .select2 {
   width: 100% !important;
 }
 
-.form-group-add .select2 .select2-selection {
-  min-height: calc(4.5rem + 2px);
+.select2-search--dropdown {
+  display: none !important;
 }
 
-.form-group-add-submit {
+.form-user-add-submit {
+  margin-top: 15px;
+  margin-left: 20px;
+}
+
+.form-user-edit-submit {
   margin-top: 15px;
   margin-left: 20px;
 }

@@ -9,6 +9,8 @@ use Validator;
 use App\Group;
 use App\Permission;
 use App\PermissionGroup;
+use App\UserPermission;
+use App\User;
 
 class PermissionsController extends Controller
 {
@@ -40,8 +42,8 @@ class PermissionsController extends Controller
             return redirect(url('/admin/permissies/groepen/toevoegen'))->with('errors', $errors);
         }
         $group = Group::create([
-            'name' => $request->has('name') ? $request->input('name') : $group->name,
-            'slug' => $request->has('name') ? Str::slug($request->input('name'), '_') : $group->name
+            'name' => $request->input('name'),
+            'slug' => Str::slug($request->input('name'), '_')
         ]);
         foreach($request->input('permissions') as $permission_id) {
             PermissionGroup::create([
@@ -98,6 +100,7 @@ class PermissionsController extends Controller
     }
 
     public function users() {
-        return view('admin.permissions.users');
+        $users = User::all();
+        return view('admin.permissions.users', compact('users'));
     }
 }

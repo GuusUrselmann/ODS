@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Product;
 
 class ProductsController extends Controller
 {
@@ -16,7 +17,8 @@ class ProductsController extends Controller
     }
 
     public function overview() {
-        return view('admin.products.products');
+        $products = Product::all();
+        return view('admin.products.products', compact('products'));
     }
 
     public function add() {
