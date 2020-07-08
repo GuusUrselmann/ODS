@@ -346,6 +346,17 @@ return [
             'url'  => 'admin/filialen/',
             'icon'    => 'fas fa-fw fa-network-wired',
         ],
+        ['header' => 'KLANTEN'],
+        [
+            'text'    => 'Bedrijven',
+            'url'  => 'admin/klanten/bedrijven',
+            'icon'    => 'fas fa-fw fa-users',
+        ],
+        [
+            'text'    => 'Particulieren',
+            'url'  => 'admin/klanten/particulieren',
+            'icon'    => 'fas fa-fw fa-network-wired',
+        ],
         ['header' => 'OVERIG'],
         [
             'text'    => 'Permissies',
@@ -454,11 +465,11 @@ return [
         ],
         [
             'name' => 'Sweetalert2',
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdn.jsdelivr.net/npm/sweetalert2@8',
                 ],
             ],
