@@ -2,6 +2,10 @@
 
 @section('title', 'Bedrijven Overzicht')
 
+@section('content_header')
+    <h1>Bedrijven</h1>
+@stop
+
 @section('content')
 <div class="container-fluid">
     <div class="row">
@@ -16,7 +20,7 @@
 
                 <div class="card-body p-0">
                     <table class="table table-striped table-hover">
-                        <thead class="table table-striped">
+                        <thead>
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Naam</th>
@@ -56,7 +60,7 @@
             </div>
         </div>
 
-        <div class="col-sm-3">
+        <div class="col-sm-12 col-md-3">
             <div class="info-box">
                 <span class="info-box-icon bg-info elevation-1"><i class="fas fa-list-ol"></i></span>
                 <div class="info-box-content">

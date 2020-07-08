@@ -17,7 +17,7 @@ class CreateCustomersTable extends Migration
             $table->id();
             $table->bigInteger('contact_information_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
-            $table->enum('payment_method', ['cash', 'card']);
+            $table->enum('preferred_payment_method', ['cash', 'card']);
             $table->timestamps();
             $table->softDeletes();
 
