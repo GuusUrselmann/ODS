@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCompaniesTable extends Migration
+class CreateCustomersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,16 @@ class CreateCompaniesTable extends Migration
      */
     public function up()
     {
-        Schema::create('companies', function (Blueprint $table) {
+        Schema::create('customers', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('contact_information_id')->unsigned();
-            $table->string('name');
-            $table->string('legal_number');
-            $table->string('tax_number');
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->bigInteger('user_id')->unsigned();
+            $table->enum('preferred_payment_method', ['cash', 'card']);
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('contact_information_id')->references('id')->on('contact_information')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -34,6 +33,6 @@ class CreateCompaniesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('companies');
+        Schema::dropIfExists('customers');
     }
 }

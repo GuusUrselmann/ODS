@@ -15,13 +15,8 @@ class CreateBranchesTable extends Migration
     {
         Schema::create('branches', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('contact_information_id')->unsigned();
             $table->string('name');
-            $table->string('zipcode');
-            $table->string('address');
-            $table->integer('house_number');
-            $table->string('city');
-            $table->integer('phonenumber');
-            $table->string('email');
             $table->boolean('cash');
             $table->boolean('card');
             $table->boolean('ideal');
@@ -35,6 +30,8 @@ class CreateBranchesTable extends Migration
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('contact_information_id')->references('id')->on('contact_information')->onDelete('cascade');
         });
     }
 
