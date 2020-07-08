@@ -18,15 +18,12 @@ class CategoriesController extends Controller
     {
     }
 
-    public function overview()
-    {
+    public function categories() {
         $categories = Category::all();
-
-        return view('admin.categories.overview', ['categories' => $categories]);
+        return view('admin.categories.categories', compact('categories'));
     }
 
-    public function add()
-    {
+    public function add() {
         $branches = Branch::all();
 
         return view('admin.categories.add', ['branches' => $branches]);
@@ -36,10 +33,10 @@ class CategoriesController extends Controller
     {
         $category = Category::find(request('id'));
         $branches = Branch::all();
-        
-        return view('admin.categories.edit', [ 
+
+        return view('admin.categories.edit', [
             'category' => $category,
-            'branches' => $branches    
+            'branches' => $branches
         ]);
     }
 

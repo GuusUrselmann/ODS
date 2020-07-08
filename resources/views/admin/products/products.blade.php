@@ -1,13 +1,14 @@
 @extends('adminlte::page')
 @section('title', 'Products')
 @section('plugins.Datatables', true)
+@section('plugins.Sweetalert2', true)
 @section('content_header')
     <h1>Producten</h1>
 @stop
 @section('content')
     <div class="row">
         <div class="col-sm-9">
-            <div class="card table-users">
+            <div class="card table-products">
                 <div class="card-header">
                     <h3 class="card-title">Alle Producten</h3><a class="btn btn-sm btn-success float-right" href="{{url('admin/producten/toevoegen')}}"><i class="fas fa-plus"></i> Nieuw product</a>
                 </div>
@@ -16,32 +17,28 @@
                         <thead>
                             <tr>
                                 <th style="width: 10px">#</th>
-                                <th>Voornaam</th>
-                                <th>Achternaam</th>
-                                <th>Type</th>
-                                <th>Permissie Groep</th>
-                                <th>Acties</th>
+                                <th style="width: 210px">Plaatje</th>
+                                <th>Naam</th>
+                                <th>Prijs</th>
+                                <th style="width: 70px">Acties</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse($products as $product)
                             <tr>
-                                <td>{{$product->name}}</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
+                                <td>{{$product->id}}</td>
+                                <td class="p-1"><div class="product-background background-cover" style="background-image: url({{asset($product->image_path)}})"></div></td>
+                                <td><span class="h5">{{$product->name}}</span><br />{{$product->description}}</td>
+                                <td>€{{str_replace('.', ',', $product->price)}}</td>
                                 <td>
                                     <a href="{{url('admin/producten/bewerken/'.$product->id)}}" class="btn btn-sm btn-warning action-btn text-light"><i class="fas fa-pencil-alt"></i></a>
-                                    <a data-href="{{url('admin/gebruikers/verwijderen/'.$product->id)}}" class="btn btn-sm btn-danger action-btn text-light" data-toggle="modal" data-target="#deleteConfirmModal"><i class="fas fa-times"></i></a>
+                                    <a data-href="{{url('admin/producten/verwijderen/'.$product->id)}}" class="btn btn-sm btn-danger action-btn text-light deleteConfirmModal"><i class="fas fa-times"></i></a>
                                 </td>
                             </tr>
                             @empty
                                 <tr>
                                     <td></td>
                                     <td>Geen Producten Gevonden</td>
-                                    <td></td>
-                                    <td></td>
                                     <td></td>
                                     <td></td>
                                 </tr>
@@ -53,7 +50,7 @@
         </div>
         <div class="col-sm-3">
             <div class="info-box">
-                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-users"></i></span>
+                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-utensils"></i></span>
                 <div class="info-box-content">
                 <span class="info-box-text">Aantal Producten</span>
                 <span class="info-box-number">{{ $products->count() }}</span>
@@ -82,10 +79,10 @@
 @section('js')
     <script>
         $(document).ready(function() {
-            $('#usersTable').DataTable({
+            $('#productsTable').DataTable({
                 lengthChange: false,
                 "language": {
-                    "zeroRecords": "Geen gebruikers gevonden",
+                    "zeroRecords": "Geen Producten gevonden",
                     "info": "Pagina _PAGE_ / _PAGES_",
                     "search": "Zoeken:",
                     "paginate": {
@@ -96,7 +93,23 @@
                     },
                 }
             });
+            $(".deleteConfirmModal").on('click', function () {
+                Swal.fire({
+                    title: "Weet u het zeker?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#dc3545",
+                    cancelButtonColor: "#6c757d",
+                    confirmButtonText: "Ja, verwijder!",
+                    cancelButtonText: "Annuleren",
+                }).then((result) => {
+                    if (result.value) {
+                        window.location.replace($(this).attr("data-href"));
+                    }
+                });
+            });
         });
+
     </script>
     <script src="{{ asset('js/utilities/confirm-delete.js') }}" defer></script>
 @stop

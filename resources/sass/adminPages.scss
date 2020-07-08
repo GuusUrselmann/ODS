@@ -1,3 +1,8 @@
+.background-cover {
+    background-size: cover;
+    background-position: center center;
+}
+
 .action-btn {
     width: 30px;
     height: 30px;
@@ -54,4 +59,24 @@
 .form-user-edit-submit {
     margin-top: 15px;
     margin-left: 20px;
+}
+
+.product-background {
+    width: 200px;
+    height: 100px;
+}
+
+.form-image {
+    padding: 10px 0px;
+    #image-input {
+        display: none;
+    }
+}
+.form-image-preview {
+    img {
+        width: 100%;
+    }
+}
+#form-image {
+    display: none;
 }
