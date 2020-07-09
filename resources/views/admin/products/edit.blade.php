@@ -9,12 +9,15 @@
         <div class="col-sm-9">
             <div class="card p-3">
                 <div class="card-body p-0">
-                    <form id="formProductEdit" class="form-product-edit" method="POST" action="" enctype="multipart/form-data">
+                    <form id="formProductEdit" class="form-product-edit needs-validation" method="POST" action="" enctype="multipart/form-data" novalidate>
                         @csrf
                         <div class="row">
                             <div class="form-group col-6">
                                 <label>Naam</label>
-                                <input type="text" class="form-control" placeholder="Naam" name="name" value="{{$product->name}}">
+                                <input type="text" class="form-control" placeholder="Naam" name="name" value="{{$product->name}}" required>
+                                <div class="invalid-feedback">
+                                    Vul a.u.b. een geldige naam in.
+                                </div>
                             </div>
                             <div class="form-group col-3">
                                 <label>Prijs</label>
@@ -24,7 +27,10 @@
                                             <i class="fas fa-euro-sign"></i>
                                         </span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="00,00" name="price" value="{{$product->price}}">
+                                    <input type="text" class="form-control" placeholder="00,00" name="price" value="{{$product->price}}" required>
+                                    <div class="invalid-feedback">
+                                        Vul a.u.b. een geldige naam in.
+                                    </div>
                                 </div>
                            </div>
                         </div>
@@ -83,4 +89,5 @@
         });
     });
     </script>
+    <script src="{{ url('/js/utilities/form-validation.js') }}"></script>
 @stop

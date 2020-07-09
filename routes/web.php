@@ -41,7 +41,7 @@ Route::group(['prefix' => '/admin'], function () {
         Route::get('/bewerken/{id}', 'Admin\CategoriesController@edit');
         Route::post('/toevoegen', 'Admin\CategoriesController@save');
         Route::post('/bewerken/{id}', 'Admin\CategoriesController@update');
-        Route::post('/verwijderen/{id}', 'Admin\CategoriesController@delete');
+        Route::get('/verwijderen/{id}', 'Admin\CategoriesController@delete');
     });
 
     Route::group(['prefix' => '/gebruikers'], function () {

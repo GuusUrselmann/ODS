@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
+use Validator;
 use App\Category;
-use App\Branch;
 
 class CategoriesController extends Controller
 {
@@ -24,59 +25,48 @@ class CategoriesController extends Controller
     }
 
     public function add() {
-        $branches = Branch::all();
-
-        return view('admin.categories.add', ['branches' => $branches]);
+        return view('admin.categories.add');
     }
 
-    public function edit()
-    {
-        $category = Category::find(request('id'));
-        $branches = Branch::all();
-
-        return view('admin.categories.edit', [
-            'category' => $category,
-            'branches' => $branches
+    public function save(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:50'
         ]);
-    }
-
-    /*
-    *   Method to insert new categories into the datbase
-    */
-    public function save()
-    {
-        $highestPosition = Category::where('status', 'active')->max('webshop_position');
-
-        $category = new Category();
-
-        $category->name = request('name');
-        $category->status = request('status');
-        $category->branch_id = request('branch_id');
-        $category->webshop_position = $highestPosition + 1;
-
-        $category->save();
-
+        if($validator->fails()) {
+            $errors = $validator->errors();
+            return redirect(url('/admin/categorieen/toevoegen'))->with('errors', $errors);
+        }
+        Category::create([
+            'name' => $request->input('name'),
+            'slug' => Str::slug($request->input('name'), '_')
+        ]);
         return redirect(url('/admin/categorieen'));
     }
 
-    /*
-    *   Method to update existing categories into the datbase
-    */
-    public function update()
-    {
-        $category = Category::find(request('id'));
+    public function edit($id) {
+        $category = Category::find($id);
+        return view('admin.categories.edit', compact('category'));
+    }
 
-        $category->name = request('name');
-        $category->status = request('status');
-        $category->branch_id = request('branch_id');
-
-        $category->save();
-
+    public function update($id, Request $request) {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:50'
+        ]);
+        if($validator->fails()) {
+            $errors = $validator->errors();
+            return redirect(url('/admin/categorieen/bewerken/'.$id))->with('errors', $errors);
+        }
+        $category = Category::find($id);
+        $category->update([
+            'name' => $request->has('name') ? $request->input('name') : $category->name,
+            'slug' => $request->has('name') ? Str::slug($request->input('name'), '_') : $category->slug,
+        ]);
         return redirect(url('/admin/categorieen'));
     }
 
-    public function delete()
-    {
+    public function delete($id) {
+        $category = Category::find($id);
+        $category->delete();
         return redirect(url('/admin/categorieen'));
     }
 }
