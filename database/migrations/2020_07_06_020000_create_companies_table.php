@@ -17,6 +17,7 @@ class CreateCompaniesTable extends Migration
             $table->id();
             $table->bigInteger('contact_information_id')->unsigned();
             $table->string('name');
+            $table->string('email');
             $table->string('legal_number');
             $table->string('tax_number');
             $table->enum('status', ['active', 'inactive'])->default('active');

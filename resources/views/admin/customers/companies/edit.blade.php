@@ -2,6 +2,10 @@
 
 @section('title', 'Bedrijf Bewerken')
 
+@section('content_header')
+    <h1>Bedrijf Bewerken</h1>
+@stop
+
 @section('content')
 <div class="container-fluid">
     <div class="row">
@@ -94,29 +98,31 @@
 
                             <div class="col form-group">
                                 <label for="email">Email:</label>
-                                <input type="email" name="email" class="form-control" id="email" value="{{ $company->contact_information->email }}" required>
+                                <input type="email" name="email" class="form-control" id="email" value="{{ $company->email }}" required>
                                 <div class="invalid-feedback">
                                     Vul a.u.b. een geldig email in.
                                 </div>
                             </div>
                         </div>
 
+                        <button type="submit" class="btn btn-primary btn-block">Opslaan</button>
                     </form>
 
                 </div>
             </div>         
-        </div>
-        
-        <div class="col-sm-12 col-md-3">
-            <div class="small-box bg-white">
-                <div class="inner">
-                    <h4>Bedrijf informatie bewerken</h4>
-                    <button type="submit" form="formCompanyEdit" class="btn btn-primary btn-block mt-5">Opslaan</button>
-                </div>
-            </div>
-        </div>
+        </div>        
     </div>
 </div>
+
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 @stop
 
 @section('css')
