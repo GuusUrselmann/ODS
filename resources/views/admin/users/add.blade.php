@@ -9,62 +9,79 @@
         <div class="col-sm-9">
             <div class="card p-3">
                 <div class="card-body p-0">
-                    <form id="formUserAdd" class="form-user-add" method="POST" action="" enctype="multipart/form-data">
+                    <form id="formUserAdd" class="form-user-add needs-validation" method="POST" action="" enctype="multipart/form-data" novalidate>
                         @csrf
                         <div class="row">
                             <div class="form-group col-4">
                                 <label>Voornaam</label>
-                                <input type="text" class="form-control" placeholder="Voornaam" name="first_name">
+                                <input type="text" class="form-control" placeholder="Voornaam" name="first_name" required>
+                                <div class="invalid-feedback">
+                                    Vul a.u.b. een geldige voornaam in.
+                                </div>
                             </div>
                             <div class="form-group col-4">
                                 <label>Achternaam</label>
-                                <input type="text" class="form-control" placeholder="Achternaam" name="last_name">
+                                <input type="text" class="form-control" placeholder="Achternaam" name="last_name" required>
+                                <div class="invalid-feedback">
+                                    Vul a.u.b. een geldige achternaam in.
+                                </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-4">
                                 <label>Gebruikersnaam</label>
-                                <input type="text" class="form-control" placeholder="Gebruikersnaam" name="username">
+                                <input type="text" class="form-control" placeholder="Gebruikersnaam" name="username" required>
+                                <div class="invalid-feedback">
+                                    Vul a.u.b. een geldig gebruikersnaam in.
+                                </div>
                             </div>
                             <div class="form-group col-4">
                                 <label>Email</label>
-                                <input type="email" class="form-control" placeholder="Email" name="email">
+                                <input type="email" class="form-control" placeholder="Email" name="email" required>
+                                <div class="invalid-feedback">
+                                    Vul a.u.b. een geldig email in.
+                                </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-4">
                                 <label>Gebruiker Type</label>
-                                <select class="usertype-select" name="user_type_id" id="usertypeSelect">
+                                <select class="usertype-select" name="user_type_id" id="usertypeSelect" required>
                                     @foreach($user_types as $user_type)
                                     <option value="{{ $user_type->id }}" {{ $user_type->slug == 'klant' ? 'selected' : '' }}>{{ $user_type->name }}</option>
                                     @endforeach
                                 </select>
+                                <div class="invalid-feedback">
+                                    Vul a.u.b. een geldig gebruiker type in.
+                                </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-4">
                                 <label>Wachtwoord</label>
-                                <input type="password" class="form-control" placeholder="Wachtwoord" name="password">
+                                <input type="password" class="form-control" placeholder="Wachtwoord" name="password" required>
+                                <div class="invalid-feedback">
+                                    Vul a.u.b. een geldig wachtwoord in.
+                                </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-8">
                                 <label>Permissies</label>
-                                <select class="permissions-select" multiple="multiple" name="permissions[]">
+                                <select class="permissions-select" multiple="multiple" name="permissions[]" required>
                                     @foreach($permissions as $permission)
                                     <option value="{{ $permission->id }}">{{ $permission->name }}</option>
                                     @endforeach
                                 </select>
+                                <div class="invalid-feedback">
+                                    Vul a.u.b. geldige permissies in.
+                                </div>
                             </div>
                         </div>
+                        <div class="col-2 float-right">
+                            <button type="submit" form="formUserAdd" class="form-user-add-submit btn btn-lg btn-success mb-2">Aanmaken</button>
+                        </div>
                     </form>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card p-2">
-                <div class="card-body p-0">
-                    <button type="submit" form="formUserAdd" class="form-user-add-submit btn btn-success mb-2">Opslaan</button>
                 </div>
             </div>
         </div>
@@ -92,4 +109,5 @@
         $('.permissions-select').val(changes[value]).change();
     });
     </script>
+    <script src="{{ url('/js/utilities/form-validation.js') }}"></script>
 @stop

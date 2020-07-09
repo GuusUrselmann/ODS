@@ -330,22 +330,12 @@ return [
             'url'  => 'admin/categorieen/',
             'icon'    => 'fas fa-fw fa-list-ol',
         ],
-        [
-            'text'    => 'Couponcodes',
-            'url'  => 'admin/couponcodes/',
-            'icon'    => 'fas fa-fw fa-ticket-alt',
-        ],
-        ['header' => 'BEDRIJF'],
-        [
-            'text'    => 'Gebruikers',
-            'url'  => 'admin/gebruikers/',
-            'icon'    => 'fas fa-fw fa-users',
-        ],
-        [
-            'text'    => 'Filialen',
-            'url'  => 'admin/filialen/',
-            'icon'    => 'fas fa-fw fa-network-wired',
-        ],
+        // [
+        //     'text'    => 'Couponcodes',
+        //     'url'  => 'admin/couponcodes/',
+        //     'icon'    => 'fas fa-fw fa-ticket-alt',
+        // ],
+
         ['header' => 'KLANTEN'],
         [
             'text'    => 'Bedrijven',
@@ -357,7 +347,17 @@ return [
             'url'  => 'admin/klanten/particulieren',
             'icon'    => 'fas fa-fw fa-network-wired',
         ],
-        ['header' => 'OVERIG'],
+        ['header' => 'BEDRIJF'],
+        [
+            'text'    => 'Gebruikers',
+            'url'  => 'admin/gebruikers/',
+            'icon'    => 'fas fa-fw fa-users',
+        ],
+        // [
+        //     'text'    => 'Filialen',
+        //     'url'  => 'admin/filialen/',
+        //     'icon'    => 'fas fa-fw fa-network-wired',
+        // ],
         [
             'text'    => 'Permissies',
             'icon'    => 'fas fa-fw fa-key',
@@ -377,6 +377,7 @@ return [
             'url'  => 'admin/instellingen/',
             'icon'    => 'fas fa-fw fa-cog',
         ],
+
     ],
 
     /*

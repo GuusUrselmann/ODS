@@ -1,7 +1,7 @@
 @extends('adminlte::page')
-@section('title', 'Settings')
+@section('title', 'Instellingen')
 @section('content_header')
-    <h1>Settings</h1>
+    <h1>Instellingen</h1>
 @stop
 @section('content')
 @stop

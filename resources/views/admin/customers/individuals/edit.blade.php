@@ -1,12 +1,9 @@
 @extends('adminlte::page')
-
-@section('title', 'Particulier Bewerken')
+@section('title', 'Particulier bewerken')
 @section('plugins.Select2', true)
-
 @section('content_header')
     <h1>Particulier Bewerken</h1>
 @stop
-
 @section('content')
 <div class="row">
     <div class="col-sm-12 col-md-9">
@@ -42,7 +39,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="form-row">
                         <div class="col form-group">
                             <label for="street_name">Straatnaam:</label>
@@ -51,7 +48,7 @@
                                 Vul a.u.b. een geldig adres in.
                             </div>
                         </div>
-                        
+
                         <div class="col-3 form-group">
                             <label for="house_number">Huisnummer:</label>
                             <input type="text" name="house_number" class="form-control" id="house_number" value="{{ $individual->contact_information->house_number }}" required>
@@ -78,7 +75,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="form-row">
                         <div class="col form-group">
                             <label for="phone">Telefoonnummer:</label>
@@ -138,4 +135,3 @@
     });
 </script>
 @stop
-

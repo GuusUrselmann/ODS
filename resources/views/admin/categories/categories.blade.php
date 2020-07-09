@@ -1,18 +1,18 @@
 @extends('adminlte::page')
-@section('title', 'Permissie Groepen')
+@section('title', 'Categorieën')
 @section('plugins.Datatables', true)
 @section('content_header')
-    <h1>Permissie Groepen</h1>
+    <h1>Categorieën</h1>
 @stop
 @section('content')
     <div class="row">
         <div class="col-sm-9">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Alle Groepen</h3><a class="btn btn-sm btn-success float-right" href="{{url('admin/permissies/groepen/toevoegen')}}"><i class="fas fa-plus"></i> Nieuwe groep</a>
+                    <h3 class="card-title">Alle Categorieën</h3><a class="btn btn-sm btn-success float-right" href="{{url('admin/categorieen/toevoegen')}}"><i class="fas fa-plus"></i> Nieuwe categorie</a>
                 </div>
                 <div class="card-body p-0">
-                    <table id="groupsTable" class="display table table-striped" style="width:100%">
+                    <table id="categoriesTable" class="display table table-striped" style="width:100%">
                         <thead>
                             <tr>
                                 <th style="width: 10px">#</th>
@@ -21,19 +21,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($groups as $group)
+                            @forelse($categories as $category)
                             <tr>
-                                <td>{{ $group->id }}</td>
-                                <td>{{ $group->name }}</td>
+                                <td>{{ $category->id }}</td>
+                                <td>{{ $category->name }}</td>
                                 <td>
-                                    <a href="{{url('admin/permissies/groepen/bewerken/'.$group->id)}}" class="btn btn-sm btn-warning action-btn text-light"><i class="fas fa-pencil-alt"></i></a>
-                                    <a data-href="{{url('admin/permissies/groepen/verwijderen/'.$group->id)}}" class="btn btn-sm btn-danger action-btn text-light deleteConfirmModal"><i class="fas fa-times"></i></a>
+                                    <a href="{{url('admin/categorieen/bewerken/'.$category->id)}}" class="btn btn-sm btn-warning action-btn text-light"><i class="fas fa-pencil-alt"></i></a>
+                                    <a data-href="{{url('admin/categorieen/verwijderen/'.$category->id)}}" class="btn btn-sm btn-danger action-btn text-light deleteConfirmModal"><i class="fas fa-times"></i></a>
                                 </td>
                             </tr>
                             @empty
                                 <tr>
                                     <td></td>
-                                    <td>Geen Groepen Gevonden</td>
+                                    <td>Geen Categorieën Gevonden</td>
                                     <td></td>
                                 </tr>
                             @endforelse
@@ -46,8 +46,8 @@
             <div class="info-box">
                 <span class="info-box-icon bg-info elevation-1"><i class="fas fa-list-ol"></i></span>
                 <div class="info-box-content">
-                <span class="info-box-text">Aantal Groepen</span>
-                <span class="info-box-number">{{ $groups->count() }}</span>
+                <span class="info-box-text">Aantal Categorieën</span>
+                <span class="info-box-number">{{ $categories->count() }}</span>
             </div>
         </div>
     </div>
@@ -59,8 +59,13 @@
 @section('js')
     <script>
         $(document).ready(function() {
-            $('#groupsTable').DataTable({
+            $('#categoriesTable').DataTable({
                 lengthChange: false,
+                "columns": [
+                    null,
+                    null,
+                    { "orderable": false },
+                ],
                 "language": {
                     "zeroRecords": "Geen gebruikers gevonden",
                     "info": "Pagina _PAGE_ / _PAGES_",

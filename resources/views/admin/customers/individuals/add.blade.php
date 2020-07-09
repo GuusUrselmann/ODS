@@ -1,13 +1,9 @@
 @extends('adminlte::page')
-
-@section('title', 'Particulier Toevoegen')
-
+@section('title', 'Particulier aanmaken')
 @section('plugins.Select2', true)
-
 @section('content_header')
-    <h1>Particulier Toevoegen</h1>
+    <h1>Nieuwe Particulier</h1>
 @stop
-
 @section('content')
     <div class="row">
         <div class="col-sm-12 col-md-9">
@@ -42,7 +38,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="form-row">
                             <div class="col form-group">
                                 <label for="street_name">Straatnaam:</label>
@@ -51,7 +47,7 @@
                                     Vul a.u.b. een geldig adres in.
                                 </div>
                             </div>
-                            
+
                             <div class="col-3 form-group">
                                 <label for="house_number">Huisnummer:</label>
                                 <input type="text" name="house_number" class="form-control" id="house_number" required>
@@ -78,7 +74,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="form-row">
                             <div class="col form-group">
                                 <label for="phone">Telefoonnummer:</label>
@@ -105,7 +101,7 @@
                             </select>
                         </div>
 
-                        <button type="submit" class="btn btn-primary btn-block">Opslaan</button>
+                        <button type="submit" class="btn btn-primary btn-block">Aanmaken</button>
                     </form>
                 </div>
             </div>
@@ -126,4 +122,3 @@
 </script>
 <script src="{{ url('/js/utilities/form-validation.js') }}"></script>
 @stop
-

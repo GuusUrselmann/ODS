@@ -1,11 +1,8 @@
 @extends('adminlte::page')
-
-@section('title', 'Bedrijf Toevoegen')
-
+@section('title','Bedrijf aanmaken')
 @section('content_header')
-    <h1>Bedrijf Toevoegen</h1>
+    <h1>Nieuw Bedrijf</h1>
 @stop
-
 @section('content')
 <div class="container-fluid">
     <div class="row">
@@ -30,7 +27,7 @@
                                 </select>
                             </div>
                         </div>
-                        
+
                         <div class="form-row">
                             <div class="col form-group">
                                 <label for="legal_number">KVK nummer:</label>
@@ -39,7 +36,7 @@
                                     Vul a.u.b. een geldig KVK nummer in.
                                 </div>
                             </div>
-                            
+
                             <div class="col-6 form-group">
                                 <label for="tax_number">BTW nummer:</label>
                                 <input type="text" name="tax_number" class="form-control" id="tax_number" required>
@@ -57,7 +54,7 @@
                                     Vul a.u.b. een geldig adres in.
                                 </div>
                             </div>
-                            
+
                             <div class="col-2 form-group">
                                 <label for="house_number">Huisnummer:</label>
                                 <input type="text" name="house_number" class="form-control" id="house_number" required>
@@ -84,7 +81,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="form-row">
                             <div class="col form-group">
                                 <label for="phone">Telefoonnummer:</label>
@@ -102,15 +99,13 @@
                                 </div>
                             </div>
                         </div>
-
-                        <button type="submit" class="btn btn-primary btn-block">Opslaan</button>
+                        <div class="col-2 float-right">
+                            <button type="submit" class="btn btn-success btn-lg">Aanmaken</button>
+                        </div>
                     </form>
-
                 </div>
             </div>
-
         </div>
-
     </div>
 </div>
 
@@ -131,4 +126,3 @@
 @section('js')
 <script src="{{ url('/js/utilities/form-validation.js') }}"></script>
 @stop
-

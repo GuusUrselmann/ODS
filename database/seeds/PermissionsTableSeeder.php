@@ -14,16 +14,28 @@ class PermissionsTableSeeder extends Seeder
     public function run()
     {
         App\Permission::create([
-            'name' => 'Perm1',
-            'slug' => 'perm1'
+            'name' => 'Producten Overzicht',
+            'slug' => 'producten_overzicht'
         ]);
         App\Permission::create([
-            'name' => 'Perm2',
-            'slug' => 'perm2'
+            'name' => 'Producten Toevoegen',
+            'slug' => 'producten_toevoegen'
         ]);
         App\Permission::create([
-            'name' => 'Perm3',
-            'slug' => 'perm3'
+            'name' => 'Producten Verwijderen',
+            'slug' => 'producten_verwijderen'
+        ]);
+        App\Permission::create([
+            'name' => 'Gebruikers Overzicht',
+            'slug' => 'gebruikers_overzicht'
+        ]);
+        App\Permission::create([
+            'name' => 'Gebruikers Toevoegen',
+            'slug' => 'gebruikers_toevoegen'
+        ]);
+        App\Permission::create([
+            'name' => 'Gebruikers Verwijderen',
+            'slug' => 'gebruikers_verwijderen'
         ]);
     }
 }

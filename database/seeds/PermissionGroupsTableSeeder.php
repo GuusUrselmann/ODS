@@ -26,7 +26,23 @@ class PermissionGroupsTableSeeder extends Seeder
             'group_id' => '1'
         ]);
         App\PermissionGroup::create([
+            'permission_id' => '4',
+            'group_id' => '1'
+        ]);
+        App\PermissionGroup::create([
+            'permission_id' => '5',
+            'group_id' => '1'
+        ]);
+        App\PermissionGroup::create([
+            'permission_id' => '6',
+            'group_id' => '1'
+        ]);
+        App\PermissionGroup::create([
             'permission_id' => '1',
+            'group_id' => '2'
+        ]);
+        App\PermissionGroup::create([
+            'permission_id' => '4',
             'group_id' => '2'
         ]);
     }

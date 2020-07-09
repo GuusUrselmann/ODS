@@ -16,13 +16,9 @@ class CreateCategoriesTable extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->bigInteger('branch_id')->unsigned();
-            $table->integer('webshop_position');
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->string('slug');
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
         });
     }
 

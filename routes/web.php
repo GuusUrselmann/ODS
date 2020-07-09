@@ -27,21 +27,21 @@ Route::group(['prefix' => '/admin'], function () {
     Route::get('/dashboard', 'Admin\DashboardController@dashboard');
 
     Route::group(['prefix' => '/producten'], function () {
-        Route::get('/', 'Admin\ProductsController@overview');
+        Route::get('/', 'Admin\ProductsController@products');
         Route::get('/toevoegen', 'Admin\ProductsController@add');
-        Route::get('/{id}/bewerken', 'Admin\ProductsController@edit');
         Route::post('/toevoegen', 'Admin\ProductsController@save');
-        Route::post('/{id}/bewerken', 'Admin\ProductsController@update');
-        Route::post('/{id}/verwijderen', 'Admin\ProductsController@delete');
+        Route::get('/bewerken/{id}', 'Admin\ProductsController@edit');
+        Route::post('/bewerken/{id}', 'Admin\ProductsController@update');
+        Route::get('/verwijderen/{id}', 'Admin\ProductsController@delete');
     });
 
     Route::group(['prefix' => '/categorieen'], function () {
-        Route::get('/', 'Admin\CategoriesController@overview');
+        Route::get('/', 'Admin\CategoriesController@categories');
         Route::get('/toevoegen', 'Admin\CategoriesController@add');
         Route::get('/bewerken/{id}', 'Admin\CategoriesController@edit');
         Route::post('/toevoegen', 'Admin\CategoriesController@save');
         Route::post('/bewerken/{id}', 'Admin\CategoriesController@update');
-        Route::post('/verwijderen/{id}', 'Admin\CategoriesController@delete');
+        Route::get('/verwijderen/{id}', 'Admin\CategoriesController@delete');
     });
 
     Route::group(['prefix' => '/gebruikers'], function () {

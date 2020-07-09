@@ -1,9 +1,6 @@
 @extends('adminlte::page')
-
-@section('title', 'Bedrijven Overzicht')
-
+@section('title', 'Bedrijven')
 @section('plugins.Datatables', true)
-
 @section('content_header')
     <h1>Bedrijven</h1>
 @stop
@@ -13,7 +10,7 @@
     <div class="col-sm-12 col-md-9">
         <div class="card">
             <div class="card-header">
-                <h1 class="card-title">Bedrijven</h1>
+                <h1 class="card-title">Alle Bedrijven</h1>
                     <a href="{{ url('/admin/klanten/bedrijven/toevoegen') }}" class="btn btn-sm btn-success float-right">
                     <i class="fas fa-plus mr-2"></i> Nieuw Bedrijf
                 </a>
@@ -46,9 +43,9 @@
                                 <td>{{ $company->contact_information->phone }}</td>
                                 <td>{{ $company->status == "active" ? "Ja" : "Nee" }}</td>
                                 <td class="text-right text-nowrap">
-                                    <a href="{{ url('/admin/klanten/bedrijven/bewerken/' . $company->id) }}" class="btn btn-sm btn-warning action-btn">
+                                    <a href="{{ url('/admin/klanten/bedrijven/bewerken/' . $company->id) }}" class="btn btn-sm btn-warning action-btn text-light">
                                         <i class="fas fa-pencil-alt"></i>
-                                    </a>                                    
+                                    </a>
                                     <a data-href="{{ url('admin/klanten/bedrijven/verwijderen/'. $company->id) }}" class="btn btn-sm btn-danger action-btn text-light deleteConfirmModal">
                                         <i class="fas fa-times"></i>
                                     </a>
