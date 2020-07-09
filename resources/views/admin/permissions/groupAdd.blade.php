@@ -47,7 +47,6 @@
 @section('js')
     <script>
     $(".permissions-select").select2({
-        tags: true,
         closeOnSelect: false,
         width: '80%'
     });

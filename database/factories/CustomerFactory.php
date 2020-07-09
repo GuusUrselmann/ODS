@@ -10,7 +10,7 @@ $factory->define(App\Customer::class, function (Faker $faker) {
     
     return [
         'contact_information_id' => factory(App\ContactInformation::class)->create()->id,
-        'user_id' => 1,
+        'user_id' => factory(App\User::class)->create()->id,
         'preferred_payment_method' => $preferredPaymentMethods[rand(0, 1)]
     ];
 });

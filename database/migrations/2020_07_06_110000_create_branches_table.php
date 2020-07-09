@@ -17,6 +17,7 @@ class CreateBranchesTable extends Migration
             $table->id();
             $table->bigInteger('contact_information_id')->unsigned();
             $table->string('name');
+            $table->string('email');
             $table->boolean('cash');
             $table->boolean('card');
             $table->boolean('ideal');

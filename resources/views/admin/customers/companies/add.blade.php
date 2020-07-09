@@ -2,6 +2,10 @@
 
 @section('title', 'Bedrijf Toevoegen')
 
+@section('content_header')
+    <h1>Bedrijf Toevoegen</h1>
+@stop
+
 @section('content')
 <div class="container-fluid">
     <div class="row">
@@ -99,6 +103,7 @@
                             </div>
                         </div>
 
+                        <button type="submit" class="btn btn-primary btn-block">Opslaan</button>
                     </form>
 
                 </div>
@@ -106,16 +111,18 @@
 
         </div>
 
-        <div class="col-sm-12 col-md-3">
-            <div class="small-box bg-white">
-                <div class="inner">
-                    <h4>Bedrijf Toevoegen</h4>
-                    <button type="submit" form="formCompanyAdd" class="btn btn-primary btn-block mt-5">Opslaan</button>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
+
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 @stop
 
 @section('css')
