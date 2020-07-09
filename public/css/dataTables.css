@@ -1,0 +1,11 @@
+.dataTables_info {
+    padding: 0 0 10px 10px;
+}
+
+.dataTables_paginate {
+    padding: 0 10px 10px 0;
+}
+
+.dataTables_filter {
+    margin: 5px 0 5px 0;
+}

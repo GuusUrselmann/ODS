@@ -20,7 +20,6 @@ class CreateContactInformationTable extends Migration
             $table->string('zipcode');
             $table->string('city');
             $table->string('phone');
-            $table->string('email');
             $table->timestamps();
         });
     }
