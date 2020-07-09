@@ -51,20 +51,6 @@
             </div>
         </div>
     </div>
-
-    <div class="modal" tabindex="-1" role="dialog" id="deleteConfirmModal">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    Weet je zeker dat je deze actie wilt uitvoeren?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary btn-ok" data-dismiss="modal" aria-label="Close">Nee</button>
-                    <a class="btn btn-primary btn-ok">Ja</a>
-                </div>
-            </div>
-        </div>
-    </div>
 @stop
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">

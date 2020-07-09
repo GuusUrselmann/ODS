@@ -27,7 +27,7 @@
                                 <td>{{ $group->name }}</td>
                                 <td>
                                     <a href="{{url('admin/permissies/groepen/bewerken/'.$group->id)}}" class="btn btn-sm btn-warning action-btn text-light"><i class="fas fa-pencil-alt"></i></a>
-                                    <a data-href="{{url('admin/permissies/groepen/verwijderen/'.$group->id)}}" class="btn btn-sm btn-danger action-btn text-light" data-toggle="modal" data-target="#deleteConfirmModal"><i class="fas fa-times"></i></a>
+                                    <a data-href="{{url('admin/permissies/groepen/verwijderen/'.$group->id)}}" class="btn btn-sm btn-danger action-btn text-light deleteConfirmModal"><i class="fas fa-times"></i></a>
                                 </td>
                             </tr>
                             @empty
@@ -48,20 +48,6 @@
                 <div class="info-box-content">
                 <span class="info-box-text">Aantal Groepen</span>
                 <span class="info-box-number">{{ $groups->count() }}</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal" tabindex="-1" role="dialog" id="deleteConfirmModal">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    Weet je zeker dat je deze actie wilt uitvoeren?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary btn-ok" data-dismiss="modal" aria-label="Close">Nee</button>
-                    <a class="btn btn-primary btn-ok">Ja</a>
-                </div>
             </div>
         </div>
     </div>

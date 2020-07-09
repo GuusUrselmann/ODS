@@ -12,18 +12,18 @@ class CategoriesTableSeeder extends Seeder
     public function run()
     {
         App\Category::create([
-            'name' => 'Hoofdgerecht',
-            'slug' => 'hoofdgerecht'
+            'name' => 'Broodjes',
+            'slug' => 'broodjes'
         ]);
 
         App\Category::create([
-            'name' => 'Voorgerecht',
-            'slug' => 'voorgerecht'
+            'name' => 'Pizza\'s',
+            'slug' => 'pizzas'
         ]);
 
         App\Category::create([
-            'name' => 'Nagerecht',
-            'slug' => 'Nagerecht'
+            'name' => 'Drankjes',
+            'slug' => 'drankjes'
         ]);
     }
 }

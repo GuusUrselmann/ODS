@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Products')
+@section('title', 'Producten')
 @section('plugins.Datatables', true)
 @section('plugins.Sweetalert2', true)
 @section('content_header')

@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Users')
+@section('title', 'Product aanmaken')
 @section('plugins.Select2', true)
 @section('content_header')
     <h1>Nieuw Product</h1>

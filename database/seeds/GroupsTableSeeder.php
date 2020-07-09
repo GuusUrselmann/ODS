@@ -18,8 +18,8 @@ class GroupsTableSeeder extends Seeder
             'slug' => 'eigenaar'
         ]);
         App\Group::create([
-            'name' => 'Klant Permissies',
-            'slug' => 'klant_permissies'
+            'name' => 'Klant',
+            'slug' => 'klant'
         ]);
     }
 }

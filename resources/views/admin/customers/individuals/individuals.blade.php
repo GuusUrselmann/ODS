@@ -1,17 +1,16 @@
 @extends('adminlte::page')
-
-@section('title', 'Particulieren Overzicht')
-
+@section('title', 'Particulieren')
 @section('plugins.Datatables', true)
-
 @section('content_header')
     <h1>Particulieren</h1>
 @stop
-
 @section('content')
 <div class="row">
     <div class="col-sm-12 col-md-9">
         <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Alle Particulieren</h3>
+            </div>
             {{-- <div class="card-header">
                 <h1 class="card-title">Particulieren Klanten</h1>
                 <a href="{{ url('/admin/klanten/particulieren/toevoegen') }}" class="btn btn-sm btn-success float-right">
@@ -42,7 +41,7 @@
                                 <td>{{ $individual->user->email }}</td>
                                 <td>{{ $individual->contact_information->phone }}</td>
                                 <td class="text-right">
-                                    <a href="{{ url('/admin/klanten/particulieren/bewerken/' . $individual->id) }}" class="btn btn-sm btn-warning action-btn">
+                                    <a href="{{ url('/admin/klanten/particulieren/bewerken/' . $individual->id) }}" class="btn btn-sm btn-warning action-btn  text-light">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
                                     <a data-href="{{ url('/admin/klanten/particulieren/verwijderen/' . $individual->id) }}" class="btn btn-sm btn-danger action-btn text-light deleteConfirmModal">
@@ -71,7 +70,7 @@
         <div class="info-box">
             <span class="info-box-icon bg-info elevation-1"><i class="fas fa-list-ol"></i></span>
             <div class="info-box-content">
-            <span class="info-box-text">Aantal Particulieren Klanten</span>
+            <span class="info-box-text">Aantal Particulieren</span>
             <span class="info-box-number">{{ $individuals->count() }}</span>
         </div>
     </div>

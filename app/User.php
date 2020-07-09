@@ -63,7 +63,7 @@ class User extends Authenticatable
     }
 
     public function hasPermission($permission_name) {
-        if($this->permissions()->contains('slug', Str::slug($permission_name))) {
+        if($this->permissions()->contains('slug', Str::slug($permission_name, '_'))) {
             return true;
         }
         return false;

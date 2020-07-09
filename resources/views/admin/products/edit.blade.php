@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Users')
+@section('title', 'Product bewerken')
 @section('plugins.Select2', true)
 @section('content_header')
     <h1>Product Bewerken</h1>
@@ -41,7 +41,7 @@
                              </div>
                         </div>
                         <div class="col-2 float-right">
-                            <button type="submit" form="formProductEdit" class="form-user-add-submit btn btn-lg btn-success mb-2">Opslaan</button>
+                            <button type="submit" form="formProductEdit" class="form-user-add-submit btn btn-lg btn-success mb-2">Bewerken</button>
                         </div>
                     </form>
                 </div>
