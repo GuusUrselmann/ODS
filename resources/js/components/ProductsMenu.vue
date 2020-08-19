@@ -1,6 +1,6 @@
 <template>
     <div class="row">
-        <div class="col-9">
+        <div class="col-12 col-xl-9">
             <div class="menu-carousel rounded shadow-sm">
                 <carousel :dots="false" :items="4" :nav="false">
                     <div class="menu-category p-3 text-center" v-for="menu_category in menu"><a class="text-primary h5" :href="'#'+menu_category.category.slug">{{menu_category.category.name}}</a></div>
@@ -12,7 +12,7 @@
                         {{menu_category.category.name}}
                     </h5>
                     <div class="category-products row col-12">
-                        <div class="product col-4 p-3" v-for="menu_product in menu_category.menu_products">
+                        <div class="product col-xl-4 col-md-6 p-3" v-for="menu_product in menu_category.menu_products">
                             <div class="list-card bg-white rounded overflow-hidden position-relative shadow-sm p-3">
                                 <div class="product-image background-cover rounded-circle" :style="{'background-image' : 'url(\''+menu_product.product.image_path+'\')'}"></div>
                                 <div class="product-body">
@@ -26,7 +26,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-3">
+        <div class="col-0  col-xl-3 d-none d-xl-block">
             <div class="cart rounded shadow-sm col-10">
                 <div class="cart-header p-3">
                     <h5>Uw bestelling</h5>

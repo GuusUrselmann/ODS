@@ -37959,7 +37959,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row" }, [
-    _c("div", { staticClass: "col-9" }, [
+    _c("div", { staticClass: "col-12 col-xl-9" }, [
       _c(
         "div",
         { staticClass: "menu-carousel rounded shadow-sm" },
@@ -38013,47 +38013,51 @@ var render = function() {
               "div",
               { staticClass: "category-products row col-12" },
               _vm._l(menu_category.menu_products, function(menu_product) {
-                return _c("div", { staticClass: "product col-4 p-3" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "list-card bg-white rounded overflow-hidden position-relative shadow-sm p-3"
-                    },
-                    [
-                      _c("div", {
+                return _c(
+                  "div",
+                  { staticClass: "product col-xl-4 col-md-6 p-3" },
+                  [
+                    _c(
+                      "div",
+                      {
                         staticClass:
-                          "product-image background-cover rounded-circle",
-                        style: {
-                          "background-image":
-                            "url('" + menu_product.product.image_path + "')"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "product-body" }, [
-                        _c("h6", [_vm._v(_vm._s(menu_product.product.name))]),
+                          "list-card bg-white rounded overflow-hidden position-relative shadow-sm p-3"
+                      },
+                      [
+                        _c("div", {
+                          staticClass:
+                            "product-image background-cover rounded-circle",
+                          style: {
+                            "background-image":
+                              "url('" + menu_product.product.image_path + "')"
+                          }
+                        }),
                         _vm._v(" "),
-                        _c("p", { staticClass: "text-secondary mb-0" }, [
-                          _vm._v(_vm._s(menu_product.product.description))
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "btn btn-outline-secondary btn-sm float-right",
-                            on: {
-                              click: function($event) {
-                                return _vm.addProduct(menu_product.product.id)
+                        _c("div", { staticClass: "product-body" }, [
+                          _c("h6", [_vm._v(_vm._s(menu_product.product.name))]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "text-secondary mb-0" }, [
+                            _vm._v(_vm._s(menu_product.product.description))
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "btn btn-outline-secondary btn-sm float-right",
+                              on: {
+                                click: function($event) {
+                                  return _vm.addProduct(menu_product.product.id)
+                                }
                               }
-                            }
-                          },
-                          [_vm._v("ADD")]
-                        )
-                      ])
-                    ]
-                  )
-                ])
+                            },
+                            [_vm._v("ADD")]
+                          )
+                        ])
+                      ]
+                    )
+                  ]
+                )
               }),
               0
             )
@@ -38063,7 +38067,7 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "col-3" }, [
+    _c("div", { staticClass: "col-0  col-xl-3 d-none d-xl-block" }, [
       _c("div", { staticClass: "cart rounded shadow-sm col-10" }, [
         _c("div", { staticClass: "cart-header p-3" }, [
           _c("h5", [_vm._v("Uw bestelling")]),
