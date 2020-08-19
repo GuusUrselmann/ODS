@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use Validator;
 use App\Product;
+use App\Category;
+use App\CategoryProduct;
 
 class ProductsController extends Controller
 {
@@ -24,7 +26,8 @@ class ProductsController extends Controller
     }
 
     public function add() {
-        return view('admin.products.add');
+        $categories = Category::all();
+        return view('admin.products.add', compact('categories'));
     }
 
     public function save(Request $request) {
@@ -43,23 +46,33 @@ class ProductsController extends Controller
             $image_path = public_path('/images/products/');
             $product_image->move($image_path, $image_name.$image_extention);
         }
-        Product::create([
+        $product = Product::create([
             'name' => $request->input('name'),
             'price' => str_replace(',', '.', $request->input('price')),
             'description' => $request->input('description'),
             'image_path' => $request->has('image_path') ? 'images/products/'.$image_name.$image_extention : ''
         ]);
+        if($request->has('categories'))  {
+            foreach($request->input('categories') as $category_id) {
+                CategoryProduct::create([
+                    'category_id' => $category_id,
+                    'product_id' => $product->id
+                ]);
+            }
+        }
         return redirect(url('/admin/producten'));
     }
 
     public function edit($id) {
         $product = Product::find($id);
-        return view('admin.products.edit', compact('product'));
+        $categories = Category::all();
+        return view('admin.products.edit', compact('product', 'categories'));
     }
 
     public function update($id, Request $request) {
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:50',
+            'price' => 'required'
         ]);
         if($validator->fails()) {
             $errors = $validator->errors();
@@ -76,12 +89,28 @@ class ProductsController extends Controller
             $product_image->move($image_path, $image_name.$image_extention);
         }
         $product = Product::find($id);
+        $product_categories = CategoryProduct::where('product_id', $product->id)->get()->keyBy('category_id');
+        foreach($request->input('categories') as $category_id) {
+            if($product->hasCategory($category_id)) {
+                $product_categories->forget(2);
+            }
+            else {
+                CategoryProduct::create([
+                    'category_id' => $category_id,
+                    'product_id' => $product->id
+                ]);
+            }
+        }
+        foreach($product_categories as $category) {
+            $category->delete();
+        }
         $product->update([
             'name' => $request->input('name'),
             'price' => str_replace(',', '.', $request->input('price')),
             'description' => $request->input('description'),
             'image_path' => $request->has('image_path') ? 'images/products/'.$image_name.$image_extention : $product->image_path
         ]);
+
         return redirect(url('/admin/producten'));
     }
 

@@ -215,7 +215,7 @@ return [
     */
 
     'enabled_laravel_mix' => false,
-    'laravel_mix_css_path' => 'css/app.css',
+    'laravel_mix_css_path' => '/css/app.css',
     'laravel_mix_js_path' => 'js/app.js',
 
     /*
@@ -313,7 +313,6 @@ return [
         //     'icon_color' => 'cyan',
         //     'url'        => '#',
         // ],
-
         [
             'text'    => 'Dashboard',
             'url'  => 'admin/',
@@ -329,6 +328,11 @@ return [
             'text'    => 'Categorieën',
             'url'  => 'admin/categorieen/',
             'icon'    => 'fas fa-fw fa-list-ol',
+        ],
+        [
+            'text'    => 'Menu\'s',
+            'url'  => 'admin/menus/',
+            'icon'    => 'fas fa-fw fa-clipboard',
         ],
         // [
         //     'text'    => 'Couponcodes',
@@ -396,7 +400,7 @@ return [
         JeroenNoten\LaravelAdminLte\Menu\Filters\HrefFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\SearchFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\ActiveFilter::class,
-        JeroenNoten\LaravelAdminLte\Menu\Filters\SubmenuFilter::class,
+        // JeroenNoten\LaravelAdminLte\Menu\Filters\SubmenuFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\ClassesFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\GateFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\LangFilter::class,

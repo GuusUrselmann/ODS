@@ -21,11 +21,8 @@
 <body>
     <div class="page-wrapper container-fluid background-cover" style="background-image: url({{asset('images/backgrounds/background-auth.jpg')}})">
         <main class="row">
-            <div class="page-content col-sm-9">
+            <div class="page-content col-sm-12">
                 @yield('content')
-            </div>
-            <div class="page-sidebar col-sm-3">
-                @include('layouts.auth.sidebar')
             </div>
         </main>
     </div>

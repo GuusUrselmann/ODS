@@ -18,6 +18,8 @@ Auth::routes();
 Route::group(['prefix' => '/'], function () {
     Route::get('/', 'Guest\GuestHomeController@home');
     Route::get('/home', 'Guest\GuestHomeController@home');
+    Route::get('/bestellen', 'Guest\GuestHomeController@order');
+    Route::post('/bestellen', 'Guest\GuestHomeController@placeOrder');
 });
 
 
@@ -42,6 +44,15 @@ Route::group(['prefix' => '/admin'], function () {
         Route::post('/toevoegen', 'Admin\CategoriesController@save');
         Route::post('/bewerken/{id}', 'Admin\CategoriesController@update');
         Route::get('/verwijderen/{id}', 'Admin\CategoriesController@delete');
+    });
+
+    Route::group(['prefix' => '/menus'], function () {
+        Route::get('/', 'Admin\MenusController@menus');
+        Route::get('/toevoegen', 'Admin\MenusController@add');
+        Route::get('/bewerken/{id}', 'Admin\MenusController@edit');
+        Route::post('/toevoegen', 'Admin\MenusController@save');
+        Route::post('/bewerken/{id}', 'Admin\MenusController@update');
+        Route::get('/verwijderen/{id}', 'Admin\MenusController@delete');
     });
 
     Route::group(['prefix' => '/gebruikers'], function () {
@@ -106,4 +117,10 @@ Route::group(['prefix' => '/admin'], function () {
             Route::post('/bewerken/{id}', 'Admin\CustomerCompaniesController@update');
         });
     });
+});
+
+Route::group(['prefix' => '/api'], function () {
+    Route::post('/addproducttocart', 'APIController@addProductToCart');
+    Route::post('/removeproductfromcart', 'APIController@removeProductFromCart');
+    Route::post('/updateproductquantityincart', 'APIController@updateProductQuantityInCart');
 });

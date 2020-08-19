@@ -40,6 +40,19 @@
                                 <textarea class="form-control" rows="3" placeholder="Beschrijving" name="description">{{$product->description}}</textarea>
                              </div>
                         </div>
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <label>Categorieën</label>
+                                <select class="categories-select" multiple="multiple" name="categories[]" required>
+                                    @foreach($categories as $category)
+                                    <option value="{{ $category->id }}" {{ $product->hasCategory($category->id) ? 'selected' : '' }}>{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                                <div class="invalid-feedback">
+                                    Vul a.u.b. geldige categorieën in.
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-2 float-right">
                             <button type="submit" form="formProductEdit" class="form-user-add-submit btn btn-lg btn-success mb-2">Bewerken</button>
                         </div>
@@ -75,6 +88,11 @@
 @section('js')
     <script>
     $(document).ready(function() {
+        $(".categories-select").select2({
+            tags: true,
+            closeOnSelect: false,
+            width: '80%'
+        });
         $('#image-upload').on('click', function() {
             $('#image-input').click();
         });
