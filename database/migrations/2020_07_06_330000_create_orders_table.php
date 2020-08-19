@@ -16,7 +16,7 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('customer_id')->unsigned();
-            $table->datetime('order_datetime')->useCurrent();
+            $table->datetime('order_datetime');
             $table->enum('status', ['in_process', 'on_the_way', 'delivered', 'canceled']);
             $table->enum('payment_method', ['cash', 'card']);
             $table->timestamps();

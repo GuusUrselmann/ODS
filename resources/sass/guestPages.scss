@@ -3,12 +3,17 @@
     background-position: center center;
 }
 
-.navbar {
-    height: 75px;
-    .navbar-brand {
-        margin-left: 75px;
-        img {
-            height: 100%;
+.dropdown-cart-top {
+    min-width: 340px;
+    .dropdown-cart-top-body {
+        font-size: 13px;
+        color: #7a7e8a;
+    }
+    .btn {
+        background-color: #3ecf8e !important;
+        border-color: #3ecf8e !important;
+        i {
+            font-size: 14px;
         }
     }
 }
