@@ -20,6 +20,7 @@ Route::group(['prefix' => '/'], function () {
     Route::get('/home', 'Guest\GuestHomeController@home');
     Route::get('/bestellen', 'Guest\GuestHomeController@order');
     Route::post('/bestellen', 'Guest\GuestHomeController@placeOrder');
+    Route::get('/bestelling/{id}', 'Guest\GuestHomeController@trackOrder');
 });
 
 
@@ -53,6 +54,19 @@ Route::group(['prefix' => '/admin'], function () {
         Route::post('/toevoegen', 'Admin\MenusController@save');
         Route::post('/bewerken/{id}', 'Admin\MenusController@update');
         Route::get('/verwijderen/{id}', 'Admin\MenusController@delete');
+    });
+
+    Route::group(['prefix' => '/bestellingen'], function () {
+        Route::get('/', 'Admin\OrdersController@orders');
+        Route::get('/toevoegen', 'Admin\OrdersController@add');
+        Route::get('/bewerken/{id}', 'Admin\OrdersController@edit');
+        Route::post('/toevoegen', 'Admin\OrdersController@save');
+        Route::post('/bewerken/{id}', 'Admin\OrdersController@update');
+        Route::get('/verwijderen/{id}', 'Admin\OrdersController@delete');
+    });
+
+    Route::group(['prefix' => '/orderwindow'], function () {
+        Route::get('/', 'Admin\OrderwindowController@orderwindow');
     });
 
     Route::group(['prefix' => '/gebruikers'], function () {
@@ -123,4 +137,5 @@ Route::group(['prefix' => '/api'], function () {
     Route::post('/addproducttocart', 'APIController@addProductToCart');
     Route::post('/removeproductfromcart', 'APIController@removeProductFromCart');
     Route::post('/updateproductquantityincart', 'APIController@updateProductQuantityInCart');
+    Route::post('/orderlist', 'APIController@orderList');
 });

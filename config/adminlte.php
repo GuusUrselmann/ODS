@@ -334,6 +334,17 @@ return [
             'url'  => 'admin/menus/',
             'icon'    => 'fas fa-fw fa-clipboard',
         ],
+        ['header' => 'BESTELLINGEN'],
+        [
+            'text'    => 'Bestellingen',
+            'url'  => 'admin/bestellingen/',
+            'icon'    => 'fas fa-fw fa-hamburger',
+        ],
+        [
+            'text'    => 'Keukenscherm',
+            'url'  => 'admin/orderwindow/',
+            'icon'    => 'fas fa-fw fa-hamburger',
+        ],
         // [
         //     'text'    => 'Couponcodes',
         //     'url'  => 'admin/couponcodes/',

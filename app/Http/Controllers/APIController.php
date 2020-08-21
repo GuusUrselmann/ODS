@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use App\Product;
+use App\Order;
 use Cart;
 
 class APIController extends Controller
@@ -73,6 +74,13 @@ class APIController extends Controller
         return [
             'cart' => Cart::getContent()->sort(),
             'amount' => Cart::getTotal()
+        ];
+    }
+
+    public function orderList(Request $request) {
+        $orders = Order::with('order_products')->get();
+        return [
+            'orders' => $orders
         ];
     }
 }

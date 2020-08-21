@@ -17,8 +17,8 @@ class CreateOpeningHoursRuleTable extends Migration
             $table->id();
             $table->enum('day', ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']);
             $table->boolean('open');
-            $table->timestamp('openinghour')->useCurrent();
-            $table->timestamp('closinghour')->useCurrent();
+            $table->timestamp('openinghour');
+            $table->timestamp('closinghour');
             $table->timestamps();
         });
     }
