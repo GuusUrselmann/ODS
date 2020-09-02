@@ -15,10 +15,10 @@ class CreateOpeningHoursRuleTable extends Migration
     {
         Schema::create('opening_hours_rule', function (Blueprint $table) {
             $table->id();
-            $table->enum('day', ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']);
-            $table->boolean('open');
-            $table->timestamp('openinghour');
-            $table->timestamp('closinghour');
+            // $table->enum('day', ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']);
+            // $table->boolean('open');
+            // $table->timestamp('openinghour');
+            // $table->timestamp('closinghour');
             $table->timestamps();
         });
     }
