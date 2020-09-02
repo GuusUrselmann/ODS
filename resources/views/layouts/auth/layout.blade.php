@@ -5,9 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {{-- CSRF Token --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'ODS') }}</title>
     {{-- Scripts --}}
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script type="text/javascript">
+        function url() {
+            return '<?= url('') ?>';
+        }
+    </script>
     @yield('js')
     {{-- Fonts --}}
     <link href="{{asset('fonts/fontawesome-free-5.13.1-web/css/all.css')}}" rel="stylesheet">

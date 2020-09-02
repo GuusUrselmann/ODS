@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Guest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Mollie\Laravel\Facades\Mollie;
+use Inertia\Inertia;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use App\Menu;
@@ -20,26 +21,35 @@ class GuestHomeController extends Controller
      * @return void
      */
     public function __construct() {
+        $this->middleware('inertia.guest');
     }
 
     public function home(Request $request) {
-        $menu = Menu::find(1);
+        $menu = Menu::find(1)->list();
         $cart = Cart::getContent();
         $cart->sort();
         $cart_amount = Cart::getTotal();
-        return view('guest.home.home', compact('menu', 'cart', 'cart_amount'));
+        return Inertia::render('Guest/Home/Home', [
+            'menu' => $menu,
+            'cart' => $cart,
+            'amount' => $cart_amount
+        ]);
     }
 
     public function order(Request $request) {
         $cart = Cart::getContent();
         $cart->sort();
         $cart_amount = Cart::getTotal();
-        return view('guest.order.order', compact('cart', 'cart_amount'));
+        // return view('guest.order.order', compact('cart', 'cart_amount'));
+        return Inertia::render('Guest/Order/Order', [
+            'cart' => $cart,
+            'amount' => $cart_amount
+        ]);
     }
 
     public function placeOrder(Request $request) {
         $order_uuid = Str::random(8);
-
+        
         $next_order_id = Order::latest('id')->first() ? Order::latest('id')->first()->id + 1 : 1;
         $payment = Mollie::api()->payments->create([
             "amount" => [
@@ -58,7 +68,7 @@ class GuestHomeController extends Controller
             'order_datetime' => Carbon::now(),
             'user_id' => 1,
             'status' => 'in_process',
-            'payment_method' => 'card',
+            'payment_method' => 'iDEAL',
             'paid' => true,
             'mollie_payment_id' => $payment->id,
             'uuid' => $order_uuid

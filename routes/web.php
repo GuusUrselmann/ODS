@@ -134,6 +134,7 @@ Route::group(['prefix' => '/admin'], function () {
 });
 
 Route::group(['prefix' => '/api'], function () {
+    Route::post('/getcart', 'APIController@getCart');
     Route::post('/addproducttocart', 'APIController@addProductToCart');
     Route::post('/removeproductfromcart', 'APIController@removeProductFromCart');
     Route::post('/updateproductquantityincart', 'APIController@updateProductQuantityInCart');

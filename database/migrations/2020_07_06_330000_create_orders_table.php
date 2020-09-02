@@ -18,7 +18,7 @@ class CreateOrdersTable extends Migration
             $table->float('amount');
             $table->datetime('order_datetime');
             $table->enum('status', ['in_process', 'on_the_way', 'delivered', 'canceled']);
-            $table->enum('payment_method', ['cash', 'card']);
+            $table->enum('payment_method', ['cash', 'iDEAL']);
             $table->boolean('paid')->nullable();
             $table->string('mollie_payment_id');
             $table->string('uuid');

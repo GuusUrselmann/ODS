@@ -21,6 +21,13 @@ class APIController extends Controller
     {
     }
 
+    public function getCart() {
+        return [
+            'cart' => Cart::getContent()->sort(),
+            'amount' => Cart::getTotal()
+        ];
+    }
+
     public function addProductToCart(Request $request) {
         if(!Product::find($request->product_id)) {
             return [

@@ -24,8 +24,12 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "@inertiajs/inertia": "^0.2.1",
+        "@inertiajs/inertia-vue": "^0.2.0",
+        "v-select2-component": "^0.4.3",
         "vue-moment": "^4.1.0",
         "vue-owl-carousel": "^2.0.3",
-        "vuedraggable": "^2.24.0"
+        "vuedraggable": "^2.24.0",
+        "vuex": "^3.5.1"
     }
 }

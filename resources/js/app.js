@@ -6,7 +6,9 @@
 
 require('./bootstrap');
 
+import { InertiaApp } from '@inertiajs/inertia-vue';
 window.Vue = require('vue');
+import Vuex from 'vuex';
 
 /**
  * The following block of code may be used to automatically register your
@@ -19,11 +21,11 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('productsmenu', require('./components/ProductsMenu.vue').default);
-Vue.component('orderlist', require('./components/OrderList.vue').default);
-Vue.component('headercart', require('./components/HeaderCart.vue').default);
-Vue.component('orderwindow', require('./components/Orderwindow.vue').default);
+// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+// Vue.component('productsmenu', require('./components/ProductsMenu.vue').default);
+// Vue.component('orderlist', require('./components/OrderList.vue').default);
+// Vue.component('headercart', require('./components/HeaderCart.vue').default);
+// Vue.component('orderwindow', require('./components/Orderwindow.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -31,7 +33,53 @@ Vue.component('orderwindow', require('./components/Orderwindow.vue').default);
  */
 
 Vue.use(require('vue-moment'));
+Vue.use(InertiaApp);
+Vue.use(Vuex);
 
-const app = new Vue({
-    el: '.app',
-});
+const store = new Vuex.Store({
+    state: {
+        cart: {},
+        amount: 0
+    },
+    getters: {
+        getCart(state) {
+            return state.cart
+        },
+        getAmount(state) {
+            return state.amount
+        },
+    },
+    actions: {
+        initCart(state) {
+            axios.post(url()+'/api/getcart', {
+                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            })
+            .then(response => {
+                state.commit('updateCart', response.data.cart)
+                state.commit('updateAmount', response.data.amount)
+            })
+            .catch(error => {
+                console.log(error);
+           });
+        }
+    },
+    mutations: {
+        updateCart (state, data) {
+            Vue.set(state,'cart', data)
+        },
+        updateAmount (state, data) {
+            Vue.set(state,'amount', data)
+        },
+    }
+})
+
+const app = document.getElementById('app')
+new Vue({
+  render: h => h(InertiaApp, {
+    props: {
+      initialPage: JSON.parse(app.dataset.page),
+      resolveComponent: name => require(`./Pages/${name}`).default,
+    },
+  }),
+  store: store,
+}).$mount(app)

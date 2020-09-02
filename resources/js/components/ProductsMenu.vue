@@ -1,16 +1,16 @@
 <template>
     <div class="row">
         <div class="col-12 col-xl-9">
-            <div class="menu-carousel rounded shadow-sm">
-                <carousel :dots="false" :items="4" :nav="false">
+            <div class="menu-carousel rounded shadow-sm mb-5">
+                <carousel :dots="false" :items="4" :nav="false" :responsive="{0:{items:2},768:{items:3},1200:{items:4}}">
                     <div class="menu-category p-3 text-center" v-for="menu_category in menu"><a class="text-primary h5" :href="'#'+menu_category.category.slug">{{menu_category.category.name}}</a></div>
                 </carousel>
             </div>
             <div class="menu-products">
                 <div class="product-category row" v-for="menu_category in menu">
-                    <h5 :id="menu_category.category.slug" class="category col-12">
+                    <h4 :id="menu_category.category.slug" class="category col-12">
                         {{menu_category.category.name}}
-                    </h5>
+                    </h4>
                     <div class="category-products row col-12">
                         <div class="product col-xl-4 col-md-6 p-3" v-for="menu_product in menu_category.menu_products">
                             <div class="list-card bg-white rounded overflow-hidden position-relative shadow-sm p-3">
