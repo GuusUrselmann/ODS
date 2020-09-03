@@ -25,5 +25,10 @@ class CategoriesTableSeeder extends Seeder
             'name' => 'Drankjes',
             'slug' => 'drankjes'
         ]);
+
+        App\Category::create([
+            'name' => 'Oosters',
+            'slug' => 'oosters'
+        ]);
     }
 }

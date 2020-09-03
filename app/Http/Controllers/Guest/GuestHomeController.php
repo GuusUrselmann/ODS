@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use App\Menu;
 use App\Order;
 use App\OrderProduct;
+use App\ContactInformation;
 use Cart;
 
 class GuestHomeController extends Controller
@@ -48,50 +49,103 @@ class GuestHomeController extends Controller
     }
 
     public function placeOrder(Request $request) {
-        $order_uuid = Str::random(8);
-        
-        $next_order_id = Order::latest('id')->first() ? Order::latest('id')->first()->id + 1 : 1;
-        $payment = Mollie::api()->payments->create([
-            "amount" => [
-                "currency" => "EUR",
-                "value" => strval(number_format(Cart::getTotal(),2)) // You must send the correct number of decimals, thus we enforce the use of strings
-            ],
-            "description" => "Bestelling ODS #".$next_order_id,
-            "redirectUrl" => url('bestelling/'.$order_uuid),
-            "metadata" => [
-                "order_id" => $next_order_id,
-            ],
-        ]);
-
-        $order = Order::create([
-            'amount' => Cart::getTotal(),
-            'order_datetime' => Carbon::now(),
-            'user_id' => 1,
-            'status' => 'in_process',
-            'payment_method' => 'iDEAL',
-            'paid' => true,
-            'mollie_payment_id' => $payment->id,
-            'uuid' => $order_uuid
-        ]);
-
-        foreach(Cart::getContent() as $cart_item) {
-            OrderProduct::create([
-                'quantity' => $cart_item->quantity,
-                'order_id' => $order->id,
-                'product_id' => $cart_item->attributes['product_id'],
+        if($request->input('payment_method') == 'cash') {
+            $order_uuid = Str::random(8);
+            $contact_information = ContactInformation::create([
+                'street_name' => $request->input('streetname'),
+                'house_number' => $request->input('housenumber'),
+                'zipcode' => $request->input('zipcode'),
+                'city' => $request->input('city'),
+                'email' => $request->input('email'),
             ]);
+            $order = Order::create([
+                'amount' => Cart::getTotal(),
+                'order_datetime' => Carbon::now(),
+                'user_id' => 1,
+                'status' => 'in_process',
+                'payment_method' => $request->input('payment_method'),
+                'paid' => true,
+                'contact_information_id' => $contact_information->id,
+                'uuid' => $order_uuid
+            ]);
+            Cart::clear();
+            return redirect(url('/bedankt'))->with('order_id', $order->id);
+        }
+        elseif($request->input('payment_method') == 'iDEAL') {
+            $payment = Mollie::api()->payments->create([
+                "amount" => [
+                    "currency" => "EUR",
+                    "value" => strval(number_format(Cart::getTotal(),2)) // You must send the correct number of decimals, thus we enforce the use of strings
+                ],
+                "description" => "Bestelling ODS #".$next_order_id,
+                "redirectUrl" => url('bestelling/'.$order_uuid),
+                "metadata" => [
+                    "order_id" => $next_order_id,
+                ],
+            ]);
+            return redirect($payment->getCheckoutUrl(), 303);
         }
 
-        $payment = Mollie::api()->payments->get($payment->id);
 
-        Cart::clear();
 
-        // redirect customer to Mollie checkout page
-        return redirect($payment->getCheckoutUrl(), 303);
+        // dd($request);
+        //
+        // $order_uuid = Str::random(8);
+        //
+        // $next_order_id = Order::latest('id')->first() ? Order::latest('id')->first()->id + 1 : 1;
+        // $payment = Mollie::api()->payments->create([
+        //     "amount" => [
+        //         "currency" => "EUR",
+        //         "value" => strval(number_format(Cart::getTotal(),2)) // You must send the correct number of decimals, thus we enforce the use of strings
+        //     ],
+        //     "description" => "Bestelling ODS #".$next_order_id,
+        //     "redirectUrl" => url('bestelling/'.$order_uuid),
+        //     "metadata" => [
+        //         "order_id" => $next_order_id,
+        //     ],
+        // ]);
+        //
+        // $order = Order::create([
+        //     'amount' => Cart::getTotal(),
+        //     'order_datetime' => Carbon::now(),
+        //     'user_id' => 1,
+        //     'status' => 'in_process',
+        //     'payment_method' => 'iDEAL',
+        //     'paid' => true,
+        //     'mollie_payment_id' => $payment->id,
+        //     'uuid' => $order_uuid
+        // ]);
+        //
+        // foreach(Cart::getContent() as $cart_item) {
+        //     OrderProduct::create([
+        //         'quantity' => $cart_item->quantity,
+        //         'order_id' => $order->id,
+        //         'product_id' => $cart_item->attributes['product_id'],
+        //     ]);
+        // }
+        //
+        // $payment = Mollie::api()->payments->get($payment->id);
+        //
+        // Cart::clear();
+        //
+        // // redirect customer to Mollie checkout page
+        // return redirect($payment->getCheckoutUrl(), 303);
     }
 
-    public function trackOrder($id) {
-        $order = Order::where('uuid', $id)->first();
-        dd($order);
+    public function thanks() {
+        $order = Order::find(session('order_id'));
+        if(!$order) {
+            return redirect(url('/home'));
+        }
+        return Inertia::render('Guest/Order/Thanks', [
+            'order' => $order,
+        ]);
+    }
+
+    public function trackOrder($uuid) {
+        $order = Order::where('uuid', $uuid)->first();
+        return Inertia::render('Guest/Order/Track', [
+            'order' => $order,
+        ]);
     }
 }

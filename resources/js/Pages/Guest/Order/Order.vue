@@ -140,13 +140,13 @@
                                <div class="form-group col-md-6">
                                    <label for="order_address">Straat</label>
                                    <div class="input-group">
-                                       <input class="form-control" v-model="formOrder.streetName">
+                                       <input class="form-control" v-model="formOrder.streetName" name="streetname">
                                    </div>
                                </div>
                                <div class="form-group col-md-2">
                                    <label for="order_house_number">Huisnr.</label>
                                    <div class="input-group">
-                                       <input class="form-control" v-model="formOrder.houseNumber">
+                                       <input class="form-control" v-model="formOrder.houseNumber" name="housenumber">
                                    </div>
                                </div>
                             </div>
@@ -154,13 +154,13 @@
                                <div class="form-group col-md-4">
                                    <label for="order_zipcode">Postcode</label>
                                    <div class="input-group">
-                                       <input class="form-control" v-model="formOrder.zipcode">
+                                       <input class="form-control" v-model="formOrder.zipcode" name="zipcode">
                                    </div>
                                </div>
                                <div class="form-group col-md-4">
                                    <label for="order_city">Plaats</label>
                                    <div class="input-group">
-                                       <input class="form-control" v-model="formOrder.city">
+                                       <input class="form-control" v-model="formOrder.city" name="city">
                                    </div>
                                </div>
                             </div>
@@ -171,8 +171,8 @@
                             <div class="row">
                                <div class="col-sm-4 pr-0">
                                   <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                     <a class="nav-link active" id="v-pills-ideal-tab" data-toggle="pill" href="#v-pills-ideal" role="tab" aria-controls="v-pills-ideal" aria-selected="true"><i class="icofont-credit-card"></i> iDEAL</a>
-                                     <a class="nav-link" id="v-pills-cash-tab" data-toggle="pill" href="#v-pills-cash" role="tab" aria-controls="v-pills-cash" aria-selected="false"><i class="icofont-credit-card"></i> Contant</a>
+                                     <a class="nav-link active" id="v-pills-ideal-tab" data-toggle="pill" href="#v-pills-ideal" role="tab" aria-controls="v-pills-ideal" aria-selected="true" @click="setPaymentMethod('iDEAL')"><i class="icofont-credit-card"></i> iDEAL</a>
+                                     <a class="nav-link" id="v-pills-cash-tab" data-toggle="pill" href="#v-pills-cash" role="tab" aria-controls="v-pills-cash" aria-selected="false" @click="setPaymentMethod('cash')"><i class="icofont-credit-card"></i> Contant</a>
                                      <!-- <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false"><i class="icofont-card"></i> Credit</a>
                                      <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false"><i class="icofont-bank-alt"></i> Netbanking</a>
                                      <a class="nav-link" id="v-pills-cash-tab" data-toggle="pill" href="#v-pills-cash" role="tab" aria-controls="v-pills-cash" aria-selected="false"><i class="icofont-money"></i> Pay on Delivery</a> -->
@@ -189,7 +189,7 @@
                                              <Select2 :options="[{id:'rabobank',text:'Rabobank'},{id:'cash',text:'Contant'}]" :settings="{minimumResultsForSearch:999}"/>
                                           </div> -->
                                           <div class="form-group col-md-12 mb-0">
-                                             <button class="btn btn-success btn-block btn-lg">BESTELLING PLAATSEN</button>
+                                             <!-- <button class="btn btn-success btn-block btn-lg">BESTELLING PLAATSEN</button> -->
                                           </div>
                                        </div>
                                      </div>
@@ -198,9 +198,7 @@
                                          <h6 class="mb-3 mt-0 mb-3">Contant</h6>
                                          <p>Probeer A.U.B. gepast te kunnen betalen</p>
                                          <hr>
-                                         <a href="thanks.html" class="btn btn-success btn-block btn-lg">BESTELLING PLAATSEN
-                                             <i class="icofont-long-arrow-right"></i>
-                                         </a>
+                                         <button class="btn btn-success btn-block btn-lg">BESTELLING PLAATSEN</button>
                                     </div>
 
                                   </div>
@@ -261,6 +259,7 @@
                             <!-- <hr> -->
                             <h6 class="font-weight-bold mb-0">TE BETALEN  <span class="float-right">€{{amount.toFixed(2)}}</span></h6>
                          </div>
+                         <input id="input_payment_method" type="hidden" name="payment_method" value="iDEAL">
                          <input type="hidden" name="_token" :value="csrf">
                          <!-- <button class="btn btn-success btn-block btn-lg">BETALEN</button> -->
                          <!-- <a href="thanks.html" class="btn btn-success btn-block btn-lg">BETALEN<i class="icofont-long-arrow-right"></i></a> -->
@@ -332,6 +331,9 @@
             submitOrderForm() {
                 this.$refs.orderForm.submit()
             },
+            setPaymentMethod(method) {
+                $('#input_payment_method').val(method)
+            }
         },
         computed: {
             cart() {

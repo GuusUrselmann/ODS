@@ -26,7 +26,7 @@
                     </li>
                     <li class="nav-item dropdown dropdown-cart pr-3">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-shopping-basket"></i> Cart
+                            <i class="fas fa-shopping-basket"></i> Winkelwagen
                         </a>
                         <div class="dropdown-menu dropdown-cart-top p-0 dropdown-menu-right shadow-sm border-0">
                             <div class="dropdown-menu dropdown-cart-top p-0 dropdown-menu-right shadow-sm border-0 show">

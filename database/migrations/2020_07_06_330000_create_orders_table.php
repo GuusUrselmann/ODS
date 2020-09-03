@@ -20,12 +20,14 @@ class CreateOrdersTable extends Migration
             $table->enum('status', ['in_process', 'on_the_way', 'delivered', 'canceled']);
             $table->enum('payment_method', ['cash', 'iDEAL']);
             $table->boolean('paid')->nullable();
-            $table->string('mollie_payment_id');
+            $table->string('mollie_payment_id')->nullable();
             $table->string('uuid');
+            $table->bigInteger('contact_information_id')->unsigned();
             $table->bigInteger('user_id')->nullable()->unsigned();
             $table->timestamps();
             $table->softDeletes();
 
+            $table->foreign('contact_information_id')->references('id')->on('contact_information')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }

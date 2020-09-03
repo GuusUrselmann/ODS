@@ -20,7 +20,8 @@ Route::group(['prefix' => '/'], function () {
     Route::get('/home', 'Guest\GuestHomeController@home');
     Route::get('/bestellen', 'Guest\GuestHomeController@order');
     Route::post('/bestellen', 'Guest\GuestHomeController@placeOrder');
-    Route::get('/bestelling/{id}', 'Guest\GuestHomeController@trackOrder');
+    Route::get('/bestelling/volgen/{uuid}', 'Guest\GuestHomeController@trackOrder');
+    Route::get('/bedankt', 'Guest\GuestHomeController@thanks');
 });
 
 

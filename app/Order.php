@@ -11,7 +11,7 @@ class Order extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['amount', 'order_datetime', 'user_id', 'status', 'payment_method', 'mollie_payment_id', 'uuid'];
+    protected $fillable = ['amount', 'order_datetime', 'user_id', 'status', 'payment_method', 'contact_information_id', 'mollie_payment_id', 'uuid'];
 
     public function order_products() {
         return $this->hasMany(OrderProduct::class)->with('product');

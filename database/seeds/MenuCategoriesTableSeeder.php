@@ -23,5 +23,10 @@ class MenuCategoriesTableSeeder extends Seeder
             'menu_id' => '1',
             'category_id' => '2'
         ]);
+        App\MenuCategory::create([
+            'position' => '3',
+            'menu_id' => '1',
+            'category_id' => '4'
+        ]);
     }
 }

@@ -12,8 +12,8 @@
         <div class="container-fluid productsmenu">
             <div class="row">
                 <div class="col-12 col-xl-9">
-                    <div class="menu-carousel rounded shadow-sm mb-5">
-                        <Carousel :dots="false" :items="4" :nav="false" :responsive="{0:{items:2},768:{items:3},1200:{items:4}}">
+                    <div class="menu-carousel rounded shadow-sm mb-5 sticky-top">
+                        <Carousel :dots="false" :items="4" :nav="false" :touchDrag="true" :responsive="{0:{items:2},768:{items:3},1200:{items:4}}">
                             <div class="menu-category p-3 text-center" v-for="menu_category in menu"><a class="text-primary h5" :href="'#'+menu_category.category.slug">{{menu_category.category.name}}</a></div>
                         </Carousel>
                     </div>
@@ -74,6 +74,13 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="container d-block d-xl-none fixed-bottom">
+            <div class="row">
+                <div class="col-12">
+                    <inertia-link :href="$page.paths.url+'/bestellen'" class="btn btn-success btn-block btn-lg">Afrekenen <i class="fas fa-shopping-cart"></i></inertia-link>
                 </div>
             </div>
         </div>
