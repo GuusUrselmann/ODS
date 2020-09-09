@@ -15,13 +15,16 @@
                         <input type="hidden" :name="'categories['+category.id+']'">
                         <div class="category-header border-bottom pl-2">
                             <h4>{{category.name}}</h4>
-                            <div class="product-select float-right">
+                            <div class="product-select float-right mr-5">
                                 <div class="select-input">
                                     <Select2 :options="productsOptions" v-model="productAdd[index]" :settings="{placeholder: 'Producten...'}" />
                                 </div>
                                 <div class="select-button">
                                     <div class="btn btn-success" v-on:click="addProduct(index)">Toevoegen</div>
                                 </div>
+                            </div>
+                            <div class="category-remove float-right bg-danger rounded-circle text-center" v-on:click="removeCategory(index)">
+                                <i class="fas fa-times"></i>
                             </div>
                         </div>
                         <div class="category-products row p-2">
@@ -34,6 +37,9 @@
                                     <div class="card-body p-0">
                                         <div class="product-image background-cover" :style="{backgroundImage: 'url('+asset+product.image_path+')'}"></div>
                                         <span class="badge rounded product-price badge-dark pl-1 pr-1">€ {{product.price}}</span>
+                                    </div>
+                                    <div class="product-remove bg-danger rounded-circle text-center" v-on:click="removeProduct(index, productIndex)">
+                                        <i class="fas fa-times"></i>
                                     </div>
                                 </div>
                             </div>
@@ -80,8 +86,14 @@
             addCategory() {
                 this.$store.commit('addCategoryToMenu', this.categorySelected)
             },
-            addProduct(categoryID) {
-                this.$store.commit('addProductToCategory', {cat: categoryID, product: this.productSelected(categoryID)})
+            removeCategory(catID) {
+                this.$store.commit('removeCategoryFromMenu', catID)
+            },
+            addProduct(catID) {
+                this.$store.commit('addProductToCategory', {cat: catID, product: this.productSelected(catID)})
+            },
+            removeProduct(catID, productID) {
+                this.$store.commit('removeProductFromCategory', {catID: catID, productID: productID})
             },
             productSelected(catID) {
                 let selectedProduct = this.productAdd[catID]

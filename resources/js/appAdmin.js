@@ -53,19 +53,25 @@ const store = new Vuex.Store({
             menu.push(category)
             Vue.set(state,'menu', menu)
         },
+        removeCategoryFromMenu(state, catID) {
+            let menu = this.state.menu
+            menu.splice(catID ,1)
+            Vue.set(state,'menu', menu)
+        },
         addProductToCategory (state, data) {
             let cat = data.cat
             let product = data.product
             let menu = this.state.menu
             menu[cat].products.push(product)
-            // let category = {
-            //     id: cat.id,
-            //     name: cat.text,
-            //     products: [],
-            // }
-            // menu.push(category)
             Vue.set(state,'menu', menu)
         },
+        removeProductFromCategory(state, data) {
+            let catID = data.catID
+            let productID = data.productID
+            let menu = this.state.menu
+            menu[catID].products.splice(productID ,1)
+            Vue.set(state,'menu', menu)
+        }
     }
 })
 

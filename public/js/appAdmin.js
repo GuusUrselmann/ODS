@@ -156,6 +156,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -187,10 +193,19 @@ __webpack_require__.r(__webpack_exports__);
     addCategory: function addCategory() {
       this.$store.commit('addCategoryToMenu', this.categorySelected);
     },
-    addProduct: function addProduct(categoryID) {
+    removeCategory: function removeCategory(catID) {
+      this.$store.commit('removeCategoryFromMenu', catID);
+    },
+    addProduct: function addProduct(catID) {
       this.$store.commit('addProductToCategory', {
-        cat: categoryID,
-        product: this.productSelected(categoryID)
+        cat: catID,
+        product: this.productSelected(catID)
+      });
+    },
+    removeProduct: function removeProduct(catID, productID) {
+      this.$store.commit('removeProductFromCategory', {
+        catID: catID,
+        productID: productID
       });
     },
     productSelected: function productSelected(catID) {
@@ -19117,43 +19132,61 @@ var render = function() {
                   [
                     _c("h4", [_vm._v(_vm._s(category.name))]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "product-select float-right" }, [
-                      _c(
-                        "div",
-                        { staticClass: "select-input" },
-                        [
-                          _c("Select2", {
-                            attrs: {
-                              options: _vm.productsOptions,
-                              settings: { placeholder: "Producten..." }
-                            },
-                            model: {
-                              value: _vm.productAdd[index],
-                              callback: function($$v) {
-                                _vm.$set(_vm.productAdd, index, $$v)
-                              },
-                              expression: "productAdd[index]"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "select-button" }, [
+                    _c(
+                      "div",
+                      { staticClass: "product-select float-right mr-5" },
+                      [
                         _c(
                           "div",
-                          {
-                            staticClass: "btn btn-success",
-                            on: {
-                              click: function($event) {
-                                return _vm.addProduct(index)
+                          { staticClass: "select-input" },
+                          [
+                            _c("Select2", {
+                              attrs: {
+                                options: _vm.productsOptions,
+                                settings: { placeholder: "Producten..." }
+                              },
+                              model: {
+                                value: _vm.productAdd[index],
+                                callback: function($$v) {
+                                  _vm.$set(_vm.productAdd, index, $$v)
+                                },
+                                expression: "productAdd[index]"
                               }
-                            }
-                          },
-                          [_vm._v("Toevoegen")]
-                        )
-                      ])
-                    ])
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "select-button" }, [
+                          _c(
+                            "div",
+                            {
+                              staticClass: "btn btn-success",
+                              on: {
+                                click: function($event) {
+                                  return _vm.addProduct(index)
+                                }
+                              }
+                            },
+                            [_vm._v("Toevoegen")]
+                          )
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "category-remove float-right bg-danger rounded-circle text-center",
+                        on: {
+                          click: function($event) {
+                            return _vm.removeCategory(index)
+                          }
+                        }
+                      },
+                      [_c("i", { staticClass: "fas fa-times" })]
+                    )
                   ]
                 ),
                 _vm._v(" "),
@@ -19203,7 +19236,24 @@ var render = function() {
                                 },
                                 [_vm._v("€ " + _vm._s(product.price))]
                               )
-                            ])
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "product-remove bg-danger rounded-circle text-center",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.removeProduct(
+                                      index,
+                                      productIndex
+                                    )
+                                  }
+                                }
+                              },
+                              [_c("i", { staticClass: "fas fa-times" })]
+                            )
                           ])
                         ]
                       )
@@ -37559,17 +37609,23 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_0__["default"].Store({
       menu.push(category);
       Vue.set(state, 'menu', menu);
     },
+    removeCategoryFromMenu: function removeCategoryFromMenu(state, catID) {
+      var menu = this.state.menu;
+      menu.splice(catID, 1);
+      Vue.set(state, 'menu', menu);
+    },
     addProductToCategory: function addProductToCategory(state, data) {
       var cat = data.cat;
       var product = data.product;
       var menu = this.state.menu;
-      menu[cat].products.push(product); // let category = {
-      //     id: cat.id,
-      //     name: cat.text,
-      //     products: [],
-      // }
-      // menu.push(category)
-
+      menu[cat].products.push(product);
+      Vue.set(state, 'menu', menu);
+    },
+    removeProductFromCategory: function removeProductFromCategory(state, data) {
+      var catID = data.catID;
+      var productID = data.productID;
+      var menu = this.state.menu;
+      menu[catID].products.splice(productID, 1);
       Vue.set(state, 'menu', menu);
     }
   }

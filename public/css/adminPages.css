@@ -112,12 +112,42 @@
   bottom: 5px;
 }
 
+.category-remove {
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  margin-top: -35px;
+  display: none;
+}
+
+.category:hover .category-remove {
+  display: block;
+}
+
 .categories-empty {
   border-radius: 10px;
 }
 
 .products-empty {
   border-radius: 10px;
+}
+
+.product-remove {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  line-height: 20px;
+  display: none;
+}
+
+.product:hover .product-remove {
+  display: block;
+}
+
+.product:hover .product-remove:hover {
+  cursor: pointer;
 }
 
 .select2-container--default .select2-selection--single {
