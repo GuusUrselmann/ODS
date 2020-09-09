@@ -6,7 +6,7 @@
 @stop
 @section('content')
     <div class="row">
-        <div class="col-sm-9">
+        <div class="col-sm-12">
             <div class="card p-3">
                 <div class="card-body p-0">
                     <form id="formMenuAdd" class="form-menu-add needs-validation" method="POST" action="" enctype="multipart/form-data" novalidate>
@@ -20,6 +20,9 @@
                                 </div>
                             </div>
                         </div>
+                        <div>
+                            <menubuilder :categories-data="{{$categories}}" :products-data="{{$products}}" />
+                        </div>
                         <div class="col-2 float-right">
                             <button type="submit" form="formMenuAdd" class="form-user-add-submit btn btn-lg btn-success mb-2">Aanmaken</button>
                         </div>
@@ -30,10 +33,17 @@
     </div>
 @stop
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
     <link rel="stylesheet" href="{{asset('/css/adminPages.css')}}">
 @stop
 @section('js')
+    <script>
+    function url() {
+        return '<?= url('') ?>';
+    }
+    function asset() {
+        return '<?= asset('') ?>'
+    }
+    </script>
     <script>
     $(document).ready(function() {
         $(".categories-select").select2({
@@ -55,5 +65,6 @@
         });
     });
     </script>
+    <script src="{{ url('/js/appAdmin.js') }}" defer></script>
     <script src="{{ url('/js/utilities/form-validation.js') }}"></script>
 @stop

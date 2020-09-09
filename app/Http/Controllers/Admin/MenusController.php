@@ -28,7 +28,8 @@ class MenusController extends Controller
 
     public function add() {
         $categories = Category::all();
-        return view('admin.menus.add');
+        $products = Product::all();
+        return view('admin.menus.add', compact('categories', 'products'));
     }
 
     public function save(Request $request) {
@@ -39,6 +40,7 @@ class MenusController extends Controller
             $errors = $validator->errors();
             return redirect(url('/admin/menus/toevoegen'))->with('errors', $errors);
         }
+        dd($request->input('categories'));
         Menu::create([
             'name' => $request->input('name')
         ]);
