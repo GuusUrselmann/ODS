@@ -43,6 +43,9 @@ const store = new Vuex.Store({
         },
     },
     mutations: {
+        setMenu(state, menu) {
+            Vue.set(state,'menu', menu)
+        },
         addCategoryToMenu (state, cat) {
             let menu = this.state.menu
             let category = {
@@ -71,6 +74,22 @@ const store = new Vuex.Store({
             let menu = this.state.menu
             menu[catID].products.splice(productID ,1)
             Vue.set(state,'menu', menu)
+        }
+    },
+    actions: {
+        initMenu(state, data) {
+            let menu = data.map(function(menu_category, index) {
+                let products = menu_category.menu_products.map(function(menu_product) {
+                    return menu_product.product
+                })
+                console.log(products)
+                return {
+                    id: menu_category.category_id,
+                    name: menu_category.category.name,
+                    products: products,
+                }
+            })
+            state.commit('setMenu', menu)
         }
     }
 })

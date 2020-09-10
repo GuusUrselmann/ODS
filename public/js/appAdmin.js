@@ -187,7 +187,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: {
     categoriesData: null,
-    productsData: null
+    productsData: null,
+    menuData: null
   },
   methods: {
     addCategory: function addCategory() {
@@ -259,6 +260,13 @@ __webpack_require__.r(__webpack_exports__);
     }(function () {
       return asset();
     })
+  },
+  mounted: function mounted() {
+    if (this.menuData != null) {
+      this.$store.dispatch('initMenu', this.menuData);
+    } else {
+      console.log('no data set');
+    }
   }
 });
 
@@ -37599,6 +37607,9 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_0__["default"].Store({
     }
   },
   mutations: {
+    setMenu: function setMenu(state, menu) {
+      Vue.set(state, 'menu', menu);
+    },
     addCategoryToMenu: function addCategoryToMenu(state, cat) {
       var menu = this.state.menu;
       var category = {
@@ -37627,6 +37638,22 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_0__["default"].Store({
       var menu = this.state.menu;
       menu[catID].products.splice(productID, 1);
       Vue.set(state, 'menu', menu);
+    }
+  },
+  actions: {
+    initMenu: function initMenu(state, data) {
+      var menu = data.map(function (menu_category, index) {
+        var products = menu_category.menu_products.map(function (menu_product) {
+          return menu_product.product;
+        });
+        console.log(products);
+        return {
+          id: menu_category.category_id,
+          name: menu_category.category.name,
+          products: products
+        };
+      });
+      state.commit('setMenu', menu);
     }
   }
 });

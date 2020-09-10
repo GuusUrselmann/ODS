@@ -8,6 +8,8 @@ use App\MenuProduct;
 
 class MenuCategory extends Model
 {
+    protected $fillable = ['position', 'menu_id', 'category_id'];
+
     public function category() {
         return $this->belongsTo(Category::class);
     }

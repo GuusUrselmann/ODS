@@ -81,6 +81,7 @@
         props: {
             categoriesData: null,
             productsData: null,
+            menuData: null,
         },
         methods: {
             addCategory() {
@@ -125,6 +126,15 @@
             },
             asset() {
                 return asset();
+            }
+        },
+        mounted() {
+            if(this.menuData != null) {
+                this.$store.dispatch('initMenu', this.menuData)
+
+            }
+            else {
+                console.log('no data set')
             }
         },
     }
