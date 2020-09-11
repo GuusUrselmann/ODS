@@ -1,6 +1,10 @@
 <?php
 
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Mollie\Laravel\Facades\Mollie;
 use App\Order;
 
 class MollieWebhookController extends Controller {
