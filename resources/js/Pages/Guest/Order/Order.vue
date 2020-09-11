@@ -183,13 +183,8 @@
                                      <div class="tab-pane fade show active" id="v-pills-ideal" role="tabpanel" aria-labelledby="v-pills-ideal-tab">
                                         <h6 class="mb-3 mt-0 mb-3">iDEAL</h6>
                                        <div class="form-row">
-
-                                          <!-- <div class="form-group col-md-8">
-                                             <label>Bank</label>
-                                             <Select2 :options="[{id:'rabobank',text:'Rabobank'},{id:'cash',text:'Contant'}]" :settings="{minimumResultsForSearch:999}"/>
-                                          </div> -->
                                           <div class="form-group col-md-12 mb-0">
-                                             <!-- <button class="btn btn-success btn-block btn-lg">BESTELLING PLAATSEN</button> -->
+                                             <button class="btn btn-success btn-block btn-lg">BESTELLING PLAATSEN</button>
                                           </div>
                                        </div>
                                      </div>

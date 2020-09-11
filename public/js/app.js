@@ -2391,11 +2391,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -46955,9 +46950,23 @@ var render = function() {
                                     ),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "form-row" }, [
-                                      _c("div", {
-                                        staticClass: "form-group col-md-12 mb-0"
-                                      })
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "form-group col-md-12 mb-0"
+                                        },
+                                        [
+                                          _c(
+                                            "button",
+                                            {
+                                              staticClass:
+                                                "btn btn-success btn-block btn-lg"
+                                            },
+                                            [_vm._v("BESTELLING PLAATSEN")]
+                                          )
+                                        ]
+                                      )
                                     ])
                                   ]
                                 ),

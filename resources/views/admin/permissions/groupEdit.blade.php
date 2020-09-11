@@ -33,6 +33,16 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="form-group form-inline col-12">
+                                <label>Naam</label>
+                                <select class="menu-select" name="menu" required>
+                                    @foreach($permissions as $permission)
+                                    <option value="{{ $permission->id }}" {{ $group->hasPermission($permission->id) ? 'selected' : '' }}>{{ $permission->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                         <div class="col-2 float-right">
                             <button type="submit" form="formGroupEdit" class="form-group-edit-submit btn btn-success mb-2">Bewerken</button>
                         </div>

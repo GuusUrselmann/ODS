@@ -68,21 +68,57 @@ class GuestHomeController extends Controller
                 'contact_information_id' => $contact_information->id,
                 'uuid' => $order_uuid
             ]);
+            foreach(Cart::getContent() as $cart_item) {
+                OrderProduct::create([
+                    'quantity' => $cart_item->quantity,
+                    'order_id' => $order->id,
+                    'product_id' => $cart_item->attributes['product_id'],
+                ]);
+            }
             Cart::clear();
-            return redirect(url('/bedankt'))->with('order_id', $order->id);
+            return redirect(url('/bedankt/'.$order_uuid));
         }
         elseif($request->input('payment_method') == 'iDEAL') {
+            $order_uuid = Str::random(8);
+            $next_order_id = Order::latest('id')->first() ? Order::latest('id')->first()->id + 1 : 1;
             $payment = Mollie::api()->payments->create([
                 "amount" => [
                     "currency" => "EUR",
                     "value" => strval(number_format(Cart::getTotal(),2)) // You must send the correct number of decimals, thus we enforce the use of strings
                 ],
                 "description" => "Bestelling ODS #".$next_order_id,
-                "redirectUrl" => url('bestelling/'.$order_uuid),
+                "redirectUrl" => url('bedankt/'.$order_uuid),
+                'webhookUrl'   => url('webhooks/mollie'),
                 "metadata" => [
                     "order_id" => $next_order_id,
                 ],
             ]);
+            dd($payment);
+            $contact_information = ContactInformation::create([
+                'street_name' => $request->input('streetname'),
+                'house_number' => $request->input('housenumber'),
+                'zipcode' => $request->input('zipcode'),
+                'city' => $request->input('city'),
+                'email' => $request->input('email'),
+            ]);
+            $order = Order::create([
+                'amount' => Cart::getTotal(),
+                'order_datetime' => Carbon::now(),
+                'user_id' => 1,
+                'status' => 'in_process',
+                'payment_method' => $request->input('payment_method'),
+                'paid' => false,
+                'contact_information_id' => $contact_information->id,
+                'uuid' => $order_uuid
+            ]);
+            foreach(Cart::getContent() as $cart_item) {
+                OrderProduct::create([
+                    'quantity' => $cart_item->quantity,
+                    'order_id' => $order->id,
+                    'product_id' => $cart_item->attributes['product_id'],
+                ]);
+            }
+            Cart::clear();
             return redirect($payment->getCheckoutUrl(), 303);
         }
 
@@ -132,8 +168,8 @@ class GuestHomeController extends Controller
         // return redirect($payment->getCheckoutUrl(), 303);
     }
 
-    public function thanks() {
-        $order = Order::find(session('order_id'));
+    public function thanks($uuid) {
+        $order = Order::where('uuid', $uuid)->first();
         if(!$order) {
             return redirect(url('/home'));
         }

@@ -21,7 +21,7 @@ Route::group(['prefix' => '/'], function () {
     Route::get('/bestellen', 'Guest\GuestHomeController@order');
     Route::post('/bestellen', 'Guest\GuestHomeController@placeOrder');
     Route::get('/bestelling/volgen/{uuid}', 'Guest\GuestHomeController@trackOrder');
-    Route::get('/bedankt', 'Guest\GuestHomeController@thanks');
+    Route::get('/bedankt/{uuid}', 'Guest\GuestHomeController@thanks');
 });
 
 
@@ -140,4 +140,8 @@ Route::group(['prefix' => '/api'], function () {
     Route::post('/removeproductfromcart', 'APIController@removeProductFromCart');
     Route::post('/updateproductquantityincart', 'APIController@updateProductQuantityInCart');
     Route::post('/orderlist', 'APIController@orderList');
+});
+
+Route::group(['prefix' => '/webhooks'], function() {
+    Route::post('/mollie', 'MollieWebhookController@handle');
 });
