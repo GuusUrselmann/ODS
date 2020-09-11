@@ -93,7 +93,7 @@ class GuestHomeController extends Controller
                     "order_id" => $next_order_id,
                 ],
             ]);
-            dd($payment->metadata['order_id']);
+            dd($payment->metadata);
             $contact_information = ContactInformation::create([
                 'street_name' => $request->input('streetname'),
                 'house_number' => $request->input('housenumber'),
