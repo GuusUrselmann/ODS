@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 @section('title', 'Gebruiker permissies')
 @section('content_header')
-    <h1>Gebruiker Permissies</h1>
+    <h1>Gebruikers Rechten</h1>
 @stop
 @section('content')
     <div class="row">
@@ -18,7 +18,7 @@
                                 <th>Voornaam</th>
                                 <th>Achternaam</th>
                                 <th>Type</th>
-                                <th>Permissie Groep</th>
+                                <th>Rechten Groep</th>
                                 <th>Acties</th>
                             </tr>
                         </thead>

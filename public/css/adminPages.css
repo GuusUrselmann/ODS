@@ -158,3 +158,22 @@
   height: calc(2.25rem) !important;
 }
 
+.options-add {
+  position: relative;
+}
+
+.options-add #addOptionButton {
+  position: absolute;
+  right: -30px;
+}
+
+.options-field .option {
+  position: relative;
+}
+
+.options-field .option .removeOptionButton {
+  position: absolute;
+  right: -30px;
+  top: 5px;
+}
+

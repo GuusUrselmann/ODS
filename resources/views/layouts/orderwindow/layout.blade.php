@@ -12,7 +12,7 @@
             return '<?= url('') ?>';
         }
     </script>
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/appOrderWindow.js') }}" defer></script>
     {{-- Fonts --}}
     <link href="{{ asset('fonts/fontawesome-free-5.13.1-web/css/all.min.css') }}" rel="stylesheet" type="text/css" >
     {{-- Styles --}}

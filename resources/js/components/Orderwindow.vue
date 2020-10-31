@@ -1,6 +1,6 @@
 <template>
     <div class="container-fluid orderwindow p-0">
-        <nav class="orderwindow-header navbar navbar-expand-lg sticky-top navbar-light bg-primary shadow-sm">
+        <nav class="orderwindow-header navbar navbar-expand-lg sticky-top navbar-light bg-dark shadow-sm">
             <div class="container-fluid">
                 <a class="navbar-brand float-left text-white" :href="url+'/admin/dashboard'">
                     <h5><i class="fas fa-arrow-left"></i> Terug</h5>

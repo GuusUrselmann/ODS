@@ -20,4 +20,8 @@ class Order extends Model
     public function user() {
         return $this->belongsTo(User::class)->first();
     }
+
+    public function contactInformation() {
+        return $this->belongsTo(ContactInformation::class);
+    }
 }

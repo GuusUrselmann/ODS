@@ -21,6 +21,12 @@
   font-size: 14px;
 }
 
+.product-price {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
+
 .banner {
   height: 425px;
 }

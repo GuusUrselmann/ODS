@@ -15,20 +15,16 @@ class CreateCouponcodesTable extends Migration
     {
         Schema::create('couponcodes', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('branch_id')->unsigned();
             $table->string('code');
-            $table->integer('amount')->unsigned();
-            $table->date('active_from');
-            $table->date('active_till');
+            $table->decimal('amount')->unsigned();
+            $table->date('active_from')->nullable();
+            $table->date('active_till')->nullable();
             $table->enum('type', ['delivery', 'takeaway', 'both']);
             $table->enum('sort', ['percentage', 'amount']);
-            $table->integer('min_amount_spent')->nullable();
-            $table->boolean('one_off');
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->decimal('min_amount_spent')->nullable();
+            $table->boolean('one_off')->nullable();
             $table->timestamps();
-            $table->softDeletes();
 
-            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
         });
     }
 

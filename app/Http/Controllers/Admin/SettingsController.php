@@ -15,7 +15,11 @@ class SettingsController extends Controller
     public function __construct() {
     }
 
-    public function overview() {
+    public function general() {
         return view('admin.settings.settings');
+    }
+
+    public function openinghours() {
+        return view('admin.settings.openinghours');
     }
 }

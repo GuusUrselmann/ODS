@@ -152,3 +152,22 @@
 .select2-selection__arrow {
     height: calc(2.25rem)!important;
 }
+
+.options-add {
+    position: relative;
+    #addOptionButton {
+        position: absolute;
+        right: -30px;
+    }
+}
+.options-field {
+    .option {
+        position: relative;
+        .removeOptionButton {
+            position: absolute;
+            right: -30px;
+            top: 5px;
+        }
+    }
+
+}

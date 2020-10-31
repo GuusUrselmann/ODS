@@ -325,6 +325,11 @@ return [
             'icon'    => 'fas fa-fw fa-utensils',
         ],
         [
+            'text'    => 'Standaard Extra\'s',
+            'url'  => 'admin/standaard-extras/',
+            'icon'    => 'fas fa-fw fa-utensils',
+        ],
+        [
             'text'    => 'Categorieën',
             'url'  => 'admin/categorieen/',
             'icon'    => 'fas fa-fw fa-list-ol',
@@ -345,11 +350,11 @@ return [
             'url'  => 'admin/orderwindow/',
             'icon'    => 'fas fa-fw fa-hamburger',
         ],
-        // [
-        //     'text'    => 'Couponcodes',
-        //     'url'  => 'admin/couponcodes/',
-        //     'icon'    => 'fas fa-fw fa-ticket-alt',
-        // ],
+        [
+            'text'    => 'Couponcodes',
+            'url'  => 'admin/couponcodes/',
+            'icon'    => 'fas fa-fw fa-ticket-alt',
+        ],
 
         ['header' => 'KLANTEN'],
         [
@@ -374,23 +379,32 @@ return [
         //     'icon'    => 'fas fa-fw fa-network-wired',
         // ],
         [
-            'text'    => 'Permissies',
+            'text'    => 'Rechten',
             'icon'    => 'fas fa-fw fa-key',
             'submenu' => [
                 [
                     'text' => 'Groepen',
-                    'url'  => 'admin/permissies/groepen',
+                    'url'  => 'admin/rechten/groepen',
                 ],
                 [
                     'text' => 'Gebruikers',
-                    'url'  => 'admin/permissies/gebruikers',
+                    'url'  => 'admin/rechten/gebruikers',
                 ],
             ],
         ],
         [
             'text'    => 'Instellingen',
-            'url'  => 'admin/instellingen/',
             'icon'    => 'fas fa-fw fa-cog',
+            'submenu' => [
+                [
+                    'text' => 'Algemeen',
+                    'url'  => 'admin/instellingen',
+                ],
+                [
+                    'text' => 'Openingstijden',
+                    'url'  => 'admin/instellingen/openingstijden',
+                ],
+            ],
         ],
 
     ],

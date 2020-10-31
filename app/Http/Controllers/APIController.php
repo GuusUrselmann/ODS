@@ -85,9 +85,19 @@ class APIController extends Controller
     }
 
     public function orderList(Request $request) {
-        $orders = Order::with('order_products')->get();
+        $orders = Order::with('order_products','contactInformation')->get();
         return [
             'orders' => $orders
+        ];
+    }
+
+    public function setOrderStatus(Request $request) {
+        $order = Order::find($request->order_id);
+        $order->update([
+            'status' => $request->order_status
+        ]);
+        return [
+            'order' => $order
         ];
     }
 }

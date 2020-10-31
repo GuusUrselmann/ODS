@@ -5,5 +5,6 @@
     "/css/adminPages.css": "/css/adminPages.css",
     "/css/guestPages.css": "/css/guestPages.css",
     "/css/orderwindow.css": "/css/orderwindow.css",
-    "/js/appAdmin.js": "/js/appAdmin.js"
+    "/js/appAdmin.js": "/js/appAdmin.js",
+    "/js/appOrderWindow.js": "/js/appOrderWindow.js"
 }

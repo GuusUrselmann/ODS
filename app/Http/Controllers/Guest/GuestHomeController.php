@@ -8,6 +8,7 @@ use Mollie\Laravel\Facades\Mollie;
 use Inertia\Inertia;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use Validator;
 use App\Menu;
 use App\Order;
 use App\OrderProduct;
@@ -49,6 +50,17 @@ class GuestHomeController extends Controller
     }
 
     public function placeOrder(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'streetname' => 'required',
+            'housenumber' => 'required',
+            'zipcode' => 'postal_code:NL',
+            'city' => 'required',
+            'payment_method' => 'in:iDEAL,cash',
+        ]);
+        if($validator->fails()) {
+            $errors = $validator->errors();
+            return redirect(url('/bestellen'))->with('errors', $errors);
+        }
         if($request->input('payment_method') == 'cash') {
             $order_uuid = Str::random(8);
             $contact_information = ContactInformation::create([
@@ -62,7 +74,8 @@ class GuestHomeController extends Controller
                 'amount' => Cart::getTotal(),
                 'order_datetime' => Carbon::now(),
                 'user_id' => 1,
-                'status' => 'in_process',
+                'status' => 'received',
+                'type' => 'takeaway',
                 'payment_method' => $request->input('payment_method'),
                 'paid' => true,
                 'contact_information_id' => $contact_information->id,
@@ -104,9 +117,11 @@ class GuestHomeController extends Controller
                 'amount' => Cart::getTotal(),
                 'order_datetime' => Carbon::now(),
                 'user_id' => 1,
-                'status' => 'in_process',
+                'status' => 'received',
+                'type' => 'takeaway',
                 'payment_method' => $request->input('payment_method'),
                 'paid' => false,
+                'mollie_payment_id' => $payment->id,
                 'contact_information_id' => $contact_information->id,
                 'uuid' => $order_uuid
             ]);
@@ -178,7 +193,7 @@ class GuestHomeController extends Controller
     }
 
     public function trackOrder($uuid) {
-        $order = Order::where('uuid', $uuid)->first();
+        $order = Order::where('uuid', $uuid)->with('contactInformation')->first();
         return Inertia::render('Guest/Order/Track', [
             'order' => $order,
         ]);

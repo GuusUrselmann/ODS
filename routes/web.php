@@ -57,6 +57,15 @@ Route::group(['prefix' => '/admin'], function () {
         Route::get('/verwijderen/{id}', 'Admin\MenusController@delete');
     });
 
+    Route::group(['prefix' => '/standaard-extras'], function () {
+        Route::get('/', 'Admin\StandardExtrasController@standardextras');
+        Route::get('/toevoegen', 'Admin\StandardExtrasController@add');
+        Route::post('/toevoegen', 'Admin\StandardExtrasController@save');
+        Route::get('/bewerken/{id}', 'Admin\StandardExtrasController@edit');
+        Route::post('/bewerken/{id}', 'Admin\StandardExtrasController@update');
+        Route::get('/verwijderen/{id}', 'Admin\StandardExtrasController@delete');
+    });
+
     Route::group(['prefix' => '/bestellingen'], function () {
         Route::get('/', 'Admin\OrdersController@orders');
         Route::get('/toevoegen', 'Admin\OrdersController@add');
@@ -79,7 +88,7 @@ Route::group(['prefix' => '/admin'], function () {
         Route::get('/verwijderen/{id}', 'Admin\UsersController@delete');
     });
 
-    Route::group(['prefix' => '/permissies'], function () {
+    Route::group(['prefix' => '/rechten'], function () {
         Route::get('/', 'Admin\PermissionsController@groups');
         Route::get('/groepen', 'Admin\PermissionsController@groups');
         Route::get('/groepen/toevoegen', 'Admin\PermissionsController@groupAdd');
@@ -91,7 +100,9 @@ Route::group(['prefix' => '/admin'], function () {
     });
 
     Route::group(['prefix' => '/instellingen'], function () {
-        Route::get('/', 'Admin\SettingsController@overview');
+        Route::get('/', 'Admin\SettingsController@general');
+        Route::get('/algemeen', 'Admin\SettingsController@general');
+        Route::get('/openingstijden', 'Admin\SettingsController@openinghours');
     });
 
     Route::group(['prefix' => '/couponcodes'], function () {
@@ -140,6 +151,7 @@ Route::group(['prefix' => '/api'], function () {
     Route::post('/removeproductfromcart', 'APIController@removeProductFromCart');
     Route::post('/updateproductquantityincart', 'APIController@updateProductQuantityInCart');
     Route::post('/orderlist', 'APIController@orderList');
+    Route::post('/setorderstatus', 'APIController@setOrderStatus');
 });
 
 Route::group(['prefix' => '/webhooks'], function() {

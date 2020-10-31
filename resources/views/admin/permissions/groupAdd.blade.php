@@ -2,7 +2,7 @@
 @section('title', 'Permissie groep aanmaken')
 @section('plugins.Select2', true)
 @section('content_header')
-    <h1>Nieuwe Permissie Groep</h1>
+    <h1>Nieuwe Rechten Groep</h1>
 @stop
 @section('content')
     <div class="row">
@@ -22,14 +22,14 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-sm-9 col-12">
-                                <label>Permissies</label>
+                                <label>Rechten</label>
                                 <select class="permissions-select" multiple="multiple" name="permissions[]" required>
                                     @foreach($permissions as $permission)
                                     <option value="{{ $permission->id }}">{{ $permission->name }}</option>
                                     @endforeach
                                 </select>
                                 <div class="invalid-feedback">
-                                    Vul a.u.b. geldige permissies in.
+                                    Vul a.u.b. geldige rechten in.
                                 </div>
                             </div>
                         </div>

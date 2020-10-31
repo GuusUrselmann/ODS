@@ -10,7 +10,7 @@ use App\Order;
 class OrderwindowController extends Controller
 {
     public function orderwindow() {
-        $orders = Order::with('order_products')->get();
+        $orders = Order::with('order_products','contactInformation')->get();
         return view('admin.orderwindow.orderwindow', compact('orders'));
     }
 }

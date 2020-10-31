@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\CategoryProduct;
+use App\ProductStandardExtra;
+use App\ProductExtra;
 
 class Product extends Model
 {
@@ -24,5 +26,19 @@ class Product extends Model
             }
         }
         return false;
+    }
+
+    public function options() {
+        $standard_extras = $this->standardExtras()->with('standardExtra.options')->get()->pluck('standardExtra');
+        $extra_options = $this->extraOptions()->with('options')->get();
+        return collect()->merge($standard_extras)->merge($extra_options);
+    }
+
+    public function standardExtras() {
+        return $this->hasMany(ProductStandardExtra::class);
+    }
+
+    public function extraOptions() {
+        return $this->hasMany(ProductExtra::class);
     }
 }

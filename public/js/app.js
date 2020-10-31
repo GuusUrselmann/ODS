@@ -2027,6 +2027,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -46459,7 +46460,34 @@ var render = function() {
                                 },
                                 [_vm._v("ADD")]
                               )
-                            ])
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              {
+                                staticClass:
+                                  "badge rounded product-price badge-info p-1 pl-2 pr-2"
+                              },
+                              [
+                                _c(
+                                  "span",
+                                  {
+                                    staticClass: "font-weight-bold text-white",
+                                    staticStyle: { "font-size": "13px" }
+                                  },
+                                  [_vm._v("€")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "span",
+                                  {
+                                    staticClass:
+                                      "h6 font-weight-bold text-white"
+                                  },
+                                  [_vm._v(_vm._s(menu_product.product.price))]
+                                )
+                              ]
+                            )
                           ]
                         )
                       ]

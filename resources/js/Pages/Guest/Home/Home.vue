@@ -31,6 +31,7 @@
                                             <p class="text-secondary mb-0">{{menu_product.product.description}}</p>
                                             <div class="btn btn-outline-secondary btn-sm float-right" v-on:click="addProduct(menu_product.product.id)">ADD</div>
                                         </div>
+                                        <span class="badge rounded product-price badge-info p-1 pl-2 pr-2"><span class="font-weight-bold text-white" style="font-size: 13px">€</span> <span class="h6 font-weight-bold text-white">{{menu_product.product.price}}</span></span>
                                     </div>
                                 </div>
                             </div>
