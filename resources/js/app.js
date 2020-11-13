@@ -39,11 +39,15 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
     state: {
         cart: {},
+        conditions: {},
         amount: 0
     },
     getters: {
         getCart(state) {
             return state.cart
+        },
+        getConditions(state) {
+            return state.conditions
         },
         getAmount(state) {
             return state.amount
@@ -56,6 +60,7 @@ const store = new Vuex.Store({
             })
             .then(response => {
                 state.commit('updateCart', response.data.cart)
+                state.commit('updateConditions', response.data.conditions)
                 state.commit('updateAmount', response.data.amount)
             })
             .catch(error => {
@@ -66,6 +71,9 @@ const store = new Vuex.Store({
     mutations: {
         updateCart (state, data) {
             Vue.set(state,'cart', data)
+        },
+        updateConditions (state, data) {
+            Vue.set(state,'conditions', data)
         },
         updateAmount (state, data) {
             Vue.set(state,'amount', data)

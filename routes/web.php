@@ -152,6 +152,7 @@ Route::group(['prefix' => '/api'], function () {
     Route::post('/updateproductquantityincart', 'APIController@updateProductQuantityInCart');
     Route::post('/orderlist', 'APIController@orderList');
     Route::post('/setorderstatus', 'APIController@setOrderStatus');
+    Route::post('addCouponcode', 'APIController@addCouponcodeToCart');
 });
 
 Route::group(['prefix' => '/webhooks'], function() {

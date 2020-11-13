@@ -1938,6 +1938,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_owl_carousel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-owl-carousel */ "./node_modules/vue-owl-carousel/dist/vue-owl-carousel.js");
 /* harmony import */ var vue_owl_carousel__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_owl_carousel__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _Layouts_Guest_Layout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Layouts/Guest/Layout */ "./resources/js/Pages/Layouts/Guest/Layout.vue");
+/* harmony import */ var v_select2_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! v-select2-component */ "./node_modules/v-select2-component/dist/Select2.esm.js");
 //
 //
 //
@@ -2028,42 +2029,158 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Layout: _Layouts_Guest_Layout__WEBPACK_IMPORTED_MODULE_2__["default"],
-    Carousel: vue_owl_carousel__WEBPACK_IMPORTED_MODULE_1___default.a
+    Carousel: vue_owl_carousel__WEBPACK_IMPORTED_MODULE_1___default.a,
+    Select2: v_select2_component__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   props: {
     menu: null
   },
+  data: function data() {
+    return {
+      modalExtraOptions: null
+    };
+  },
   methods: {
-    addProduct: function addProduct(productId) {
+    addProduct: function addProduct(product) {
       var _this = this;
 
+      if (product.extra_options.concat(product.standard_extras).length) {
+        //launch extra options modal before adding to cart
+        $("#productExtraOptionsModal").modal('toggle');
+        this.modalExtraOptions = product;
+      } else {
+        //No extra options, just add to cart
+        axios.post(url() + '/api/addproducttocart', {
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          product_id: product.id
+        }).then(function (response) {
+          _this.$store.commit('updateCart', response.data.cart);
+
+          _this.$store.commit('updateAmount', response.data.amount);
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      }
+    },
+    addProductWithOptions: function addProductWithOptions() {
+      var _this2 = this;
+
+      $("#productExtraOptionsModal").modal('toggle');
+      var selected_options = [];
+      $('.modal-product-options .extra-option').each(function (i, v) {
+        if ($(v).find('select')[0]) {
+          //type is dropdown
+          if ($(v).find('select')[0].value != '') {
+            if ($(v).hasClass('standard-extra')) {
+              //standard extra
+              //value = standard_extras table id
+              selected_options.push({
+                'type': 'standard_extra',
+                'id': $(v).data("id"),
+                'value': $(v).find('select')[0].value
+              });
+            } else {
+              //extra option
+              //value = extra_options table id
+              selected_options.push({
+                'type': 'extra_option',
+                'id': $(v).data("id"),
+                'value': $(v).find('select')[0].value
+              });
+            }
+          }
+        } else {
+          //type is multiple
+          if ($(v).find("input[name='extra_options']:checked").length != 0) {
+            if ($(v).hasClass('standard-extra')) {
+              //standard extra
+              var optionsSelected = [];
+              $.each($(v).find("input[name='extra_options']:checked"), function () {
+                optionsSelected.push($(this).val());
+              });
+              selected_options.push({
+                'type': 'standard_extra',
+                'id': $(v).data("id"),
+                'value': optionsSelected
+              });
+            } else {
+              //extra option
+              var optionsSelected = [];
+              $.each($(v).find("input[name='extra_options']:checked"), function () {
+                optionsSelected.push($(this).val());
+              });
+              selected_options.push({
+                'type': 'extra_option',
+                'id': $(v).data("id"),
+                'value': optionsSelected
+              });
+            }
+          }
+        }
+      });
       axios.post(url() + '/api/addproducttocart', {
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        product_id: productId
-      }).then(function (response) {
-        _this.$store.commit('updateCart', response.data.cart);
-
-        _this.$store.commit('updateAmount', response.data.amount);
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    removeProduct: function removeProduct(rowId) {
-      var _this2 = this;
-
-      axios.post(url() + '/api/removeproductfromcart', {
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        row_id: rowId
+        product_id: this.modalExtraOptions.id,
+        extra_options: selected_options
       }).then(function (response) {
         _this2.$store.commit('updateCart', response.data.cart);
 
@@ -2072,8 +2189,24 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       });
     },
-    updateProductQuantity: function updateProductQuantity(rowId, amount) {
+    removeProduct: function removeProduct(rowId) {
       var _this3 = this;
+
+      axios.post(url() + '/api/removeproductfromcart', {
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        row_id: rowId
+      }).then(function (response) {
+        _this3.$store.commit('updateCart', response.data.cart);
+
+        _this3.$store.commit('updateAmount', response.data.amount);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    updateProductQuantity: function updateProductQuantity(rowId, amount) {
+      var _this4 = this;
 
       axios.post(url() + '/api/updateproductquantityincart', {
         headers: {
@@ -2082,9 +2215,9 @@ __webpack_require__.r(__webpack_exports__);
         row_id: rowId,
         quantity: amount
       }).then(function (response) {
-        _this3.$store.commit('updateCart', response.data.cart);
+        _this4.$store.commit('updateCart', response.data.cart);
 
-        _this3.$store.commit('updateAmount', response.data.amount);
+        _this4.$store.commit('updateAmount', response.data.amount);
       })["catch"](function (error) {
         console.log(error);
       });
@@ -2093,6 +2226,9 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     cart: function cart() {
       return this.$store.getters.getCart;
+    },
+    conditions: function conditions() {
+      return this.$store.getters.getConditions;
     },
     amount: function amount() {
       return this.$store.getters.getAmount;
@@ -2392,6 +2528,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2413,8 +2561,28 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    removeProduct: function removeProduct(rowId) {
+    addCoupon: function addCoupon() {
       var _this = this;
+
+      var coupon_input = $('#couponcode')[0].value;
+
+      if (coupon_input) {
+        axios.post(url() + '/api/addCouponcode', {
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          code: coupon_input
+        }).then(function (response) {
+          console.log(response.data);
+          _this.cartItems = response.data.cart;
+          _this.cartAmount = response.data.amount;
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      }
+    },
+    removeProduct: function removeProduct(rowId) {
+      var _this2 = this;
 
       axios.post(url() + '/api/removeproductfromcart', {
         headers: {
@@ -2422,14 +2590,14 @@ __webpack_require__.r(__webpack_exports__);
         },
         row_id: rowId
       }).then(function (response) {
-        _this.cartItems = response.data.cart;
-        _this.cartAmount = response.data.amount;
+        _this2.cartItems = response.data.cart;
+        _this2.cartAmount = response.data.amount;
       })["catch"](function (error) {
         console.log(error);
       });
     },
     updateProductQuantity: function updateProductQuantity(rowId, amount) {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.post(url() + '/api/updateproductquantityincart', {
         headers: {
@@ -2438,8 +2606,8 @@ __webpack_require__.r(__webpack_exports__);
         row_id: rowId,
         quantity: amount
       }).then(function (response) {
-        _this2.cartItems = response.data.cart;
-        _this2.cartAmount = response.data.amount;
+        _this3.cartItems = response.data.cart;
+        _this3.cartAmount = response.data.amount;
       })["catch"](function (error) {
         console.log(error);
       });
@@ -46453,7 +46621,7 @@ var render = function() {
                                   on: {
                                     click: function($event) {
                                       return _vm.addProduct(
-                                        menu_product.product.id
+                                        menu_product.product
                                       )
                                     }
                                   }
@@ -46576,7 +46744,11 @@ var render = function() {
                         staticClass:
                           "col-3 cart-product-price p-0 text-right pr-2"
                       },
-                      [_vm._v("€" + _vm._s(cart_item.price.toFixed(2)))]
+                      [
+                        _c("b", [
+                          _vm._v("€" + _vm._s(cart_item.price.toFixed(2)))
+                        ])
+                      ]
                     ),
                     _vm._v(" "),
                     _c(
@@ -46591,8 +46763,44 @@ var render = function() {
                         }
                       },
                       [_c("i", { staticClass: "fas fa-times" })]
-                    )
-                  ]
+                    ),
+                    _vm._v(" "),
+                    _vm._l(cart_item.attributes.extra_options, function(
+                      extra_option
+                    ) {
+                      return _c("div", { staticClass: "col-12 p-0" }, [
+                        _c(
+                          "div",
+                          { staticClass: "col-12 p-0" },
+                          _vm._l(extra_option.name.split(","), function(
+                            extra_option_name,
+                            i
+                          ) {
+                            return _c(
+                              "div",
+                              { staticClass: "col-10 offset-2 p-0" },
+                              [
+                                i == 0
+                                  ? _c("b", [
+                                      _vm._v(
+                                        "-" + _vm._s(extra_option.option) + ":"
+                                      )
+                                    ])
+                                  : _vm._e(),
+                                _c(
+                                  "span",
+                                  { staticClass: "float-right pr-2" },
+                                  [_vm._v(_vm._s(extra_option_name))]
+                                )
+                              ]
+                            )
+                          }),
+                          0
+                        )
+                      ])
+                    })
+                  ],
+                  2
                 )
               }),
               0
@@ -46608,23 +46816,42 @@ var render = function() {
             _vm._v(" "),
             !_vm.cartEmpty
               ? _c("div", { staticClass: "cart-amount bg-white" }, [
-                  _c("div", { staticClass: "mb-2 rounded p-2 clearfix" }, [
-                    _c("img", {
-                      staticClass: "img-fluid float-left",
-                      attrs: { src: "images/site/wallet-icon.png" }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "h6",
-                      { staticClass: "font-weight-bold text-right mb-2" },
-                      [
-                        _vm._v("Totaal : "),
-                        _c("span", { staticClass: "text-danger" }, [
-                          _vm._v("€" + _vm._s(_vm.amount.toFixed(2)))
+                  _c(
+                    "div",
+                    { staticClass: "mb-2 rounded p-2 clearfix" },
+                    [
+                      _vm._l(_vm.conditions, function(condition) {
+                        return _c("div", { staticClass: "condition row" }, [
+                          _c("div", { staticClass: "col-6 offset-6 p-0" }, [
+                            _c("h6", [
+                              _c("b", [_vm._v(_vm._s(condition.name))])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "text-right" }, [
+                              _c("b", [_vm._v(_vm._s(condition.value))])
+                            ])
+                          ])
                         ])
-                      ]
-                    )
-                  ]),
+                      }),
+                      _vm._v(" "),
+                      _c("img", {
+                        staticClass: "img-fluid float-left",
+                        attrs: { src: "images/site/wallet-icon.png" }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "h6",
+                        { staticClass: "font-weight-bold text-right mb-2" },
+                        [
+                          _vm._v("Totaal : "),
+                          _c("span", { staticClass: "text-danger" }, [
+                            _vm._v("€" + _vm._s(_vm.amount.toFixed(2)))
+                          ])
+                        ]
+                      )
+                    ],
+                    2
+                  ),
                   _vm._v(" "),
                   _c(
                     "div",
@@ -46672,7 +46899,255 @@ var render = function() {
           1
         )
       ])
-    ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal modal-product-options",
+        attrs: {
+          tabindex: "-1",
+          role: "dialog",
+          id: "productExtraOptionsModal"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-header" }, [
+                _vm._v(
+                  "\n                    Kies uw type extra opties\n                "
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _vm.modalExtraOptions
+                  ? _c(
+                      "div",
+                      { staticClass: "extra-options" },
+                      _vm._l(
+                        _vm.modalExtraOptions.standard_extras.concat(
+                          _vm.modalExtraOptions.extra_options
+                        ),
+                        function(extra_option, index) {
+                          return _c("div", { staticClass: "form-row" }, [
+                            extra_option.standard_extra_id
+                              ? _c(
+                                  "div",
+                                  { staticClass: "form-group col-6" },
+                                  [
+                                    _c("label", [
+                                      _c("b", [
+                                        _vm._v(
+                                          _vm._s(
+                                            extra_option.standard_extra.name
+                                          )
+                                        )
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    extra_option.standard_extra.type ==
+                                    "dropdown"
+                                      ? _c("Select2", {
+                                          staticClass:
+                                            "extra-option standard-extra",
+                                          attrs: {
+                                            "data-id":
+                                              extra_option.standard_extra.id,
+                                            options: extra_option.standard_extra.options.map(
+                                              function(option) {
+                                                return {
+                                                  id: option.id,
+                                                  text:
+                                                    option.name +
+                                                    " (+ €" +
+                                                    option.extra_amount +
+                                                    ")"
+                                                }
+                                              }
+                                            ),
+                                            settings: {
+                                              minimumResultsForSearch: 99
+                                            }
+                                          }
+                                        })
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    extra_option.standard_extra.type ==
+                                    "multiple"
+                                      ? _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "options extra-option standard-extra",
+                                            attrs: {
+                                              "data-id": extra_option.id
+                                            }
+                                          },
+                                          _vm._l(
+                                            extra_option.standard_extra.options,
+                                            function(option) {
+                                              return _c(
+                                                "div",
+                                                { staticClass: "form-check" },
+                                                [
+                                                  _c("input", {
+                                                    staticClass:
+                                                      "form-check-input",
+                                                    attrs: {
+                                                      type: "checkbox",
+                                                      name: "extra_options"
+                                                    },
+                                                    domProps: {
+                                                      value: option.id
+                                                    }
+                                                  }),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "label",
+                                                    {
+                                                      staticClass:
+                                                        "form-check-label"
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        _vm._s(option.name) +
+                                                          " (+ €" +
+                                                          _vm._s(
+                                                            option.extra_amount
+                                                          ) +
+                                                          ")"
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              )
+                                            }
+                                          ),
+                                          0
+                                        )
+                                      : _vm._e()
+                                  ],
+                                  1
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            extra_option.type
+                              ? _c(
+                                  "div",
+                                  { staticClass: "form-group col-6" },
+                                  [
+                                    _c("label", [
+                                      _c("b", [
+                                        _vm._v(_vm._s(extra_option.name))
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    extra_option.type == "dropdown"
+                                      ? _c("Select2", {
+                                          staticClass: "extra-option",
+                                          attrs: {
+                                            "data-id": extra_option.id,
+                                            options: extra_option.options.map(
+                                              function(option) {
+                                                return {
+                                                  id: option.id,
+                                                  text:
+                                                    option.name +
+                                                    " (+ €" +
+                                                    option.extra_amount +
+                                                    ")"
+                                                }
+                                              }
+                                            ),
+                                            settings: {
+                                              minimumResultsForSearch: 99
+                                            }
+                                          }
+                                        })
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    extra_option.type == "multiple"
+                                      ? _c(
+                                          "div",
+                                          {
+                                            staticClass: "options extra-option",
+                                            attrs: {
+                                              "data-id": extra_option.id
+                                            }
+                                          },
+                                          _vm._l(extra_option.options, function(
+                                            option
+                                          ) {
+                                            return _c(
+                                              "div",
+                                              { staticClass: "form-check" },
+                                              [
+                                                _c("input", {
+                                                  staticClass:
+                                                    "form-check-input",
+                                                  attrs: {
+                                                    type: "checkbox",
+                                                    name: "extra_options"
+                                                  },
+                                                  domProps: { value: option.id }
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "label",
+                                                  {
+                                                    staticClass:
+                                                      "form-check-label"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      _vm._s(option.name) +
+                                                        " (+ €" +
+                                                        _vm._s(
+                                                          option.extra_amount
+                                                        ) +
+                                                        ")"
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          }),
+                                          0
+                                        )
+                                      : _vm._e()
+                                  ],
+                                  1
+                                )
+                              : _vm._e()
+                          ])
+                        }
+                      ),
+                      0
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-sm btn-success mt-3 mb-2 float-right",
+                    on: {
+                      click: function($event) {
+                        return _vm.addProductWithOptions()
+                      }
+                    }
+                  },
+                  [_vm._v("Aan winkelwagen toevoegen")]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = []
@@ -46865,6 +47340,46 @@ var render = function() {
                                   }
                                 }
                               })
+                            ])
+                          ])
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "pt-2" }),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "bg-white rounded shadow-sm p-4 mb-4" },
+                      [
+                        _c("h4", { staticClass: "mb-4" }, [
+                          _vm._v("Heeft U een CouponCode?")
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-row" }, [
+                          _c("div", { staticClass: "form-group col-md-8" }, [
+                            _c("label", { attrs: { for: "order_zipcode" } }, [
+                              _vm._v("Code:")
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "input-group" }, [
+                              _c("input", {
+                                staticClass: "form-control",
+                                attrs: { id: "couponcode", name: "couponcode" }
+                              }),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-success btn-md ml-3",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.addCoupon()
+                                    }
+                                  }
+                                },
+                                [_vm._v("indienen")]
+                              )
                             ])
                           ])
                         ])
@@ -66732,11 +67247,15 @@ Vue.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
 var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   state: {
     cart: {},
+    conditions: {},
     amount: 0
   },
   getters: {
     getCart: function getCart(state) {
       return state.cart;
+    },
+    getConditions: function getConditions(state) {
+      return state.conditions;
     },
     getAmount: function getAmount(state) {
       return state.amount;
@@ -66750,6 +67269,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
         }
       }).then(function (response) {
         state.commit('updateCart', response.data.cart);
+        state.commit('updateConditions', response.data.conditions);
         state.commit('updateAmount', response.data.amount);
       })["catch"](function (error) {
         console.log(error);
@@ -66759,6 +67279,9 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   mutations: {
     updateCart: function updateCart(state, data) {
       Vue.set(state, 'cart', data);
+    },
+    updateConditions: function updateConditions(state, data) {
+      Vue.set(state, 'conditions', data);
     },
     updateAmount: function updateAmount(state, data) {
       Vue.set(state, 'amount', data);

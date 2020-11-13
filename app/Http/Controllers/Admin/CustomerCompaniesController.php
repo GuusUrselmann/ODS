@@ -9,6 +9,10 @@ use App\ContactInformation;
 
 class CustomerCompaniesController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth');
+    }
+    
     public function companies()
     {
         $companies = Company::all();
@@ -44,22 +48,22 @@ class CustomerCompaniesController extends Controller
 
         $company = new Company();
         $contact_information = new ContactInformation();
-        
+
         $contact_information->street_name = request('street_name');
         $contact_information->house_number = request('house_number');
         $contact_information->city = request('city');
         $contact_information->zipcode = request('zipcode');
         $contact_information->phone = request('phone');
-        
+
         $contact_information->save();
-        
+
         $company->name = request('name');
         $company->email = request('email');
         $company->contact_information_id = $contact_information->id;
         $company->legal_number = request('legal_number');
         $company->tax_number = request('tax_number');
         $company->status = request('status');
-        
+
         $company->save();
 
         return redirect('/admin/klanten/bedrijven');
@@ -87,7 +91,7 @@ class CustomerCompaniesController extends Controller
         $company->legal_number = request('legal_number');
         $company->tax_number = request('tax_number');
         $company->status = request('status');
-        
+
         $company->save();
 
         $contact_information->street_name = request('street_name');
@@ -95,7 +99,7 @@ class CustomerCompaniesController extends Controller
         $contact_information->city = request('city');
         $contact_information->zipcode = request('zipcode');
         $contact_information->phone = request('phone');
-        
+
         $contact_information->save();
 
         return redirect('/admin/klanten/bedrijven');
@@ -105,7 +109,7 @@ class CustomerCompaniesController extends Controller
     {
         $company = Company::find(request('id'));
         $company->delete();
-        
+
         return redirect('/admin/klanten/bedrijven');
     }
 }

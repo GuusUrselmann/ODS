@@ -166,6 +166,18 @@
                             </div>
                          </div>
     					 <div class="pt-2"></div>
+                         <div class="bg-white rounded shadow-sm p-4 mb-4">
+                            <h4 class="mb-4">Heeft U een CouponCode?</h4>
+                            <div class="form-row">
+                               <div class="form-group col-md-8">
+                                   <label for="order_zipcode">Code:</label>
+                                   <div class="input-group">
+                                       <input id="couponcode" class="form-control" name="couponcode"><button type="button" class="btn btn-success btn-md ml-3" v-on:click="addCoupon()">indienen</button>
+                                   </div>
+                               </div>
+                            </div>
+                         </div>
+                         <div class="pt-2"></div>
                          <div class="bg-white rounded shadow-sm p-4 osahan-payment">
                             <h4 class="mb-4">Kies Uw betaalmethode</h4>
                             <div class="row">
@@ -296,6 +308,24 @@
             };
         },
         methods: {
+            addCoupon() {
+                var coupon_input = $('#couponcode')[0].value;
+                if(coupon_input) {
+
+                    axios.post(url()+'/api/addCouponcode', {
+                        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                        code: coupon_input,
+                    })
+                    .then(response => {
+                        console.log(response.data)
+                        this.cartItems = response.data.cart;
+                        this.cartAmount = response.data.amount;
+                    })
+                    .catch(error => {
+                        console.log(error);
+                   });
+                }
+            },
            removeProduct(rowId) {
                axios.post(url()+'/api/removeproductfromcart', {
                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },

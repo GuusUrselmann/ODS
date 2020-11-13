@@ -4,13 +4,17 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Validator; 
+use Illuminate\Validation\Validator;
 use App\Customer;
 use App\ContactInformation;
 use App\User;
 
 class CustomerIndividualsController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth');
+    }
+    
     public function individuals()
     {
         $individuals = Customer::all();
@@ -77,7 +81,7 @@ class CustomerIndividualsController extends Controller
             'zipcode' => 'required|alpha_num|max:6',
             'phone' => 'required|max:20',
             'email' => 'required|email',
-            'preferred_payment_method' => 'required', 
+            'preferred_payment_method' => 'required',
         ]);
 
         $individual = Customer::find(request('customer_id'));

@@ -9,6 +9,10 @@ use App\Couponcode;
 
 class CouponcodesController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth');
+    }
+    
     public function overview() {
         $couponcodes = Couponcode::all();
         return view('admin.couponcodes.couponcodes', compact('couponcodes'));

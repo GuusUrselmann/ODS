@@ -8,8 +8,8 @@ use App\Branch;
 
 class BranchesController extends Controller
 {
-    public function __construct()
-    {
+    public function __construct() {
+        $this->middleware('auth');
     }
 
     public function overview()
@@ -113,7 +113,7 @@ class BranchesController extends Controller
     public function edit()
     {
         $branch = Branch::find(request('id'));
-        
+
         return view('admin.branches.edit', ['branch' => $branch]);
     }
 

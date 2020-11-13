@@ -13,7 +13,9 @@ use App\Menu;
 use App\Order;
 use App\OrderProduct;
 use App\ContactInformation;
+use App\ProductExtraOption;
 use Cart;
+use Illuminate\Support\Collection;
 
 class GuestHomeController extends Controller
 {
@@ -27,7 +29,7 @@ class GuestHomeController extends Controller
     }
 
     public function home(Request $request) {
-        $menu = Menu::find(1)->list();
+        $menu = Menu::find(1)->homeList();
         $cart = Cart::getContent();
         $cart->sort();
         $cart_amount = Cart::getTotal();
@@ -53,9 +55,9 @@ class GuestHomeController extends Controller
         $validator = Validator::make($request->all(), [
             'streetname' => 'required',
             'housenumber' => 'required',
-            'zipcode' => 'postal_code:NL',
+            'zipcode' => 'required',
             'city' => 'required',
-            'payment_method' => 'in:iDEAL,cash',
+            'payment_method' => 'required|in:iDEAL,cash',
         ]);
         if($validator->fails()) {
             $errors = $validator->errors();

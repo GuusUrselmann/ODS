@@ -29,16 +29,20 @@ class Product extends Model
     }
 
     public function options() {
+        return $this->standardExtras();
+    }
+
+    public function optionsMerged() {
         $standard_extras = $this->standardExtras()->with('standardExtra.options')->get()->pluck('standardExtra');
         $extra_options = $this->extraOptions()->with('options')->get();
         return collect()->merge($standard_extras)->merge($extra_options);
     }
 
     public function standardExtras() {
-        return $this->hasMany(ProductStandardExtra::class);
+        return $this->hasMany(ProductStandardExtra::class)->with('standardExtra.options');
     }
 
     public function extraOptions() {
-        return $this->hasMany(ProductExtra::class);
+        return $this->hasMany(ProductExtra::class)->with('options');
     }
 }

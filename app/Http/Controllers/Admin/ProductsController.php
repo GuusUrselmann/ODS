@@ -22,8 +22,9 @@ class ProductsController extends Controller
      *
      * @return void
      */
-    public function __construct() {
-    }
+     public function __construct() {
+         $this->middleware('auth');
+     }
 
     public function products() {
         $products = Product::all();
@@ -100,7 +101,7 @@ class ProductsController extends Controller
         $product = Product::find($id);
         $categories = Category::all();
         $standard_extras = StandardExtra::with('options')->get();
-        $product_extra_options = $product->options();
+        $product_extra_options = $product->optionsMerged();
         return view('admin.products.edit', compact('product', 'categories', 'standard_extras', 'product_extra_options'));
     }
 

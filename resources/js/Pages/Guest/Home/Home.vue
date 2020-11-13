@@ -29,7 +29,7 @@
                                         <div class="product-body">
                                             <h6>{{menu_product.product.name}}</h6>
                                             <p class="text-secondary mb-0">{{menu_product.product.description}}</p>
-                                            <div class="btn btn-outline-secondary btn-sm float-right" v-on:click="addProduct(menu_product.product.id)">ADD</div>
+                                            <div class="btn btn-outline-secondary btn-sm float-right" v-on:click="addProduct(menu_product.product)">ADD</div>
                                         </div>
                                         <span class="badge rounded product-price badge-info p-1 pl-2 pr-2"><span class="font-weight-bold text-white" style="font-size: 13px">€</span> <span class="h6 font-weight-bold text-white">{{menu_product.product.price}}</span></span>
                                     </div>
@@ -58,8 +58,13 @@
                                         <span>+</span>
                                     </div>
                                 </div>
-                                <div class="col-3 cart-product-price p-0 text-right pr-2">€{{cart_item.price.toFixed(2)}}</div>
+                                <div class="col-3 cart-product-price p-0 text-right pr-2"><b>€{{cart_item.price.toFixed(2)}}</b></div>
                                 <div class="cart-product-remove bg-danger rounded shadow-sm text-center text-white" v-on:click="removeProduct(cart_item.id)"><i class="fas fa-times"></i></div>
+                                <div class="col-12 p-0" v-for="extra_option in cart_item.attributes.extra_options">
+                                    <div class="col-12 p-0">
+                                        <div class="col-10 offset-2 p-0" v-for="(extra_option_name, i) in extra_option.name.split(',')"><b v-if="i == 0">-{{extra_option.option}}:</b><span class="float-right pr-2">{{extra_option_name}}</span></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="cart-empty" v-if="cartEmpty">
@@ -67,6 +72,12 @@
                         </div>
                         <div class="cart-amount bg-white" v-if="!cartEmpty">
                             <div class="mb-2 rounded p-2 clearfix">
+                                <div v-for="condition in conditions" class="condition row">
+                                    <div class="col-6 offset-6 p-0">
+                                        <h6><b>{{condition.name}}</b></h6>
+                                        <div class="text-right"><b>{{condition.value}}</b></div>
+                                    </div>
+                                </div>
                                 <img class="img-fluid float-left" src="images/site/wallet-icon.png">
                                 <h6 class="font-weight-bold text-right mb-2">Totaal : <span class="text-danger">€{{amount.toFixed(2)}}</span></h6>
                             </div>
@@ -85,6 +96,43 @@
                 </div>
             </div>
         </div>
+
+        <div class="modal modal-product-options" tabindex="-1" role="dialog" id="productExtraOptionsModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        Kies uw type extra opties
+                    </div>
+                    <div class="modal-body">
+                        <div class="extra-options" v-if="modalExtraOptions">
+                            <div class="form-row" v-for="(extra_option, index) in modalExtraOptions.standard_extras.concat(modalExtraOptions.extra_options)">
+                                <div class="form-group col-6" v-if="extra_option.standard_extra_id">
+                                    <label><b>{{extra_option.standard_extra.name}}</b></label>
+                                    <Select2 class="extra-option standard-extra" :data-id="extra_option.standard_extra.id" v-if="extra_option.standard_extra.type == 'dropdown'" :options="extra_option.standard_extra.options.map(function(option) {return {id: option.id, text: option.name+' (+ €'+option.extra_amount+')'}})" :settings="{ minimumResultsForSearch: 99}" />
+                                    <div class="options extra-option standard-extra" :data-id="extra_option.id" v-if="extra_option.standard_extra.type == 'multiple'">
+                                        <div class="form-check" v-for="option in extra_option.standard_extra.options">
+                                            <input class="form-check-input" type="checkbox" name="extra_options" :value="option.id">
+                                            <label class="form-check-label">{{option.name}} (+ €{{option.extra_amount}})</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-6" v-if="extra_option.type">
+                                    <label><b>{{extra_option.name}}</b></label>
+                                    <Select2 class="extra-option" :data-id="extra_option.id" v-if="extra_option.type == 'dropdown'" :options="extra_option.options.map(function(option) {return {id: option.id, text: option.name+' (+ €'+option.extra_amount+')'}})" :settings="{ minimumResultsForSearch: 99}" />
+                                    <div class="options extra-option" :data-id="extra_option.id" v-if="extra_option.type == 'multiple'">
+                                        <div class="form-check" v-for="option in extra_option.options">
+                                            <input class="form-check-input" type="checkbox" name="extra_options" :value="option.id">
+                                            <label class="form-check-label">{{option.name}} (+ €{{option.extra_amount}})</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button v-on:click="addProductWithOptions()" class="btn btn-sm btn-success mt-3 mb-2 float-right">Aan winkelwagen toevoegen</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </layout>
 </template>
 
@@ -92,27 +140,112 @@
     import ProductsMenu from '../../../components/ProductsMenu';
     import Carousel from 'vue-owl-carousel';
     import Layout from '../../Layouts/Guest/Layout';
+    import Select2 from 'v-select2-component';
     export default {
         components: {
             Layout,
             Carousel,
+            Select2,
         },
         props: {
             menu: null,
         },
+        data: function () {
+            return {
+                modalExtraOptions: null,
+            }
+        },
         methods: {
-            addProduct(productId) {
-                axios.post(url()+'/api/addproducttocart', {
-                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-                    product_id: productId,
-                })
-                .then(response => {
-                    this.$store.commit('updateCart', response.data.cart)
-                    this.$store.commit('updateAmount', response.data.amount)
-                })
-                .catch(error => {
-                    console.log(error);
+            addProduct(product) {
+                if(product.extra_options.concat(product.standard_extras).length) {
+                    //launch extra options modal before adding to cart
+                    $("#productExtraOptionsModal").modal('toggle');
+                    this.modalExtraOptions = product;
+                }
+                else {
+                    //No extra options, just add to cart
+                    axios.post(url()+'/api/addproducttocart', {
+                        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                        product_id: product.id,
+                    })
+                    .then(response => {
+                        this.$store.commit('updateCart', response.data.cart)
+                        this.$store.commit('updateAmount', response.data.amount)
+                    })
+                    .catch(error => {
+                        console.log(error);
+                   });
+                }
+           },
+           addProductWithOptions() {
+               $("#productExtraOptionsModal").modal('toggle');
+               var selected_options = [];
+               $('.modal-product-options .extra-option').each(function(i, v) {
+                  if($(v).find('select')[0]) {
+                      //type is dropdown
+                      if($(v).find('select')[0].value != '') {
+                          if($(v).hasClass('standard-extra')) {
+                              //standard extra
+                              //value = standard_extras table id
+                              selected_options.push({
+                                  'type': 'standard_extra',
+                                  'id': $(v).data("id"),
+                                  'value': $(v).find('select')[0].value,
+                              });
+                          }
+                          else {
+                              //extra option
+                              //value = extra_options table id
+                              selected_options.push({
+                                  'type': 'extra_option',
+                                  'id': $(v).data("id"),
+                                  'value': $(v).find('select')[0].value,
+                              });
+                          }
+                      }
+                  }
+                  else {
+                      //type is multiple
+                      if($(v).find("input[name='extra_options']:checked").length != 0) {
+                          if($(v).hasClass('standard-extra')) {
+                              //standard extra
+                              var optionsSelected = [];
+                              $.each($(v).find("input[name='extra_options']:checked"), function(){
+                                  optionsSelected.push($(this).val());
+                              });
+                              selected_options.push({
+                                  'type': 'standard_extra',
+                                  'id': $(v).data("id"),
+                                  'value': optionsSelected,
+                              });
+                          }
+                          else {
+                              //extra option
+                              var optionsSelected = [];
+                              $.each($(v).find("input[name='extra_options']:checked"), function(){
+                                  optionsSelected.push($(this).val());
+                              });
+                              selected_options.push({
+                                  'type': 'extra_option',
+                                  'id': $(v).data("id"),
+                                  'value': optionsSelected,
+                              });
+                          }
+                      }
+                  }
                });
+               axios.post(url()+'/api/addproducttocart', {
+                   headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                   product_id: this.modalExtraOptions.id,
+                   extra_options: selected_options,
+               })
+               .then(response => {
+                   this.$store.commit('updateCart', response.data.cart)
+                   this.$store.commit('updateAmount', response.data.amount)
+               })
+               .catch(error => {
+                   console.log(error);
+              });
            },
            removeProduct(rowId) {
                axios.post(url()+'/api/removeproductfromcart', {
@@ -145,6 +278,9 @@
         computed: {
             cart() {
                 return this.$store.getters.getCart
+            },
+            conditions() {
+                return this.$store.getters.getConditions
             },
             amount() {
                 return this.$store.getters.getAmount

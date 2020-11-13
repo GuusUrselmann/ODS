@@ -15,8 +15,13 @@ class Menu extends Model
         return $this->hasMany(MenuCategory::class);
     }
 
+    public function homeList() {
+        $list = $this->menuCategories()->with('category', 'menuProducts.product.standardExtras', 'menuProducts.product.extraOptions')->get();
+        return $list;
+    }
+
     public function list() {
-        $list = $this->menuCategories()->with('category', 'menuProducts')->get();
+        $list = $this->menuCategories()->with('category', 'menuProducts.product')->get();
         return $list;
     }
 }
