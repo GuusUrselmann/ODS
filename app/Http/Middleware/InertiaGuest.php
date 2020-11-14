@@ -5,6 +5,8 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use App\Option;
+use App\Branch;
 
 class InertiaGuest
 {
@@ -29,6 +31,15 @@ class InertiaGuest
                 return Auth::user();
             }
             return false;
+        });
+        Inertia::share('options', function() {
+            return [
+                'website_title' => Option::where('name', 'website_title')->first(),
+                'header_title' => Option::where('name', 'header_title')->first(),
+            ];
+        });
+        Inertia::share('branch', function() {
+            return Branch::with('contactInformation')->find(1);
         });
         return $next($request);
     }

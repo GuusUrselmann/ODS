@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {{-- CSRF Token --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'ODS') }}</title>
+    <title>{{$page['props']['options']['website_title']->value}}</title>
     {{-- Scripts --}}
     <script type="text/javascript">
         function url() {

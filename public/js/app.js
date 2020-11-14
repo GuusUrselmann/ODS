@@ -2540,6 +2540,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2622,6 +2633,9 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     cart: function cart() {
       return this.$store.getters.getCart;
+    },
+    conditions: function conditions() {
+      return this.$store.getters.getConditions;
     },
     amount: function amount() {
       return this.$store.getters.getAmount;
@@ -2774,10 +2788,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: {
     cart: function cart() {
       return this.$store.getters.getCart;
+    },
+    conditions: function conditions() {
+      return this.$store.getters.getConditions;
     },
     amount: function amount() {
       return this.$store.getters.getAmount;
@@ -46823,7 +46847,7 @@ var render = function() {
                       _vm._l(_vm.conditions, function(condition) {
                         return _c("div", { staticClass: "condition row" }, [
                           _c("div", { staticClass: "col-6 offset-6 p-0" }, [
-                            _c("h6", [
+                            _c("h6", { staticClass: "float-left" }, [
                               _c("b", [_vm._v(_vm._s(condition.name))])
                             ]),
                             _vm._v(" "),
@@ -47578,13 +47602,28 @@ var render = function() {
                           _c("div", { staticClass: "d-flex flex-column" }, [
                             _c("h6", { staticClass: "mb-1 text-white" }, [
                               _vm._v(
-                                "Spice Hut Indian Restaurant\n                           "
+                                _vm._s(_vm.$page.branch.name) +
+                                  "\n                           "
                               )
                             ]),
                             _vm._v(" "),
                             _c("p", { staticClass: "mb-0 text-white" }, [
                               _c("i", { staticClass: "icofont-location-pin" }),
-                              _vm._v(" 2036 2ND AVE, NEW YORK, NY 10029")
+                              _vm._v(
+                                _vm._s(
+                                  _vm.$page.branch.contact_information
+                                    .street_name
+                                ) +
+                                  " " +
+                                  _vm._s(
+                                    _vm.$page.branch.contact_information
+                                      .house_number
+                                  ) +
+                                  ", " +
+                                  _vm._s(
+                                    _vm.$page.branch.contact_information.city
+                                  )
+                              )
                             ])
                           ])
                         ]
@@ -47651,8 +47690,63 @@ var render = function() {
                                     [_vm._v(_vm._s(cart_item.name))]
                                   )
                                 ])
-                              ])
-                            ]
+                              ]),
+                              _vm._v(" "),
+                              _vm._l(
+                                cart_item.attributes.extra_options,
+                                function(extra_option) {
+                                  return _c(
+                                    "div",
+                                    { staticClass: "col-12 p-0" },
+                                    [
+                                      _c(
+                                        "div",
+                                        { staticClass: "col-12 p-0" },
+                                        _vm._l(
+                                          extra_option.name.split(","),
+                                          function(extra_option_name, i) {
+                                            return _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "col-10 offset-2 p-0 d-inline-block"
+                                              },
+                                              [
+                                                i == 0
+                                                  ? _c("b", [
+                                                      _vm._v(
+                                                        "-" +
+                                                          _vm._s(
+                                                            extra_option.option
+                                                          ) +
+                                                          ":"
+                                                      )
+                                                    ])
+                                                  : _vm._e(),
+                                                _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "float-right pr-2"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      _vm._s(extra_option_name)
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            )
+                                          }
+                                        ),
+                                        0
+                                      )
+                                    ]
+                                  )
+                                }
+                              )
+                            ],
+                            2
                           )
                         }),
                         0
@@ -47664,13 +47758,34 @@ var render = function() {
                           staticClass: "mb-2 bg-white rounded-sm p-2 clearfix"
                         },
                         [
+                          _vm._l(_vm.conditions, function(condition) {
+                            return _c("div", { staticClass: "condition row" }, [
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "col-6 offset-6 d-inline-block"
+                                },
+                                [
+                                  _c("h6", { staticClass: "float-left" }, [
+                                    _c("b", [_vm._v(_vm._s(condition.name))])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "text-right" }, [
+                                    _c("b", [_vm._v(_vm._s(condition.value))])
+                                  ])
+                                ]
+                              )
+                            ])
+                          }),
+                          _vm._v(" "),
                           _c("h6", { staticClass: "font-weight-bold mb-0" }, [
                             _vm._v("TE BETALEN  "),
                             _c("span", { staticClass: "float-right" }, [
                               _vm._v("€" + _vm._s(_vm.amount.toFixed(2)))
                             ])
                           ])
-                        ]
+                        ],
+                        2
                       ),
                       _vm._v(" "),
                       _c("input", {
@@ -47840,7 +47955,12 @@ var render = function() {
                   src: _vm.$page.paths.asset + "images/site/logo.png",
                   alt: "alt text"
                 }
-              })
+              }),
+              _vm._v(
+                "\n            " +
+                  _vm._s(_vm.$page.options.header_title.value) +
+                  "\n        "
+              )
             ]
           ),
           _vm._v(" "),
@@ -47972,13 +48092,30 @@ var render = function() {
                                 }),
                                 _vm._v(" "),
                                 _c("h6", { staticClass: "mb-0" }, [
-                                  _vm._v("Brood2day")
+                                  _vm._v(_vm._s(_vm.$page.branch.name))
                                 ]),
                                 _vm._v(" "),
                                 _c(
                                   "p",
                                   { staticClass: "text-secondary mb-0" },
-                                  [_vm._v("310 S Front St, Memphis, USA")]
+                                  [
+                                    _vm._v(
+                                      _vm._s(
+                                        _vm.$page.branch.contact_information
+                                          .street_name
+                                      ) +
+                                        " " +
+                                        _vm._s(
+                                          _vm.$page.branch.contact_information
+                                            .house_number
+                                        ) +
+                                        ", " +
+                                        _vm._s(
+                                          _vm.$page.branch.contact_information
+                                            .city
+                                        )
+                                    )
+                                  ]
                                 )
                               ]
                             ),
@@ -48021,6 +48158,43 @@ var render = function() {
                                   "dropdown-cart-top-footer border-top p-4"
                               },
                               [
+                                _vm._l(_vm.conditions, function(condition) {
+                                  return _c(
+                                    "div",
+                                    { staticClass: "condition row" },
+                                    [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "col-6 offset-6 d-inline-block"
+                                        },
+                                        [
+                                          _c(
+                                            "h6",
+                                            { staticClass: "float-left" },
+                                            [
+                                              _c("b", [
+                                                _vm._v(_vm._s(condition.name))
+                                              ])
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            { staticClass: "text-right" },
+                                            [
+                                              _c("b", [
+                                                _vm._v(_vm._s(condition.value))
+                                              ])
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                }),
+                                _vm._v(" "),
                                 _c(
                                   "p",
                                   {
@@ -48040,7 +48214,8 @@ var render = function() {
                                     )
                                   ]
                                 )
-                              ]
+                              ],
+                              2
                             ),
                             _vm._v(" "),
                             _c(

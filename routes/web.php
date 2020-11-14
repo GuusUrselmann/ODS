@@ -100,8 +100,10 @@ Route::group(['prefix' => '/admin'], function () {
     });
 
     Route::group(['prefix' => '/instellingen'], function () {
-        Route::get('/', 'Admin\SettingsController@general');
-        Route::get('/algemeen', 'Admin\SettingsController@general');
+        Route::get('/', 'Admin\SettingsController@website');
+        Route::post('/', 'Admin\SettingsController@websiteSave');
+        Route::get('/website', 'Admin\SettingsController@website');
+        Route::post('/website', 'Admin\SettingsController@websiteSave');
         Route::get('/openingstijden', 'Admin\SettingsController@openinghours');
     });
 
@@ -122,6 +124,11 @@ Route::group(['prefix' => '/admin'], function () {
         Route::get('/bewerken/{id}', 'Admin\BranchesController@edit');
         Route::post('/bewerken/{id}', 'Admin\BranchesController@update');
         Route::post('/verwijderen/{id}', 'Admin\BranchesController@delete');
+    });
+
+    Route::group(['prefix' => '/filiaal'], function () {
+        Route::get('/', 'Admin\BranchController@branch');
+        Route::post('/', 'Admin\BranchController@branchSave');
     });
 
     Route::group(['prefix' => '/klanten'], function () {

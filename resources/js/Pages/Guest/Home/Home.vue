@@ -74,7 +74,7 @@
                             <div class="mb-2 rounded p-2 clearfix">
                                 <div v-for="condition in conditions" class="condition row">
                                     <div class="col-6 offset-6 p-0">
-                                        <h6><b>{{condition.name}}</b></h6>
+                                        <h6 class="float-left"><b>{{condition.name}}</b></h6>
                                         <div class="text-right"><b>{{condition.value}}</b></div>
                                     </div>
                                 </div>

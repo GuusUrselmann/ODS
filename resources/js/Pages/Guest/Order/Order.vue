@@ -219,9 +219,9 @@
                          <div class="d-flex mb-4 osahan-cart-item-profile">
                             <img class="img-fluid mr-3 rounded-pill" src="images/site/logo-small.png">
                             <div class="d-flex flex-column">
-                               <h6 class="mb-1 text-white">Spice Hut Indian Restaurant
+                               <h6 class="mb-1 text-white">{{$page.branch.name}}
                                </h6>
-                               <p class="mb-0 text-white"><i class="icofont-location-pin"></i> 2036 2ND AVE, NEW YORK, NY 10029</p>
+                               <p class="mb-0 text-white"><i class="icofont-location-pin"></i>{{$page.branch.contact_information.street_name}} {{$page.branch.contact_information.house_number}}, {{$page.branch.contact_information.city}}</p>
                             </div>
                          </div>
                          <div class="bg-white rounded-sm shadow-sm mb-2">
@@ -236,6 +236,11 @@
                                   <div class="media-body">
                                      <p class="mt-1 mb-0 text-black">{{cart_item.name}}</p>
                                   </div>
+                               </div>
+                               <div class="col-12 p-0" v-for="extra_option in cart_item.attributes.extra_options">
+                                   <div class="col-12 p-0">
+                                       <div class="col-10 offset-2 p-0 d-inline-block" v-for="(extra_option_name, i) in extra_option.name.split(',')"><b v-if="i == 0">-{{extra_option.option}}:</b><span class="float-right pr-2">{{extra_option_name}}</span></div>
+                                   </div>
                                </div>
                             </div>
                          </div>
@@ -264,6 +269,12 @@
                                <span class="float-right text-success">$1884</span>
                             </p> -->
                             <!-- <hr> -->
+                            <div v-for="condition in conditions" class="condition row">
+                                <div class="col-6 offset-6 d-inline-block">
+                                    <h6 class="float-left"><b>{{condition.name}}</b></h6>
+                                    <div class="text-right"><b>{{condition.value}}</b></div>
+                                </div>
+                            </div>
                             <h6 class="font-weight-bold mb-0">TE BETALEN  <span class="float-right">€{{amount.toFixed(2)}}</span></h6>
                          </div>
                          <input id="input_payment_method" type="hidden" name="payment_method" value="iDEAL">
@@ -363,6 +374,9 @@
         computed: {
             cart() {
                 return this.$store.getters.getCart
+            },
+            conditions() {
+                return this.$store.getters.getConditions
             },
             amount() {
                 return this.$store.getters.getAmount

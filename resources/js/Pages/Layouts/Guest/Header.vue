@@ -3,6 +3,7 @@
         <div class="container">
             <inertia-link class="navbar-brand float-left" :href="$page.paths.url+'/home'">
                 <img :src="$page.paths.asset+'images/site/logo.png'" class="css-class" alt="alt text">
+                {{$page.options.header_title.value}}
             </inertia-link>
             <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -32,8 +33,8 @@
                             <div class="dropdown-menu dropdown-cart-top p-0 dropdown-menu-right shadow-sm border-0 show">
                                 <div class="dropdown-cart-top-header p-4">
                                     <img :src="$page.paths.asset+'images/site/logo-small.png'" class="css-class float-left mr-3">
-                                    <h6 class="mb-0">Brood2day</h6>
-                                    <p class="text-secondary mb-0">310 S Front St, Memphis, USA</p>
+                                    <h6 class="mb-0">{{$page.branch.name}}</h6>
+                                    <p class="text-secondary mb-0">{{$page.branch.contact_information.street_name}} {{$page.branch.contact_information.house_number}}, {{$page.branch.contact_information.city}}</p>
                                 </div>
                                 <div class="dropdown-cart-top-body border-top p-4">
                                     <p class="mb-2" v-for="cart_item in cart">
@@ -41,6 +42,12 @@
                                     </p>
                                 </div>
                                 <div class="dropdown-cart-top-footer border-top p-4">
+                                    <div v-for="condition in conditions" class="condition row">
+                                        <div class="col-6 offset-6 d-inline-block">
+                                            <h6 class="float-left"><b>{{condition.name}}</b></h6>
+                                            <div class="text-right"><b>{{condition.value}}</b></div>
+                                        </div>
+                                    </div>
                                     <p class="mb-0 font-weight-bold text-secondary">Totaal <span class="float-right text-dark">€{{amount.toFixed(2)}}</span></p>
                                 </div>
                                 <div class="dropdown-cart-top-footer border-top p-2">
@@ -65,6 +72,9 @@
       computed : {
           cart() {
               return this.$store.getters.getCart
+          },
+          conditions() {
+              return this.$store.getters.getConditions
           },
           amount() {
               return this.$store.getters.getAmount
