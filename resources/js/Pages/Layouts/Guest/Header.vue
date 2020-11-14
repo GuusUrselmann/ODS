@@ -3,7 +3,7 @@
         <div class="container">
             <inertia-link class="navbar-brand float-left" :href="$page.paths.url+'/home'">
                 <img :src="$page.paths.asset+'images/site/logo.png'" class="css-class" alt="alt text">
-                {{$page.options.header_title.value}}
+                {{$page.options.header_title}}
             </inertia-link>
             <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

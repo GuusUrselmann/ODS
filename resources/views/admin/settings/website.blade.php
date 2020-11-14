@@ -14,13 +14,13 @@
                         <div class="form-row">
                             <div class="form-group col-4">
                                 <label>Website titel</label>
-                                <input type="text" class="form-control" name="website_title" value="{{$website_title->value}}" required>
+                                <input type="text" class="form-control" name="website_title" value="{{$website_title}}" required>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-4">
                                 <label>Header titel</label>
-                                <input type="text" class="form-control" name="header_title" value="{{$header_title->value}}" required>
+                                <input type="text" class="form-control" name="header_title" value="{{$header_title}}" required>
                             </div>
                         </div>
                         <div class="col-2 float-right">

@@ -34,8 +34,8 @@ class InertiaGuest
         });
         Inertia::share('options', function() {
             return [
-                'website_title' => Option::where('name', 'website_title')->first(),
-                'header_title' => Option::where('name', 'header_title')->first(),
+                'website_title' => Option::where('name', 'website_title')->first() ? Option::where('name', 'website_title')->first()->value : 'ODS',
+                'header_title' => Option::where('name', 'header_title')->first() ? Option::where('name', 'header_title')->first()->value : ' ',
             ];
         });
         Inertia::share('branch', function() {

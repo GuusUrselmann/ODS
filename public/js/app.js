@@ -47958,7 +47958,7 @@ var render = function() {
               }),
               _vm._v(
                 "\n            " +
-                  _vm._s(_vm.$page.options.header_title.value) +
+                  _vm._s(_vm.$page.options.header_title) +
                   "\n        "
               )
             ]
