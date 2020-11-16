@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 @section('title', 'Categorie aanmaken')
 @section('content_header')
-    <h1>Nieuwe Categorie</h1>
+    <h1><a class="h6" href="{{url()->previous()}}"><i class="fas fa-arrow-left"></i></a> Nieuwe Categorie</h1>
 @stop
 @section('content')
     <div class="row">

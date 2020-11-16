@@ -36,6 +36,8 @@ class InertiaGuest
             return [
                 'website_title' => Option::where('name', 'website_title')->first() ? Option::where('name', 'website_title')->first()->value : 'ODS',
                 'header_title' => Option::where('name', 'header_title')->first() ? Option::where('name', 'header_title')->first()->value : ' ',
+                'website_logo' => Option::where('name', 'website_logo')->first() ? Option::where('name', 'website_logo')->first()->value : ' ',
+                'home_background' => Option::where('name', 'home_background')->first() ? Option::where('name', 'home_background')->first()->value : ' ',
             ];
         });
         Inertia::share('branch', function() {

@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Guest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Mollie\Laravel\Facades\Mollie;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderConfirm;
 use Inertia\Inertia;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
@@ -75,7 +78,7 @@ class GuestHomeController extends Controller
             $order = Order::create([
                 'amount' => Cart::getTotal(),
                 'order_datetime' => Carbon::now(),
-                'user_id' => 1,
+                'user_id' => Auth::check() ? Auth::user()->id : null,
                 'status' => 'received',
                 'type' => 'takeaway',
                 'payment_method' => $request->input('payment_method'),
@@ -91,6 +94,8 @@ class GuestHomeController extends Controller
                 ]);
             }
             Cart::clear();
+            $data = $order;
+            Mail::to(Auth::check() ? Auth::user()->email : $contact_information->email)->send(new OrderConfirm($data));
             return redirect(url('/bedankt/'.$order_uuid));
         }
         elseif($request->input('payment_method') == 'iDEAL') {
@@ -118,7 +123,7 @@ class GuestHomeController extends Controller
             $order = Order::create([
                 'amount' => Cart::getTotal(),
                 'order_datetime' => Carbon::now(),
-                'user_id' => 1,
+                'user_id' => Auth::check() ? Auth::user()->id : null,
                 'status' => 'received',
                 'type' => 'takeaway',
                 'payment_method' => $request->input('payment_method'),

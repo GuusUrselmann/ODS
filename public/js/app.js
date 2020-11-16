@@ -2551,6 +2551,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2567,7 +2597,10 @@ __webpack_require__.r(__webpack_exports__);
         streetName: null,
         houseNumber: null,
         zipcode: null,
-        city: null
+        city: null,
+        firstName: null,
+        lastName: null,
+        email: null
       }
     };
   },
@@ -2584,7 +2617,6 @@ __webpack_require__.r(__webpack_exports__);
           },
           code: coupon_input
         }).then(function (response) {
-          console.log(response.data);
           _this.cartItems = response.data.cart;
           _this.cartAmount = response.data.amount;
         })["catch"](function (error) {
@@ -2796,6 +2828,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    };
+  },
   computed: {
     cart: function cart() {
       return this.$store.getters.getCart;
@@ -46523,7 +46560,10 @@ var render = function() {
         staticClass: "container-fluid banner background-cover p-0",
         style: {
           backgroundImage:
-            "url(" + _vm.$page.paths.asset + "images/site/banner-home.jpg)"
+            "url(" +
+            _vm.$page.paths.asset +
+            _vm.$page.options.home_background +
+            ")"
         }
       },
       [
@@ -47370,6 +47410,164 @@ var render = function() {
                       ]
                     ),
                     _vm._v(" "),
+                    !_vm.$page.user
+                      ? _c(
+                          "div",
+                          {
+                            staticClass: "bg-white rounded shadow-sm p-4 mb-4"
+                          },
+                          [
+                            _c("h4", { staticClass: "mb-4" }, [
+                              _vm._v("Gegevens")
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "form-row" }, [
+                              _c(
+                                "div",
+                                { staticClass: "form-group col-md-5" },
+                                [
+                                  _c(
+                                    "label",
+                                    { attrs: { for: "order_address" } },
+                                    [_vm._v("Voornaam")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "input-group" }, [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.formOrder.firstName,
+                                          expression: "formOrder.firstName"
+                                        }
+                                      ],
+                                      staticClass: "form-control",
+                                      attrs: { name: "first_name" },
+                                      domProps: {
+                                        value: _vm.formOrder.firstName
+                                      },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            _vm.formOrder,
+                                            "firstName",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    })
+                                  ])
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "form-group col-md-5" },
+                                [
+                                  _c(
+                                    "label",
+                                    { attrs: { for: "order_address" } },
+                                    [_vm._v("Achternaam")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "input-group" }, [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.formOrder.lastName,
+                                          expression: "formOrder.lastName"
+                                        }
+                                      ],
+                                      staticClass: "form-control",
+                                      attrs: { name: "last_name" },
+                                      domProps: {
+                                        value: _vm.formOrder.lastName
+                                      },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            _vm.formOrder,
+                                            "lastName",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    })
+                                  ])
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "form-row" }, [
+                              _c(
+                                "div",
+                                { staticClass: "form-group col-md-6" },
+                                [
+                                  _c(
+                                    "label",
+                                    { attrs: { for: "order_address" } },
+                                    [_vm._v("Email")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "input-group" }, [
+                                    _c(
+                                      "div",
+                                      { staticClass: "input-group-prepend" },
+                                      [
+                                        _c(
+                                          "span",
+                                          { staticClass: "input-group-text" },
+                                          [
+                                            _vm._v(
+                                              "\n                                           @\n                                       "
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.formOrder.email,
+                                          expression: "formOrder.email"
+                                        }
+                                      ],
+                                      staticClass: "form-control",
+                                      attrs: { type: "email", name: "email" },
+                                      domProps: { value: _vm.formOrder.email },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            _vm.formOrder,
+                                            "email",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    })
+                                  ])
+                                ]
+                              )
+                            ])
+                          ]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
                     _c("div", { staticClass: "pt-2" }),
                     _vm._v(" "),
                     _c(
@@ -47952,7 +48150,8 @@ var render = function() {
               _c("img", {
                 staticClass: "css-class",
                 attrs: {
-                  src: _vm.$page.paths.asset + "images/site/logo.png",
+                  src: _vm.$page.paths.asset + _vm.$page.options.website_logo,
+                  height: "30px",
                   alt: "alt text"
                 }
               }),
@@ -48048,9 +48247,10 @@ var render = function() {
                               }
                             },
                             [
-                              _vm._v(
-                                "\n                            @csrf\n                        "
-                              )
+                              _c("input", {
+                                attrs: { type: "hidden", name: "_token" },
+                                domProps: { value: _vm.csrf }
+                              })
                             ]
                           )
                         ]

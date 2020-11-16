@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 @section('title', 'Filiaal')
 @section('content_header')
-    <h1>Filiaal <b>{{$branch->name}}</b></h1>
+    <h1><a class="h6" href="{{url()->previous()}}"><i class="fas fa-arrow-left"></i></a> Filiaal <b>{{$branch->name}}</b></h1>
 @stop
 @section('content')
     <div class="row">

@@ -21,6 +21,7 @@ class MollieWebhookController extends Controller {
             $order->update([
                 'paid' => true
             ]);
+            Mail::to(Auth::check() ? Auth::user()->email : $order->contactInformation->email)->send(new OrderConfirm());
         }
     }
 }

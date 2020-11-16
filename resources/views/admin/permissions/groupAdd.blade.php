@@ -2,7 +2,7 @@
 @section('title', 'Permissie groep aanmaken')
 @section('plugins.Select2', true)
 @section('content_header')
-    <h1>Nieuwe Rechten Groep</h1>
+    <h1><a class="h6" href="{{url()->previous()}}"><i class="fas fa-arrow-left"></i></a> Nieuwe Rechten Groep</h1>
 @stop
 @section('content')
     <div class="row">

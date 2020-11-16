@@ -177,3 +177,11 @@
   top: 5px;
 }
 
+#formSettings .form-image .image-input {
+  display: none;
+}
+
+#formSettings .form-image-preview img {
+  width: 150px;
+}
+

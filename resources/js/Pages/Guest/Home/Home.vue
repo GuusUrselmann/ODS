@@ -1,6 +1,6 @@
 <template>
     <layout >
-        <div class="container-fluid banner background-cover p-0" :style="{backgroundImage: 'url('+$page.paths.asset+'images/site/banner-home.jpg)'}">
+        <div class="container-fluid banner background-cover p-0" :style="{backgroundImage: 'url('+$page.paths.asset+$page.options.home_background+')'}">
             <div class="row position-relative">
                 <div class="col-12 banner-info">
                     <div class="info-name text-white">

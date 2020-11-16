@@ -35,7 +35,7 @@
                                 <td>{{$order->order_datetime}}</td>
                                 <td>{{$order->status == 'in_process' ? 'in behandeling' : ''}}</td>
                                 <td>{{$order->mollie_payment_id}}</td>
-                                <td>{{$order->user()->username}}</td>
+                                <td>{{$order->user() ? $order->user()->username : ''}}</td>
                                 <td>
                                     <a href="{{url('admin/bestellingen/bewerken/'.$order->id)}}" class="btn btn-sm btn-warning action-btn text-light"><i class="fas fa-pencil-alt"></i></a>
                                     <a data-href="{{url('admin/bestellingen/verwijderen/'.$order->id)}}" class="btn btn-sm btn-danger action-btn text-light deleteConfirmModal"><i class="fas fa-times"></i></a>

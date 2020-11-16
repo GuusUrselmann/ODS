@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light shadow-sm">
         <div class="container">
             <inertia-link class="navbar-brand float-left" :href="$page.paths.url+'/home'">
-                <img :src="$page.paths.asset+'images/site/logo.png'" class="css-class" alt="alt text">
+                <img :src="$page.paths.asset+$page.options.website_logo" height="30px" class="css-class" alt="alt text">
                 {{$page.options.header_title}}
             </inertia-link>
             <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,7 +21,7 @@
                                 Uitloggen
                             </a>
                             <form id="logout-form" :action="$page.paths.url+'/logout'" method="POST" style="display: none;">
-                                @csrf
+                                <input type="hidden" name="_token" :value="csrf">
                             </form>
                         </div>
                     </li>
@@ -69,6 +69,11 @@
 </template>
 <script>
   export default {
+      data: function() {
+          return {
+              csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+          }
+      },
       computed : {
           cart() {
               return this.$store.getters.getCart

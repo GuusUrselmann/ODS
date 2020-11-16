@@ -44,5 +44,8 @@ class LoginController extends Controller
     	if (Auth::user()->user_type_id == UserType::where('slug', 'eigenaar')->first()->id) {
     		return redirect(url('/admin'));
     	}
+        else {
+            return redirect(url('/'));
+        }
     }
 }

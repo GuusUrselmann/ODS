@@ -65,7 +65,7 @@
     					 <div class="pt-2"></div> -->
     					 <div class="bg-white rounded shadow-sm p-4 mb-4">
                             <h4 class="mb-4">Bezorg adres</h4>
-                            <!-- <div class="row">
+                            <!-- <div class="row" v-if="$page.user">
                                <div class="col-md-6">
                                   <div class="bg-white card addresses-item mb-4 border border-success">
                                      <div class="gold-members p-4">
@@ -161,6 +161,36 @@
                                    <label for="order_city">Plaats</label>
                                    <div class="input-group">
                                        <input class="form-control" v-model="formOrder.city" name="city">
+                                   </div>
+                               </div>
+                            </div>
+                         </div>
+                         <div class="bg-white rounded shadow-sm p-4 mb-4" v-if="!$page.user">
+                            <h4 class="mb-4">Gegevens</h4>
+                            <div class="form-row">
+                               <div class="form-group col-md-5">
+                                   <label for="order_address">Voornaam</label>
+                                   <div class="input-group">
+                                       <input class="form-control" v-model="formOrder.firstName" name="first_name">
+                                   </div>
+                               </div>
+                               <div class="form-group col-md-5">
+                                   <label for="order_address">Achternaam</label>
+                                   <div class="input-group">
+                                       <input class="form-control" v-model="formOrder.lastName" name="last_name">
+                                   </div>
+                               </div>
+                            </div>
+                            <div class="form-row">
+                               <div class="form-group col-md-6">
+                                   <label for="order_address">Email</label>
+                                   <div class="input-group">
+                                       <div class="input-group-prepend">
+                                           <span class="input-group-text">
+                                               @
+                                           </span>
+                                       </div>
+                                       <input type="email" class="form-control" v-model="formOrder.email" name="email">
                                    </div>
                                </div>
                             </div>
@@ -315,6 +345,9 @@
                     houseNumber: null,
                     zipcode: null,
                     city: null,
+                    firstName: null,
+                    lastName: null,
+                    email: null,
                 },
             };
         },
@@ -328,7 +361,6 @@
                         code: coupon_input,
                     })
                     .then(response => {
-                        console.log(response.data)
                         this.cartItems = response.data.cart;
                         this.cartAmount = response.data.amount;
                     })

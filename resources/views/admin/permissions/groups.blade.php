@@ -2,7 +2,7 @@
 @section('title', 'Permissie Groepen')
 @section('plugins.Datatables', true)
 @section('content_header')
-    <h1>Rechten Groepen</h1>
+    <h1><a class="h6" href="{{url()->previous()}}"><i class="fas fa-arrow-left"></i></a> Rechten Groepen</h1>
 @stop
 @section('content')
     <div class="row">
