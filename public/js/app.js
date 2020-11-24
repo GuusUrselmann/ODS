@@ -2957,9 +2957,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.$store.dispatch('initCart');
-    $('#selectOrderTypeModal').modal('toggle');
 
-    if (!$('#selectOrderTypeModal').data('order-type')) {}
+    if (!$('#selectOrderTypeModal').data('order-type')) {
+      $('#selectOrderTypeModal').modal('toggle');
+    }
   }
 });
 

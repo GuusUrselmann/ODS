@@ -97,8 +97,8 @@
         },
         mounted() {
             this.$store.dispatch('initCart')
-            $('#selectOrderTypeModal').modal('toggle')
             if(!$('#selectOrderTypeModal').data('order-type')) {
+                $('#selectOrderTypeModal').modal('toggle')
             }
         }
     }
