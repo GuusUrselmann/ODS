@@ -19,6 +19,9 @@ class InertiaGuest
      */
     public function handle($request, Closure $next)
     {
+        Inertia::share('order_type', function () {
+            return session('order_type');
+        });
         Inertia::setRootView('layouts.guest.layout');
         Inertia::share('paths', function () {
             return [

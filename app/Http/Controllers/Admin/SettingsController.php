@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use Validator;
 use App\Option;
+use App\Branch;
+use App\OpeningHour;
 
 class SettingsController extends Controller
 {
@@ -98,6 +100,58 @@ class SettingsController extends Controller
     }
 
     public function openinghours() {
-        return view('admin.settings.openinghours');
+        $branch = Branch::find(1);
+        // $opening_hours = OpeningHour::where('branch_id', $branch->id)->get();
+        return view('admin.settings.openinghours', compact('branch'));
+    }
+
+    public function openinghoursSave(Request $request) {
+        $validator = Validator::make($request->all(), [
+        ]);
+        if($validator->fails()) {
+            $errors = $validator->errors();
+            return redirect(url('/admin/instellingen'))->with('errors', $errors);
+        }
+        $branch = Branch::find(1);
+        foreach($request->input('opening_hours') as $type => $days) {
+            foreach($days as $day => $data) {
+                if(OpeningHour::where('branch_id', $branch->id)->where('type', $type)->where('day', $day)->first()) {
+                    $opening_hour = OpeningHour::where('branch_id', $branch->id)->where('type', $type)->where('day', $day)->first();
+                    if($data['open'] == 'open') {
+                        $opening_hour->update([
+                            'open' => true,
+                            'from' => $data['from'],
+                            'till' => $data['till']
+                        ]);
+                    }
+                    else {
+                        $opening_hour->update([
+                            'open' => false
+                        ]);
+                    }
+                }
+                else {
+                    if($data['open'] == 'open') {
+                        OpeningHour::create([
+                            'day' => $day,
+                            'type' => $type,
+                            'open' => true,
+                            'from' => $data['from'],
+                            'till' => $data['till'],
+                            'branch_id' => $branch->id
+                        ]);
+                    }
+                    else {
+                        OpeningHour::create([
+                            'day' => $day,
+                            'type' => $type,
+                            'open' => false,
+                            'branch_id' => $branch->id
+                        ]);
+                    }
+                }
+            }
+        }
+        return redirect(url('/admin/instellingen/openingstijden'));
     }
 }

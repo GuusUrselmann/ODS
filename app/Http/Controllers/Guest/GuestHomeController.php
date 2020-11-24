@@ -17,6 +17,7 @@ use App\Order;
 use App\OrderProduct;
 use App\ContactInformation;
 use App\ProductExtraOption;
+use App\Branch;
 use Cart;
 use Illuminate\Support\Collection;
 
@@ -28,6 +29,7 @@ class GuestHomeController extends Controller
      * @return void
      */
     public function __construct() {
+        $this->middleware('guestsession');
         $this->middleware('inertia.guest');
     }
 

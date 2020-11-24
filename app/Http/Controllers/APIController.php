@@ -13,6 +13,7 @@ use App\StandardExtraOption;
 use App\ProductExtra;
 use App\ProductExtraOption;
 use App\Couponcode;
+use App\Branch;
 use Cart;
 use Illuminate\Support\Collection;
 
@@ -233,6 +234,26 @@ class APIController extends Controller
         return [
             'cart' => Cart::getContent()->sort(),
             'amount' => Cart::getTotal(),
+        ];
+    }
+
+    public function setOrderType(Request $request) {
+        session(['order_type' => $request->order_type]);
+    }
+
+    public function validateZipcode(Request $request) {
+        $branch = Branch::find(1);
+        $areas = $branch->deliveryAreas();
+        foreach($areas as $zipcode) {
+            if($zipcode == substr($request->zipcode, 0, -2)) {
+                session(['order_type' => $request->order_type]);
+                return [
+                    'validated' => true,
+                ];
+            }
+        }
+        return [
+            'validated' => false,
         ];
     }
 }

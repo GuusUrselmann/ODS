@@ -25,5 +25,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+
+        view()->composer('adminlte::page', function ($view) {
+            $user_branches = 'neeeeh';
+            $view->with('user_branches', $user_branches);
+        });
     }
 }

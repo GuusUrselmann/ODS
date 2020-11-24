@@ -63,7 +63,7 @@
                             <h6 class="mb-3">You may also like</h6>
                          </div>
     					 <div class="pt-2"></div> -->
-    					 <div class="bg-white rounded shadow-sm p-4 mb-4">
+    					 <div class="bg-white rounded shadow-sm p-4 mb-4" v-if="$page.order_type == 'delivery'">
                             <h4 class="mb-4">Bezorg adres</h4>
                             <!-- <div class="row" v-if="$page.user">
                                <div class="col-md-6">

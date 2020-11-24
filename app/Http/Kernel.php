@@ -66,5 +66,6 @@ class Kernel extends HttpKernel
 
         'inertia.guest' => \App\Http\Middleware\InertiaGuest::class,
         'inertia.auth' => \App\Http\Middleware\InertiaAuth::class,
+        'guestsession' => \App\Http\Middleware\GuestSession::class,
     ];
 }

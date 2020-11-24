@@ -14,7 +14,9 @@
                 <div class="col-12 col-xl-9">
                     <div class="menu-carousel rounded shadow-sm mb-5 sticky-top">
                         <Carousel :dots="false" :items="4" :nav="false" :touchDrag="true" :responsive="{0:{items:2},768:{items:3},1200:{items:4}}">
+                            <template slot="prev"><div class="prev"><i class="fas fa-arrow-left"></i></div></template>
                             <div class="menu-category p-3 text-center" v-for="menu_category in menu"><a class="text-primary h5" :href="'#'+menu_category.category.slug">{{menu_category.category.name}}</a></div>
+                            <template slot="next"><div class="next"><i class="fas fa-arrow-right"></i></div></template>
                         </Carousel>
                     </div>
                     <div class="menu-products">
@@ -39,7 +41,7 @@
                     </div>
                 </div>
                 <div class="col-0  col-xl-3 d-none d-xl-block">
-                    <div class="cart rounded shadow-sm col-10">
+                    <div class="cart sticky-top rounded shadow-sm col-10">
                         <div class="cart-header p-3">
                             <h5>Uw bestelling</h5>
                             <h6 v-if="!cartEmpty">{{Object.keys(cart).length}} items</h6>

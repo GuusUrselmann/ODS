@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
         <div class="container">
             <inertia-link class="navbar-brand float-left" :href="$page.paths.url+'/home'">
                 <img :src="$page.paths.asset+$page.options.website_logo" height="30px" class="css-class" alt="alt text">

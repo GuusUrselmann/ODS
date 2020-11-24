@@ -105,6 +105,7 @@ Route::group(['prefix' => '/admin'], function () {
         Route::get('/website', 'Admin\SettingsController@website');
         Route::post('/website', 'Admin\SettingsController@websiteSave');
         Route::get('/openingstijden', 'Admin\SettingsController@openinghours');
+        Route::post('/openingstijden', 'Admin\SettingsController@openinghoursSave');
     });
 
     Route::group(['prefix' => '/couponcodes'], function () {
@@ -159,7 +160,9 @@ Route::group(['prefix' => '/api'], function () {
     Route::post('/updateproductquantityincart', 'APIController@updateProductQuantityInCart');
     Route::post('/orderlist', 'APIController@orderList');
     Route::post('/setorderstatus', 'APIController@setOrderStatus');
-    Route::post('addCouponcode', 'APIController@addCouponcodeToCart');
+    Route::post('/addCouponcode', 'APIController@addCouponcodeToCart');
+    Route::post('/setOrderType', 'APIController@setOrderType');
+    Route::post('/validateZipcode', 'APIController@validateZipcode');
 });
 
 Route::group(['prefix' => '/webhooks'], function() {

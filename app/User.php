@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 use App\UserType;
+use App\Branch;
 use App\Group;
 
 class User extends Authenticatable
@@ -41,8 +42,27 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function adminlte_image()
+    {
+        return 'https://picsum.photos/300/300';
+    }
+
+    public function adminlte_desc()
+    {
+        return 'That\'s a nice guy';
+    }
+
+    public function adminlte_profile_url()
+    {
+        return 'profile/username';
+    }
+
     public function user_type() {
         return UserType::where('id', $this->user_type_id)->first();
+    }
+
+    public function admin_current_branch() {
+        return $this->belongsTo(Branch::class)->first();
     }
 
     public function permissions() {

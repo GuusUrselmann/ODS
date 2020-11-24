@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use App\ContactInformation;
+use App\OpeningHour;
 
 class Branch extends Model
 {
@@ -17,5 +18,16 @@ class Branch extends Model
 
     public function deliveryAreas() {
         return explode(',', $this->delivery_areas);
+    }
+
+    public function openingHours($type = false, $day = false) {
+        $query = $this->hasMany(OpeningHour::class);
+        if($type) {
+            $query = $query->where('type', $type);
+        }
+        if($day) {
+            $query = $query->where('day', $day);
+        }
+        return $query;
     }
 }

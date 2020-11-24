@@ -40,7 +40,7 @@ const store = new Vuex.Store({
     state: {
         cart: {},
         conditions: {},
-        amount: 0
+        amount: 0,
     },
     getters: {
         getCart(state) {
