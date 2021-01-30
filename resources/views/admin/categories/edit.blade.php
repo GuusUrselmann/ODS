@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 @section('title', 'Categorie bewerken')
 @section('content_header')
-    <h1>Categorie Bewerken</h1>
+    <h1><a class="h6" href="{{url()->previous()}}"><i class="fas fa-arrow-left"></i></a> Categorie Bewerken</h1>
 @stop
 @section('content')
     <div class="row">

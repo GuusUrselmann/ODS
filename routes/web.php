@@ -18,6 +18,10 @@ Auth::routes();
 Route::group(['prefix' => '/'], function () {
     Route::get('/', 'Guest\GuestHomeController@home');
     Route::get('/home', 'Guest\GuestHomeController@home');
+    Route::get('/bestellen', 'Guest\GuestHomeController@order');
+    Route::post('/bestellen', 'Guest\GuestHomeController@placeOrder');
+    Route::get('/bestelling/volgen/{uuid}', 'Guest\GuestHomeController@trackOrder');
+    Route::get('/bedankt/{uuid}', 'Guest\GuestHomeController@thanks');
 });
 
 
@@ -25,6 +29,7 @@ Route::group(['prefix' => '/'], function () {
 Route::group(['prefix' => '/admin'], function () {
     Route::get('/', 'Admin\DashboardController@dashboard');
     Route::get('/dashboard', 'Admin\DashboardController@dashboard');
+    Route::get('/setbranch/{id}', 'Admin\DashboardController@setBranch');
 
     Route::group(['prefix' => '/producten'], function () {
         Route::get('/', 'Admin\ProductsController@products');
@@ -44,6 +49,37 @@ Route::group(['prefix' => '/admin'], function () {
         Route::get('/verwijderen/{id}', 'Admin\CategoriesController@delete');
     });
 
+    Route::group(['prefix' => '/menus'], function () {
+        Route::get('/', 'Admin\MenusController@menus');
+        Route::get('/toevoegen', 'Admin\MenusController@add');
+        Route::get('/bewerken/{id}', 'Admin\MenusController@edit');
+        Route::post('/toevoegen', 'Admin\MenusController@save');
+        Route::post('/bewerken/{id}', 'Admin\MenusController@update');
+        Route::get('/verwijderen/{id}', 'Admin\MenusController@delete');
+    });
+
+    Route::group(['prefix' => '/standaard-extras'], function () {
+        Route::get('/', 'Admin\StandardExtrasController@standardextras');
+        Route::get('/toevoegen', 'Admin\StandardExtrasController@add');
+        Route::post('/toevoegen', 'Admin\StandardExtrasController@save');
+        Route::get('/bewerken/{id}', 'Admin\StandardExtrasController@edit');
+        Route::post('/bewerken/{id}', 'Admin\StandardExtrasController@update');
+        Route::get('/verwijderen/{id}', 'Admin\StandardExtrasController@delete');
+    });
+
+    Route::group(['prefix' => '/bestellingen'], function () {
+        Route::get('/', 'Admin\OrdersController@orders');
+        Route::get('/toevoegen', 'Admin\OrdersController@add');
+        Route::get('/bewerken/{id}', 'Admin\OrdersController@edit');
+        Route::post('/toevoegen', 'Admin\OrdersController@save');
+        Route::post('/bewerken/{id}', 'Admin\OrdersController@update');
+        Route::get('/verwijderen/{id}', 'Admin\OrdersController@delete');
+    });
+
+    Route::group(['prefix' => '/orderwindow'], function () {
+        Route::get('/', 'Admin\OrderwindowController@orderwindow');
+    });
+
     Route::group(['prefix' => '/gebruikers'], function () {
         Route::get('/', 'Admin\UsersController@users');
         Route::get('/toevoegen', 'Admin\UsersController@add');
@@ -53,7 +89,7 @@ Route::group(['prefix' => '/admin'], function () {
         Route::get('/verwijderen/{id}', 'Admin\UsersController@delete');
     });
 
-    Route::group(['prefix' => '/permissies'], function () {
+    Route::group(['prefix' => '/rechten'], function () {
         Route::get('/', 'Admin\PermissionsController@groups');
         Route::get('/groepen', 'Admin\PermissionsController@groups');
         Route::get('/groepen/toevoegen', 'Admin\PermissionsController@groupAdd');
@@ -65,7 +101,12 @@ Route::group(['prefix' => '/admin'], function () {
     });
 
     Route::group(['prefix' => '/instellingen'], function () {
-        Route::get('/', 'Admin\SettingsController@overview');
+        Route::get('/', 'Admin\SettingsController@website');
+        Route::post('/', 'Admin\SettingsController@websiteSave');
+        Route::get('/website', 'Admin\SettingsController@website');
+        Route::post('/website', 'Admin\SettingsController@websiteSave');
+        Route::get('/openingstijden', 'Admin\SettingsController@openinghours');
+        Route::post('/openingstijden', 'Admin\SettingsController@openinghoursSave');
     });
 
     Route::group(['prefix' => '/couponcodes'], function () {
@@ -87,6 +128,11 @@ Route::group(['prefix' => '/admin'], function () {
         Route::post('/verwijderen/{id}', 'Admin\BranchesController@delete');
     });
 
+    Route::group(['prefix' => '/filiaal'], function () {
+        Route::get('/', 'Admin\BranchController@branch');
+        Route::post('/', 'Admin\BranchController@branchSave');
+    });
+
     Route::group(['prefix' => '/klanten'], function () {
         Route::group(['prefix' => '/particulieren'], function () {
             Route::get('/', 'Admin\CustomerIndividualsController@individuals');
@@ -106,4 +152,20 @@ Route::group(['prefix' => '/admin'], function () {
             Route::post('/bewerken/{id}', 'Admin\CustomerCompaniesController@update');
         });
     });
+});
+
+Route::group(['prefix' => '/api'], function () {
+    Route::post('/getcart', 'APIController@getCart');
+    Route::post('/addproducttocart', 'APIController@addProductToCart');
+    Route::post('/removeproductfromcart', 'APIController@removeProductFromCart');
+    Route::post('/updateproductquantityincart', 'APIController@updateProductQuantityInCart');
+    Route::post('/orderlist', 'APIController@orderList');
+    Route::post('/setorderstatus', 'APIController@setOrderStatus');
+    Route::post('/addCouponcode', 'APIController@addCouponcodeToCart');
+    Route::post('/setOrderType', 'APIController@setOrderType');
+    Route::post('/validateZipcode', 'APIController@validateZipcode');
+});
+
+Route::group(['prefix' => '/webhooks'], function() {
+    Route::post('/mollie', 'MollieWebhookController@handle');
 });

@@ -15,14 +15,21 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('customer_id')->unsigned();
-            $table->datetime('order_datetime')->useCurrent();
-            $table->enum('status', ['in_process', 'on_the_way', 'delivered', 'canceled']);
-            $table->enum('payment_method', ['cash', 'card']);
+            $table->float('amount');
+            $table->datetime('order_datetime');
+            $table->enum('status', ['received', 'in_process', 'ready', 'on_the_way', 'delivered', 'canceled']);
+            $table->enum('type', ['delivery', 'takeaway']);
+            $table->enum('payment_method', ['cash', 'iDEAL']);
+            $table->boolean('paid')->nullable();
+            $table->string('mollie_payment_id')->nullable();
+            $table->string('uuid');
+            $table->bigInteger('contact_information_id')->unsigned();
+            $table->bigInteger('user_id')->nullable()->unsigned();
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
+            $table->foreign('contact_information_id')->references('id')->on('contact_information')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

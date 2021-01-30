@@ -2,7 +2,7 @@
 @section('title', 'Permissie groep bewerken')
 @section('plugins.Select2', true)
 @section('content_header')
-    <h1>Permissie Groep <b>{{$group->name}}</b> Bewerken</h1>
+    <h1><a class="h6" href="{{url()->previous()}}"><i class="fas fa-arrow-left"></i></a> Rechten Groep <b>{{$group->name}}</b> Bewerken</h1>
 @stop
 @section('content')
     <div class="row">
@@ -22,15 +22,25 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-sm-9 col-12">
-                                <label>Permissies</label>
+                                <label>Rechten</label>
                                 <select class="permissions-select" multiple="multiple" name="permissions[]" required>
                                     @foreach($permissions as $permission)
                                     <option value="{{ $permission->id }}" {{ $group->hasPermission($permission->id) ? 'selected' : '' }}>{{ $permission->name }}</option>
                                     @endforeach
                                 </select>
                                 <div class="invalid-feedback">
-                                    Vul a.u.b. geldige permissies in.
+                                    Vul a.u.b. geldige rechten in.
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group form-inline col-12">
+                                <label>Naam</label>
+                                <select class="menu-select" name="menu" required>
+                                    @foreach($permissions as $permission)
+                                    <option value="{{ $permission->id }}" {{ $group->hasPermission($permission->id) ? 'selected' : '' }}>{{ $permission->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="col-2 float-right">

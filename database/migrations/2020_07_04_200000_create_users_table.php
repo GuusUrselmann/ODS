@@ -24,11 +24,13 @@ class CreateUsersTable extends Migration
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->bigInteger('user_type_id')->unsigned();
+            $table->bigInteger('admin_current_branch_id')->nullable()->unsigned();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('user_type_id')->references('id')->on('user_types')->onDelete('cascade');
+            $table->foreign('admin_current_branch_id')->references('id')->on('branches')->onDelete('cascade');
         });
     }
 

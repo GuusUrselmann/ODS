@@ -1,117 +1,86 @@
 @extends('adminlte::page')
-
-@section('title', 'Couponcode Aanmaken')
-
+@section('title', 'Couponcode aanmaken')
+@section('plugins.Select2', true)
 @section('content_header')
-    <h1>Couponcode Aanmaken</h1>
+    <h1><a class="h6" href="{{url()->previous()}}"><i class="fas fa-arrow-left"></i></a> Nieuwe Couponcode</h1>
 @stop
-
 @section('content')
-<div class="containter">    
     <div class="row">
-        <div class="col-sm-8 offset-sm-2 pt-md-5">
-            <div class="card">
-                <div class="card-body">
-                    <form action="{{ url()->current() }}" method="POST" class="needs-validation" novalidate>
+        <div class="col-sm-12">
+            <div class="card p-3">
+                <div class="card-body p-0">
+                    <form id="formCouponcodeAdd" class="form-couponcode-add needs-validation" method="POST" action="" enctype="multipart/form-data" novalidate>
                         @csrf
-                        <div class="form-group">
-                            <label for="code">Coupon Code:</label>
-                            <div class="input-group">
-                                <input type="text" name="code" class="form-control random-string" id="code" required>
-                                <span class="input-group-append">
-                                    <button type="button" class="btn btn-info random-string-generator">Willekeurig</button>
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="branch">Filliaal:</label>
-                            <select class="form-control" name="branch_id">
-                                @foreach($branches as $branch)
-                                    <option value="{{ $branch['id'] }}">
-                                        {{ $branch['name'] }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-
                         <div class="form-row">
-                            <div class="col-1 form-group">
-                                <label for="">Soort:</label>
-                                <select class="form-control" name="sort">
-                                    <option value="percentage">%</option>
-                                    <option value="amount">€</option>
-                                </select>
-                            </div>
-                            <div class="col form-group">
-                                <label for="">Bedrag/Percentage:</label>
-                                <input type="number" step="0.5" name="amount" class="form-control" required>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="minAmount">Min. Bedrag</label>
-                            <div class="input-group mb-2">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">€</div>
+                            <div class="form-group col-6">
+                                <label>Code</label>
+                                <input type="text" class="form-control" placeholder="Couponcode" name="code" required>
+                                <div class="invalid-feedback">
+                                    Vul a.u.b. een geldige code in.
                                 </div>
-                                <input type="number" step="0.5" min="0" name="min_amount_spent" class="form-control" id="minAmount" required>
                             </div>
                         </div>
-
-                        <div class="form-row">
-                            <div class="col form-group">
-                                <label for="type">Bezorgen/Afhalen:</label>
-                                <select name="type" class="form-control" id="type">
-                                    <option value="delivery">Bezorgen</option>
+                        <div class="row">
+                            <div class="form-group col-3">
+                                <label>Type</label>
+                                <select class="type-select" name="type" id="typeSelect" required>
+                                    <option value="delivery" selected>Bezorgen</option>
                                     <option value="takeaway">Afhalen</option>
-                                    <option value="both">Bezorgen/Afhalen</option>
+                                    <option value="both">Beide</option>
                                 </select>
                             </div>
                         </div>
-                        
-                        <div class="form-group">
-                            <label for="status">Status:</label>
-                            <select name="status" class="form-control" id="status">
-                                <option value="active">Actief</option>
-                                <option value="inactive">Inactief</option>
-                            </select>
-                        </div>
-
                         <div class="form-row">
-                            <div class="col form-group">
-                                <label for="active_from">Geldig Vanaf:</label>
-                                <input type="date" name="active_from" class="form-control" id="active_from" required>
+                            <div class="form-group col-2">
+                                <label>Korting</label>
+                                <input type="text" class="form-control" placeholder="10" name="amount" required>
                             </div>
-
-                            <div class="col form-group">
-                                <label for="active_till">Geldig Tot:</label>
-                                <input type="date" name="active_till" class="form-control" id="active_till" required>
+                            <div class="form-group col-2">
+                                <label>Soort korting</label>
+                                <select class="sort-select" name="sort" id="sortSelect" required>
+                                    <option value="percentage" selected>Percentage</option>
+                                    <option value="amount">Bedrag</option>
+                                </select>
                             </div>
                         </div>
-                        
-                        <div class="form-group">
-                            <label for="one_off">Eenmalig:</label>
-                            <select name="one_off" class="form-control" id="one_off">
-                                <option value="1">Ja</option>
-                                <option value="0">Nee</option>
-                            </select>
+                        <div class="form-group col-3">
+                            <label>Minimaal bedrag</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-euro-sign"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="00,00" name="min_amount_spent" required>
+                                <div class="invalid-feedback">
+                                    Vul a.u.b. een geldig bedrag in.
+                                </div>
+                            </div>
+                       </div>
+                        <div class="col-2 float-right">
+                            <button type="submit" form="formCouponcodeAdd" class="form-couponcode-add-submit btn btn-lg btn-success mb-2">Aanmaken</button>
                         </div>
-
-                        <button type="submit" class="btn btn-primary btn-block">Opslaan</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @stop
-
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+    <link rel="stylesheet" href="{{asset('/css/adminPages.css')}}">
 @stop
-
 @section('js')
-<script src="{{ url('/js/utilities/form-validation.js') }}"></script>
-<script src="{{ url('/js/utilities/random-string.js') }}"></script>
+    <script>
+    $(document).ready(function() {
+        $(".type-select").select2({
+            tags: true,
+            width: '80%'
+        });
+        $(".sort-select").select2({
+            tags: true,
+            width: '80%'
+        });
+    });
+    </script>
+    <script src="{{ url('/js/utilities/form-validation.js') }}"></script>
 @stop

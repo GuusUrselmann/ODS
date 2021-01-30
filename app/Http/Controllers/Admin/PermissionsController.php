@@ -19,8 +19,9 @@ class PermissionsController extends Controller
      *
      * @return void
      */
-    public function __construct() {
-    }
+     public function __construct() {
+         $this->middleware('auth');
+     }
 
     public function groups() {
         $groups = Group::all();
@@ -39,7 +40,7 @@ class PermissionsController extends Controller
         ]);
         if($validator->fails()) {
             $errors = $validator->errors();
-            return redirect(url('/admin/permissies/groepen/toevoegen'))->with('errors', $errors);
+            return redirect(url('/admin/rechten/groepen/toevoegen'))->with('errors', $errors);
         }
         $group = Group::create([
             'name' => $request->input('name'),
@@ -51,7 +52,7 @@ class PermissionsController extends Controller
                 'group_id' => $group->id
             ]);
         }
-        return redirect(url('/admin/permissies/groepen/'));
+        return redirect(url('/admin/rechten/groepen/'));
     }
 
     public function groupEdit($id) {
@@ -67,7 +68,7 @@ class PermissionsController extends Controller
         ]);
         if($validator->fails()) {
             $errors = $validator->errors();
-            return redirect(url('/admin/permissies/groepen/bewerken/'.$id))->with('errors', $errors);
+            return redirect(url('/admin/rechten/groepen/bewerken/'.$id))->with('errors', $errors);
         }
         $group = Group::find($id);
         $group->update([
@@ -90,13 +91,13 @@ class PermissionsController extends Controller
                 $group_permission->delete();
             }
         }
-        return redirect(url('/admin/permissies/groepen/'));
+        return redirect(url('/admin/rechten/groepen/'));
     }
 
     public function groupDelete($id) {
         $group = Group::find($id);
         $group->delete();
-        return redirect('/admin/permissies/groepen');
+        return redirect('/admin/rechten/groepen');
     }
 
     public function users() {

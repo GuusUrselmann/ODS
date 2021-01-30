@@ -19,8 +19,9 @@ class UsersController extends Controller
      *
      * @return void
      */
-    public function __construct() {
-    }
+     public function __construct() {
+         $this->middleware('auth');
+     }
 
     public function users() {
         $users = User::all();
@@ -46,12 +47,12 @@ class UsersController extends Controller
 
     public function save(Request $request) {
         $validator = Validator::make($request->all(), [
-            'username' => 'require|max:50',
-            'email' => 'require|email:rfc,dns|unique:users',
-            'password' => 'require|max:50',
-            'first_name' => 'require|max:50',
-            'last_name' => 'require|max:50',
-            'user_type_id' => 'require'
+            'username' => 'required|max:50',
+            'email' => 'required|email:rfc,dns|unique:users',
+            'password' => 'required|max:50',
+            'first_name' => 'required|max:50',
+            'last_name' => 'required|max:50',
+            'user_type_id' => 'required'
         ]);
         if($validator->fails()) {
             $errors = $validator->errors();

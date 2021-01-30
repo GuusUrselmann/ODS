@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 use App\UserType;
 class LoginController extends Controller
 {
@@ -43,5 +44,8 @@ class LoginController extends Controller
     	if (Auth::user()->user_type_id == UserType::where('slug', 'eigenaar')->first()->id) {
     		return redirect(url('/admin'));
     	}
+        else {
+            return redirect(url('/'));
+        }
     }
 }

@@ -2,14 +2,14 @@
 @section('title', 'Permissie Groepen')
 @section('plugins.Datatables', true)
 @section('content_header')
-    <h1>Permissie Groepen</h1>
+    <h1><a class="h6" href="{{url()->previous()}}"><i class="fas fa-arrow-left"></i></a> Rechten Groepen</h1>
 @stop
 @section('content')
     <div class="row">
         <div class="col-sm-9">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Alle Groepen</h3><a class="btn btn-sm btn-success float-right" href="{{url('admin/permissies/groepen/toevoegen')}}"><i class="fas fa-plus"></i> Nieuwe groep</a>
+                    <h3 class="card-title">Alle Groepen</h3><a class="btn btn-sm btn-success float-right" href="{{url('admin/rechten/groepen/toevoegen')}}"><i class="fas fa-plus"></i> Nieuwe groep</a>
                 </div>
                 <div class="card-body p-0">
                     <table id="groupsTable" class="display table table-striped" style="width:100%">
@@ -26,8 +26,8 @@
                                 <td>{{ $group->id }}</td>
                                 <td>{{ $group->name }}</td>
                                 <td>
-                                    <a href="{{url('admin/permissies/groepen/bewerken/'.$group->id)}}" class="btn btn-sm btn-warning action-btn text-light"><i class="fas fa-pencil-alt"></i></a>
-                                    <a data-href="{{url('admin/permissies/groepen/verwijderen/'.$group->id)}}" class="btn btn-sm btn-danger action-btn text-light deleteConfirmModal"><i class="fas fa-times"></i></a>
+                                    <a href="{{url('admin/rechten/groepen/bewerken/'.$group->id)}}" class="btn btn-sm btn-warning action-btn text-light"><i class="fas fa-pencil-alt"></i></a>
+                                    <a data-href="{{url('admin/rechten/groepen/verwijderen/'.$group->id)}}" class="btn btn-sm btn-danger action-btn text-light deleteConfirmModal"><i class="fas fa-times"></i></a>
                                 </td>
                             </tr>
                             @empty

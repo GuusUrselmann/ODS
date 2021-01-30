@@ -2,7 +2,7 @@
 @section('title', 'Categorieën')
 @section('plugins.Datatables', true)
 @section('content_header')
-    <h1>Categorieën</h1>
+    <h1><a class="h6" href="{{url()->previous()}}"><i class="fas fa-arrow-left"></i></a> Categorieën</h1>
 @stop
 @section('content')
     <div class="row">

@@ -80,3 +80,107 @@
 #form-image {
     display: none;
 }
+
+.border-dashed {
+    border-style: dashed!important;
+}
+.product-select {
+    margin-top: -38px;
+    .select-input {
+        width: 200px;
+        display: inline-block;
+    }
+    .select-button {
+        display: inline-block;
+    }
+}
+.product-image {
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+}
+.product-price {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+
+}
+
+.category-remove {
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    margin-top: -35px;
+    display: none;
+}
+.category {
+    &:hover {
+        .category-remove {
+            display: block;
+        }
+    }
+}
+.categories-empty {
+    border-radius: 10px;
+}
+.products-empty {
+    border-radius: 10px;
+}
+.product-remove {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    line-height: 20px;
+    display: none;
+}
+.product {
+    &:hover {
+        .product-remove {
+            display: block;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.select2-container--default .select2-selection--single {
+    height: calc(2.25rem + 2px)!important;
+}
+.select2-selection__arrow {
+    height: calc(2.25rem)!important;
+}
+
+.options-add {
+    position: relative;
+    #addOptionButton {
+        position: absolute;
+        right: -30px;
+    }
+}
+.options-field {
+    .option {
+        position: relative;
+        .removeOptionButton {
+            position: absolute;
+            right: -30px;
+            top: 5px;
+        }
+    }
+
+}
+
+#formSettings {
+    .form-image {
+        .image-input {
+            display: none;
+        }
+    }
+    .form-image-preview {
+        img {
+            width: 150px;
+        }
+    }
+}

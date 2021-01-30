@@ -3,7 +3,7 @@
 @section('plugins.Datatables', true)
 @section('plugins.Sweetalert2', true)
 @section('content_header')
-    <h1>Producten</h1>
+    <h1><a class="h6" href="{{url()->previous()}}"><i class="fas fa-arrow-left"></i></a> Producten</h1>
 @stop
 @section('content')
     <div class="row">

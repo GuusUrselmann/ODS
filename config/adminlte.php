@@ -65,11 +65,11 @@ return [
     */
 
     'usermenu_enabled' => true,
-    'usermenu_header' => false,
+    'usermenu_header' => true,
     'usermenu_header_class' => 'bg-primary',
-    'usermenu_image' => false,
-    'usermenu_desc' => false,
-    'usermenu_profile_url' => false,
+    'usermenu_image' => true,
+    'usermenu_desc' => true,
+    'usermenu_profile_url' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -215,7 +215,7 @@ return [
     */
 
     'enabled_laravel_mix' => false,
-    'laravel_mix_css_path' => 'css/app.css',
+    'laravel_mix_css_path' => '/css/app.css',
     'laravel_mix_js_path' => 'js/app.js',
 
     /*
@@ -313,7 +313,6 @@ return [
         //     'icon_color' => 'cyan',
         //     'url'        => '#',
         // ],
-
         [
             'text'    => 'Dashboard',
             'url'  => 'admin/',
@@ -326,15 +325,36 @@ return [
             'icon'    => 'fas fa-fw fa-utensils',
         ],
         [
+            'text'    => 'Standaard Extra\'s',
+            'url'  => 'admin/standaard-extras/',
+            'icon'    => 'fas fa-fw fa-utensils',
+        ],
+        [
             'text'    => 'Categorieën',
             'url'  => 'admin/categorieen/',
             'icon'    => 'fas fa-fw fa-list-ol',
         ],
-        // [
-        //     'text'    => 'Couponcodes',
-        //     'url'  => 'admin/couponcodes/',
-        //     'icon'    => 'fas fa-fw fa-ticket-alt',
-        // ],
+        [
+            'text'    => 'Menu\'s',
+            'url'  => 'admin/menus/',
+            'icon'    => 'fas fa-fw fa-clipboard',
+        ],
+        ['header' => 'BESTELLINGEN'],
+        [
+            'text'    => 'Bestellingen',
+            'url'  => 'admin/bestellingen/',
+            'icon'    => 'fas fa-fw fa-hamburger',
+        ],
+        [
+            'text'    => 'Keukenscherm',
+            'url'  => 'admin/orderwindow/',
+            'icon'    => 'fas fa-fw fa-hamburger',
+        ],
+        [
+            'text'    => 'Couponcodes',
+            'url'  => 'admin/couponcodes/',
+            'icon'    => 'fas fa-fw fa-ticket-alt',
+        ],
 
         ['header' => 'KLANTEN'],
         [
@@ -353,29 +373,43 @@ return [
             'url'  => 'admin/gebruikers/',
             'icon'    => 'fas fa-fw fa-users',
         ],
-        // [
-        //     'text'    => 'Filialen',
-        //     'url'  => 'admin/filialen/',
-        //     'icon'    => 'fas fa-fw fa-network-wired',
-        // ],
         [
-            'text'    => 'Permissies',
+            'text'    => 'Filialen',
+            'url'  => 'admin/filialen/',
+            'icon'    => 'fas fa-fw fa-network-wired',
+        ],
+        [
+            'text'    => 'Filiaal',
+            'url'  => 'admin/filiaal/',
+            'icon'    => 'fas fa-fw fa-network-wired',
+        ],
+        [
+            'text'    => 'Rechten',
             'icon'    => 'fas fa-fw fa-key',
             'submenu' => [
                 [
                     'text' => 'Groepen',
-                    'url'  => 'admin/permissies/groepen',
+                    'url'  => 'admin/rechten/groepen',
                 ],
                 [
                     'text' => 'Gebruikers',
-                    'url'  => 'admin/permissies/gebruikers',
+                    'url'  => 'admin/rechten/gebruikers',
                 ],
             ],
         ],
         [
             'text'    => 'Instellingen',
-            'url'  => 'admin/instellingen/',
             'icon'    => 'fas fa-fw fa-cog',
+            'submenu' => [
+                [
+                    'text' => 'Website',
+                    'url'  => 'admin/instellingen',
+                ],
+                [
+                    'text' => 'Openingstijden',
+                    'url'  => 'admin/instellingen/openingstijden',
+                ],
+            ],
         ],
 
     ],
@@ -396,7 +430,7 @@ return [
         JeroenNoten\LaravelAdminLte\Menu\Filters\HrefFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\SearchFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\ActiveFilter::class,
-        JeroenNoten\LaravelAdminLte\Menu\Filters\SubmenuFilter::class,
+        // JeroenNoten\LaravelAdminLte\Menu\Filters\SubmenuFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\ClassesFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\GateFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\LangFilter::class,

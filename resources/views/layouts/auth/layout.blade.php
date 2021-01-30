@@ -5,9 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {{-- CSRF Token --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'ODS') }}</title>
     {{-- Scripts --}}
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script type="text/javascript">
+        function url() {
+            return '<?= url('') ?>';
+        }
+    </script>
     @yield('js')
     {{-- Fonts --}}
     <link href="{{asset('fonts/fontawesome-free-5.13.1-web/css/all.css')}}" rel="stylesheet">
@@ -21,11 +25,8 @@
 <body>
     <div class="page-wrapper container-fluid background-cover" style="background-image: url({{asset('images/backgrounds/background-auth.jpg')}})">
         <main class="row">
-            <div class="page-content col-sm-9">
+            <div class="page-content col-sm-12">
                 @yield('content')
-            </div>
-            <div class="page-sidebar col-sm-3">
-                @include('layouts.auth.sidebar')
             </div>
         </main>
     </div>

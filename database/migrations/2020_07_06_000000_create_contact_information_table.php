@@ -19,7 +19,8 @@ class CreateContactInformationTable extends Migration
             $table->integer('house_number');
             $table->string('zipcode');
             $table->string('city');
-            $table->string('phone');
+            $table->string('phone')->nullable();
+            $table->string('email')->nullable();
             $table->timestamps();
         });
     }

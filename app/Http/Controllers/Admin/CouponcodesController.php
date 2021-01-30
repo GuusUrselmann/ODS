@@ -4,97 +4,63 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Validator;
 use App\Couponcode;
-use App\Branch;
 
 class CouponcodesController extends Controller
 {
-    public function __construct()
-    {
+    public function __construct() {
+        $this->middleware('auth');
     }
-
-    public function overview()
-    {
+    
+    public function overview() {
         $couponcodes = Couponcode::all();
-        
-        // TODO: build one query
-        foreach($couponcodes as $couponcode) {
-            $branch = Branch::find($couponcode['branch_id']);
-            $couponcode['branch_name'] = $branch['name'];
+        return view('admin.couponcodes.couponcodes', compact('couponcodes'));
+    }
+
+    public function add() {
+        return view('admin.couponcodes.add');
+    }
+
+    public function save(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'code' => 'required|max:25',
+        ]);
+        if($validator->fails()) {
+            $errors = $validator->errors();
+            return redirect(url('/admin/couponcodes/toevoegen'))->with('errors', $errors);
         }
-        
-        return view('admin.couponcodes.overview', [
-            'couponcodes' => $couponcodes,
+        $couponcode = Couponcode::create([
+            'code' => $request->input('code'),
+            'amount' => $request->input('amount'),
+            'type' => $request->input('type'),
+            'sort' => $request->input('sort'),
+            'min_amount_spent' => $request->input('min_amount_spent'),
         ]);
+        return redirect(url('/admin/couponcodes'));
     }
 
-    public function add()
-    {
-        $branches = Branch::all();
+    public function edit($id) {
+        $couponcode = Couponcode::find($id);
+        return view('admin.couponcodes.edit', compact('couponcode'));
+    }
 
-        return view('admin.couponcodes.add', [
-            'branches' => $branches
+    public function update($id, Request $request) {
+        $validator = Validator::make($request->all(), [
+            'code' => 'required|max:25',
         ]);
-    }
-
-    public function edit()
-    {
-        $couponcode = Couponcode::find(request('id'));
-        $branches = Branch::all();
-
-        return view('admin.couponcodes.edit', [
-            'couponcode' => $couponcode,
-            'branches' => $branches
+        if($validator->fails()) {
+            $errors = $validator->errors();
+            return redirect(url('/admin/couponcodes/bewerken/'.$id))->with('errors', $errors);
+        }
+        $couponcode = Couponcode::find($id);
+        $couponcode->update([
+            'code' => $request->input('code'),
+            'amount' => str_replace(',', '.', $request->input('amount')),
+            'type' => $request->input('type'),
+            'sort' => $request->input('sort'),
+            'min_amount_spent' => str_replace(',', '.', $request->input('min_amount_spent')),
         ]);
-    }
-
-    /*
-    *   Method to insert new categories into the datbase
-    */
-    public function save()
-    {
-        $couponcode = new Couponcode();
-
-        $couponcode->branch_id = request('branch_id');
-        $couponcode->code = request('code');
-        $couponcode->amount = request('amount');
-        $couponcode->status = request('status');
-        $couponcode->active_from = request('active_from');
-        $couponcode->active_till = request('active_till');
-        $couponcode->type = request('type');
-        $couponcode->sort = request('sort');
-        $couponcode->min_amount_spent = request('min_amount_spent');
-        $couponcode->one_off = request('one_off');
-
-        $couponcode->save();
-
-        return redirect('/admin/couponcodes');
-    }
-
-    /*
-    *   Method to update existing categories into the datbase
-    */
-    public function update()
-    {
-        $couponcode = Couponcode::find(request('id'));
-
-        $couponcode->branch_id = request('branch_id');
-        $couponcode->code = request('code');
-        $couponcode->amount = request('amount');
-        $couponcode->status = request('status');
-        $couponcode->active_from = request('active_from');
-        $couponcode->active_till = request('active_till');
-        $couponcode->type = request('type');
-        $couponcode->sort = request('sort');
-        $couponcode->min_amount_spent = request('min_amount_spent');
-        $couponcode->one_off = request('one_off');
-
-        $couponcode->save();
-
-        return redirect('/admin/couponcodes');
-    }
-
-    public function delete() {
-        
+        return redirect(url('/admin/couponcodes'));
     }
 }

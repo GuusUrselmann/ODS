@@ -41,5 +41,19 @@ class ProductsTableSeeder extends Seeder
             'price' => 11.99,
             'image_path' => 'images/products/product_4.jpg'
         ]);
+
+        App\Product::create([
+            'name' => 'Broodje ongezond',
+            'description' => 'sla, tomaten en vlees op een krokant broodje',
+            'price' => 6.99,
+            'image_path' => 'images/products/product_5.jpg'
+        ]);
+
+        App\Product::create([
+            'name' => 'Croissant speciaal',
+            'description' => 'Croissant met diverse toppings',
+            'price' => 7.49,
+            'image_path' => 'images/products/product_6.jpg'
+        ]);
     }
 }
