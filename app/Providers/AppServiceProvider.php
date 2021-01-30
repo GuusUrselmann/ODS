@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Auth;
+use App\Branch;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,7 +29,13 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
 
         view()->composer('adminlte::page', function ($view) {
-            $user_branches = 'neeeeh';
+            $user_branches = Branch::all()->keyBy('id');
+            foreach($user_branches as $user_branch) {
+                if($user_branch->id == Auth::user()->admin_current_branch()->id) {
+                    $user_branches->forget($user_branch->id);
+
+                }
+            }
             $view->with('user_branches', $user_branches);
         });
     }

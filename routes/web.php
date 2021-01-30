@@ -29,6 +29,7 @@ Route::group(['prefix' => '/'], function () {
 Route::group(['prefix' => '/admin'], function () {
     Route::get('/', 'Admin\DashboardController@dashboard');
     Route::get('/dashboard', 'Admin\DashboardController@dashboard');
+    Route::get('/setbranch/{id}', 'Admin\DashboardController@setBranch');
 
     Route::group(['prefix' => '/producten'], function () {
         Route::get('/', 'Admin\ProductsController@products');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Validator;
 use App\Branch;
 
@@ -14,7 +15,7 @@ class BranchController extends Controller
     }
 
     public function branch() {
-        $branch = Branch::with('contactInformation')->first();
+        $branch = Branch::with('contactInformation')->find(Auth::user()->admin_current_branch_id);
         return view('admin.branch.branch', compact('branch'));
     }
 
@@ -26,7 +27,7 @@ class BranchController extends Controller
             $errors = $validator->errors();
             return redirect(url('/admin/filiaal'))->with('errors', $errors);
         }
-        $branch = Branch::first();
+        $branch = Branch::with('contactInformation')->find(Auth::user()->admin_current_branch_id);
         $contact_information = $branch->contactInformation->first();
         $branch->update([
             'name' => $request->input('name'),

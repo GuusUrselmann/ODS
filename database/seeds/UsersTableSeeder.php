@@ -22,6 +22,7 @@ class UsersTableSeeder extends Seeder
             'first_name' => 'Guus',
             'last_name' => 'Urselmann',
             'user_type_id' => '1',
+            'admin_current_branch_id' => '1',
             'remember_token' => Str::random(10)
         ]);
 
@@ -34,6 +35,7 @@ class UsersTableSeeder extends Seeder
                 'first_name' => 'Sabrina',
                 'last_name' => 'Hooijmans',
                 'user_type_id' => '1',
+                'admin_current_branch_id' => '1',
                 'remember_token' => Str::random(10)
             ]
         );

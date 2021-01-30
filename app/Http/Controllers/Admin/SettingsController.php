@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Auth;
 use Validator;
 use App\Option;
 use App\Branch;
@@ -91,7 +92,7 @@ class SettingsController extends Controller
             else {
                 Option::create([
                     'name' => 'home_background',
-                    'value' => '/images/site/banner-home'.$image_extention,
+                    'value' => '/images/site/banner-home'.$imSßage_extention,
                 ]);
             }
         }
@@ -100,7 +101,7 @@ class SettingsController extends Controller
     }
 
     public function openinghours() {
-        $branch = Branch::find(1);
+        $branch = Branch::with('contactInformation')->find(Auth::user()->admin_current_branch_id);
         // $opening_hours = OpeningHour::where('branch_id', $branch->id)->get();
         return view('admin.settings.openinghours', compact('branch'));
     }
@@ -112,7 +113,7 @@ class SettingsController extends Controller
             $errors = $validator->errors();
             return redirect(url('/admin/instellingen'))->with('errors', $errors);
         }
-        $branch = Branch::find(1);
+        $branch = Branch::with('contactInformation')->find(Auth::user()->admin_current_branch_id);
         foreach($request->input('opening_hours') as $type => $days) {
             foreach($days as $day => $data) {
                 if(OpeningHour::where('branch_id', $branch->id)->where('type', $type)->where('day', $day)->first()) {

@@ -15,19 +15,28 @@
 
 <li class="nav-item dropdown user-current-branch">
     <div class="current-branch">
-        <span>
-            {{Auth::user()->admin_current_branch() == null}}
-        </span>
-        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-            <span>
-                {{Auth::user()->admin_current_branch()->name}}
-            </span>
-        </a>
-        <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-            <a class="dropdown-item" href="{{ url('/admin/dashboard') }}">
-
+        @if(Auth::user()->user_type()->slug == 'eigenaar')
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                <span>
+                    {{Auth::user()->admin_current_branch()->name}}
+                </span>
             </a>
-        </ul>
+            <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                @foreach($user_branches as $branch)
+                        <li>
+                            <a class="dropdown-item" href="{{ url('/admin/setbranch/'.$branch->id) }}">
+                                {{$branch->name}}
+                            </a>
+                        </li>
+                @endforeach
+            </ul>
+        @else
+            <div class="nav-link">
+                <span>
+                    {{Auth::user()->admin_current_branch()->name}}
+                </span>
+            </div>
+        @endif
     </div>
 </li>
 <li class="nav-item dropdown user-menu">
