@@ -2954,14 +2954,13 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       });
     }
-  },
-  mounted: function mounted() {
-    this.$store.dispatch('initCart');
+  } // mounted() {
+  //     this.$store.dispatch('initCart')
+  //     if(!$('#selectOrderTypeModal').data('order-type')) {
+  //         $('#selectOrderTypeModal').modal('toggle')
+  //     }
+  // }
 
-    if (!$('#selectOrderTypeModal').data('order-type')) {
-      $('#selectOrderTypeModal').modal('toggle');
-    }
-  }
 });
 
 /***/ }),
@@ -68160,12 +68159,12 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\wamp64\www\newsystem\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\wamp64\www\newsystem\resources\sass\app.scss */"./resources/sass/app.scss");
-__webpack_require__(/*! C:\wamp64\www\newsystem\resources\sass\authPages.scss */"./resources/sass/authPages.scss");
-__webpack_require__(/*! C:\wamp64\www\newsystem\resources\sass\adminPages.scss */"./resources/sass/adminPages.scss");
-__webpack_require__(/*! C:\wamp64\www\newsystem\resources\sass\guestPages.scss */"./resources/sass/guestPages.scss");
-module.exports = __webpack_require__(/*! C:\wamp64\www\newsystem\resources\sass\orderwindow.scss */"./resources/sass/orderwindow.scss");
+__webpack_require__(/*! C:\wamp64\www\ODS\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\wamp64\www\ODS\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\wamp64\www\ODS\resources\sass\authPages.scss */"./resources/sass/authPages.scss");
+__webpack_require__(/*! C:\wamp64\www\ODS\resources\sass\adminPages.scss */"./resources/sass/adminPages.scss");
+__webpack_require__(/*! C:\wamp64\www\ODS\resources\sass\guestPages.scss */"./resources/sass/guestPages.scss");
+module.exports = __webpack_require__(/*! C:\wamp64\www\ODS\resources\sass\orderwindow.scss */"./resources/sass/orderwindow.scss");
 
 
 /***/ })

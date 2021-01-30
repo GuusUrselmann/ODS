@@ -373,11 +373,11 @@ return [
             'url'  => 'admin/gebruikers/',
             'icon'    => 'fas fa-fw fa-users',
         ],
-        [
-            'text'    => 'Filialen',
-            'url'  => 'admin/filialen/',
-            'icon'    => 'fas fa-fw fa-network-wired',
-        ],
+        // [
+        //     'text'    => 'Filialen',
+        //     'url'  => 'admin/filialen/',
+        //     'icon'    => 'fas fa-fw fa-network-wired',
+        // ],
         [
             'text'    => 'Filiaal',
             'url'  => 'admin/filiaal/',

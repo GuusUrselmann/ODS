@@ -95,11 +95,11 @@
                });
             }
         },
-        mounted() {
-            this.$store.dispatch('initCart')
-            if(!$('#selectOrderTypeModal').data('order-type')) {
-                $('#selectOrderTypeModal').modal('toggle')
-            }
-        }
+        // mounted() {
+        //     this.$store.dispatch('initCart')
+        //     if(!$('#selectOrderTypeModal').data('order-type')) {
+        //         $('#selectOrderTypeModal').modal('toggle')
+        //     }
+        // }
     }
 </script>
